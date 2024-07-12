@@ -8,10 +8,11 @@ import {
 } from "react";
 import { getRecipients } from "./themeApi";
 
+//interface
 export interface ThemeData {
   team: string;
   name: string;
-  backgroundColor: string[];
+  backgroundColor: string;
   backgroundImageURL?: string;
 }
 
@@ -22,18 +23,19 @@ export interface ThemeProviderProps {
 export interface ThemeContextProps {
   themeData: ThemeData;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleOptionClick: (optionType: string, value: string) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
   undefined
 );
 
-//ThemeProvider
+//ThemeProvider component
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [themeData, setThemeData] = useState<ThemeData>({
-    team: "8-1",
+    team: "",
     name: "",
-    backgroundColor: [],
+    backgroundColor: "beige",
     backgroundImageURL: "",
   });
 
@@ -42,6 +44,13 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     setThemeData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleOptionClick = (optionType: string, value: string) => {
+    setThemeData((prevData) => ({
+      ...prevData,
+      [optionType]: value,
     }));
   };
 
@@ -54,9 +63,10 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           setThemeData({
             team: recipient.team,
             name: recipient.name,
-            backgroundColor: recipient.backgroundColor,
+            backgroundColor: recipient.backgroundColor || [],
             backgroundImageURL: recipient.backgroundImageURL,
           });
+          console.log("API 데이터 호출 성공:", recipient);
         }
       } catch (error) {
         console.error("API 데이터 호출 실패:", error);
@@ -67,7 +77,9 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [themeData.team]);
 
   return (
-    <ThemeContext.Provider value={{ themeData, handleChange }}>
+    <ThemeContext.Provider
+      value={{ themeData, handleChange, handleOptionClick }}
+    >
       {children}
     </ThemeContext.Provider>
   );

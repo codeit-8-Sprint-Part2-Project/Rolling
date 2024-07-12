@@ -1,6 +1,15 @@
 import * as React from "react";
-import { useContext } from "react";
-import { ThemeContext } from "../core/ThemeProvider"; // 적절한 경로로 수정하세요
+import { useState, useEffect } from "react";
+import { useFormContext } from "../hooks/useFormContext";
+import { ThemeContext, ThemeContextProps } from "../core/ThemeProvider";
+
+// enum 정의
+enum BackgroundColor {
+  Purple = "purple",
+  Beige = "beige",
+  Blue = "blue",
+  Green = "green",
+}
 
 interface BackgroundColorListProps {
   selectedOption: string;
@@ -11,20 +20,26 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   selectedOption,
   handleOptionClick,
 }) => {
-  const themeContext = useContext(ThemeContext);
+  const themeContext = useFormContext<ThemeContextProps>(ThemeContext);
+  const [backgroundColors, setBackgroundColors] = useState<string[]>([]);
+
+  // Enum 값을 배열로 변환
+  const backgroundColorArray = Object.values(BackgroundColor);
+
+  useEffect(() => {
+    setBackgroundColors(backgroundColorArray);
+    console.log(backgroundColorArray);
+  }, []);
 
   if (!themeContext) {
-    return null; // 컨텍스트가 정의되지 않은 경우, null을 반환
+    return null;
   }
-
-  const { themeData } = themeContext;
-  const colors = themeData.backgroundColor;
 
   return (
     <ul>
-      {colors.map((color) => (
+      {backgroundColors.map((color, index) => (
         <li
-          key={color}
+          key={`${color}-${index}`}
           onClick={() => handleOptionClick("backgroundColor", color)}
           style={{
             backgroundColor:
