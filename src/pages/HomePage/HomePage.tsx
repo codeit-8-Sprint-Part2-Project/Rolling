@@ -1,10 +1,10 @@
 import React from "react";
-import Nav from "../../components/Layout/Nav";
+import Header from "../../components/Layout/Header";
 
 const HomePage: React.FC = () => {
   return (
     <div>
-      <Nav />
+      <Header />
     </div>
   );
 };
