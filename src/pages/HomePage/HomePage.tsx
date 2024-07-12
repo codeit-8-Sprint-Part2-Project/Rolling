@@ -1,7 +1,12 @@
 import React from "react";
+import Nav from "../../components/Layout/Nav";
 
-function HomePage() {
-  return <div>HomePage</div>;
-}
+const HomePage: React.FC = () => {
+  return (
+    <div>
+      <Nav />
+    </div>
+  );
+};
 
 export default HomePage;
