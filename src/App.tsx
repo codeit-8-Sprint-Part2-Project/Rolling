@@ -1,9 +1,9 @@
 import './App.css';
+import PostPage from './pages/PostPage';
 
 function App() {
   return (
-    <div>
-    </div>
+    <PostPage />
   );
 }
 
