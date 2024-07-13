@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext, ThemeContextProps } from "../core/ThemeProvider";
+import { ThemeContext, ThemeContextProps } from "../api/ThemeProvider";
 
 export function useFormContext<T>(context: React.Context<T | undefined>) {
   const contextValue = useContext(context);

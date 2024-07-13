@@ -25,6 +25,7 @@ export interface ThemeContextProps {
   themeData: ThemeData;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOptionClick: (optionType: string, value: string) => void;
+  fetchThemeData: (team: string) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
@@ -56,32 +57,34 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }));
   };
 
-  useEffect(() => {
-    const fetchThemeData = async () => {
-      try {
-        const data = await getRecipients({ team: themeData.team, limit: 1 });
-        if (data.results.length > 0) {
-          const recipient = data.results[0];
-          setThemeData({
-            id: recipient.id,
-            team: recipient.team,
-            name: recipient.name,
-            backgroundColor: recipient.backgroundColor,
-            backgroundImageURL: recipient.backgroundImageURL || [],
-          });
-          console.log("API 데이터 호출 성공:", recipient);
-        }
-      } catch (error) {
-        console.error("API 데이터 호출 실패:", error);
+  const fetchThemeData = async (team: string) => {
+    try {
+      const data = await getRecipients({ team: themeData.team, limit: 1 });
+      if (data.results.length > 0) {
+        const recipient = data.results[0];
+        setThemeData({
+          id: recipient.id,
+          team: recipient.team,
+          name: recipient.name,
+          backgroundColor: recipient.backgroundColor,
+          backgroundImageURL: recipient.backgroundImageURL,
+        });
+        console.log("API 데이터 호출 성공:", recipient);
       }
-    };
+    } catch (error) {
+      console.error("API 데이터 호출 실패:", error);
+    }
+  };
 
-    fetchThemeData();
+  useEffect(() => {
+    if (themeData.team) {
+      fetchThemeData(themeData.team);
+    }
   }, [themeData.team]);
 
   return (
     <ThemeContext.Provider
-      value={{ themeData, handleChange, handleOptionClick }}
+      value={{ themeData, handleChange, handleOptionClick, fetchThemeData }}
     >
       {children}
     </ThemeContext.Provider>

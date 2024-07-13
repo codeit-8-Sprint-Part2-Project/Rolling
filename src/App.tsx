@@ -1,5 +1,5 @@
 import * as React from "react";
-import ThemeProvider from "./pages/postTheme/core/ThemeProvider";
+import ThemeProvider from "./pages/postTheme/api/ThemeProvider";
 import PostTheme from "./pages/postTheme/PostTheme";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

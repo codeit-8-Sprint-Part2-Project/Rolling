@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { useFormContext } from "../hooks/useFormContext";
-import { ThemeContext } from "../core/ThemeProvider";
+import { ThemeContext } from "../api/ThemeProvider";
 import { BackgroundColorList } from "./BackgroundColorList";
 import { BackgroundImageList } from "./BackgroundImageList";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ThemeContextProps } from "../core/ThemeProvider";
+import { ThemeContextProps } from "../api/ThemeProvider";
 
 interface ReceiverInputProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

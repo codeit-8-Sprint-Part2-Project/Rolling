@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useFormContext } from "../hooks/useFormContext";
-import { ThemeContext, ThemeContextProps } from "../core/ThemeProvider";
+import { ThemeContext, ThemeContextProps } from "../api/ThemeProvider";
 
 // enum 정의
 enum BackgroundColor {

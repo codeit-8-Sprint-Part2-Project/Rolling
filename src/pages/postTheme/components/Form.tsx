@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactNode } from "react";
-import { ThemeContextProps } from "../core/ThemeProvider";
+import { ThemeContextProps } from "../api/ThemeProvider";
 
 interface FormProps {
   children: ReactNode;

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Form from "./components/Form";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeSelection from "./components/ThemeSelection";
-import { ThemeContext, ThemeContextProps } from "./core/ThemeProvider";
+import { ThemeContext, ThemeContextProps } from "./api/ThemeProvider";
 
 const PostTheme: React.FC = () => {
   const themeContext = useContext<ThemeContextProps | undefined>(ThemeContext);
