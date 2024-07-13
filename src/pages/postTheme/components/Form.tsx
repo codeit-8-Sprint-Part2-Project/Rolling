@@ -18,7 +18,7 @@ const Form: React.FC<FormProps> = ({ children, handleChange, themeData }) => {
         }
         return child;
       })}
-      <button type="submit">제출하기</button>
+      <button type="submit">생성하기</button>
     </form>
   );
 };

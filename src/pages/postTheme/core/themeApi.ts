@@ -21,7 +21,7 @@ export async function getRecipients({
   limit,
   offset,
 }: GetRecipientsParams) {
-  const url = new URL(`${BASE_URL}/${(team = "7-4")}/recipients/`);
+  const url = new URL(`${BASE_URL}/${(team = "8-1")}/recipients/`);
   if (limit) url.searchParams.append("limit", limit.toString());
   if (offset) url.searchParams.append("offset", offset.toString());
 

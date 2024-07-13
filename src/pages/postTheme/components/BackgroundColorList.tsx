@@ -38,7 +38,9 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   return (
     <ul>
       {backgroundColors.map((color, index) => (
-        <li
+        <input
+          id="backgroundColor"
+          value={color}
           key={`${color}-${index}`}
           onClick={() => handleOptionClick("backgroundColor", color)}
           style={{
@@ -46,9 +48,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
               selectedOption === color ? "lightgray" : "transparent",
             cursor: "pointer",
           }}
-        >
-          {color}
-        </li>
+        />
       ))}
     </ul>
   );
