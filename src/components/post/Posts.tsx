@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import getRecipient from "./api/getRecipient";
+import PlusCard from "./PlusCard";
 
 const BACKGROUND_COLORS: {
     [index:string]: any,
@@ -27,12 +28,14 @@ function Posts({ id }: { id:string }) {
         handleLoad();
     }, []);
 
-    const bgColor = `bg-[${BACKGROUND_COLORS[recipient.backgroundColor]}]`;
-
     console.log(recipient);
     
     return (
-        <div className={bgColor}>테스트테스트</div>
+        <div className={`bg-[${BACKGROUND_COLORS[recipient.backgroundColor]}] h-screen pt-[7.0625rem]`}>
+            <div className="max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7">
+                <PlusCard />
+            </div>
+        </div>
     )
 }
 
