@@ -14,7 +14,6 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
     <div>
       <label>To.</label>
       <input
-        id="name"
         type="text"
         name="name"
         value={themeData?.name || ""}

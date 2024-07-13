@@ -25,12 +25,11 @@ export async function getRecipients({
   if (limit) url.searchParams.append("limit", limit.toString());
   if (offset) url.searchParams.append("offset", offset.toString());
 
-  console.log("Request URL:", url.toString()); // confirm request URL
-
   try {
     const response = await fetch(url.toString());
 
     if (!response.ok) {
+      console.log("Request URL:", url.toString()); // confirm request URL
       throw new Error(`HTTP 에러: ${response.status}`);
     }
 

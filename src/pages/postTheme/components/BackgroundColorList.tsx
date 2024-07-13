@@ -28,7 +28,6 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
 
   useEffect(() => {
     setBackgroundColors(backgroundColorArray);
-    console.log(backgroundColorArray);
   }, []);
 
   if (!themeContext) {
@@ -39,6 +38,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
     <ul>
       {backgroundColors.map((color, index) => (
         <input
+          name="backgroundColor"
           type="button"
           value={color}
           key={`${color}-${index}`}
