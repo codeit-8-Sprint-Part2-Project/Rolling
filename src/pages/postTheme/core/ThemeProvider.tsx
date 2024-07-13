@@ -10,10 +10,11 @@ import { getRecipients } from "./themeApi";
 
 //interface
 export interface ThemeData {
+  id: string;
   team: string;
   name: string;
   backgroundColor: string;
-  backgroundImageURL?: string;
+  backgroundImageURL?: string | null;
 }
 
 export interface ThemeProviderProps {
@@ -33,10 +34,11 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(
 //ThemeProvider component
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [themeData, setThemeData] = useState<ThemeData>({
+    id: "",
     team: "",
     name: "",
-    backgroundColor: "beige",
-    backgroundImageURL: "",
+    backgroundColor: "purple",
+    backgroundImageURL: null,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,10 +63,11 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         if (data.results.length > 0) {
           const recipient = data.results[0];
           setThemeData({
+            id: recipient.id,
             team: recipient.team,
             name: recipient.name,
-            backgroundColor: recipient.backgroundColor || [],
-            backgroundImageURL: recipient.backgroundImageURL,
+            backgroundColor: recipient.backgroundColor,
+            backgroundImageURL: recipient.backgroundImageURL || [],
           });
           console.log("API 데이터 호출 성공:", recipient);
         }

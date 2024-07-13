@@ -39,7 +39,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
     <ul>
       {backgroundColors.map((color, index) => (
         <input
-          id="backgroundColor"
+          type="button"
           value={color}
           key={`${color}-${index}`}
           onClick={() => handleOptionClick("backgroundColor", color)}
