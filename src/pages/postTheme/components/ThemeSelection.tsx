@@ -62,14 +62,28 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
     <section className="flex flex-col gap-12">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
-          <p>배경화면을 선택해 주세요.</p>
-          <p>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</p>
+          <p className="font-bold text-2xl">배경화면을 선택해 주세요.</p>
+          <p className="text-gray-500">
+            컬러를 선택하거나, 이미지를 선택할 수 있습니다.
+          </p>
         </div>
         <menu className="flex gap-1">
-          <button type="button" onClick={handleShowColorOptions}>
+          <button
+            type="button"
+            onClick={handleShowColorOptions}
+            className={`w-[122px] h-[40px] rounded-sm ${
+              isThemeType ? "font-bold text-violet-500 outline" : "bg-gray-200"
+            }`}
+          >
             컬러
           </button>
-          <button type="button" onClick={handleShowImageOptions}>
+          <button
+            type="button"
+            onClick={handleShowImageOptions}
+            className={`w-[122px] h-[40px] rounded-sm ${
+              !isThemeType ? "font-bold text-violet-500 outline" : "bg-gray-200"
+            }`}
+          >
             이미지
           </button>
         </menu>
