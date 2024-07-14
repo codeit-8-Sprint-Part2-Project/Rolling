@@ -18,7 +18,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE }: { message: MessageRetr
     return (
         <div className="CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col gap-4 cursor-pointer">
             <div className="SENDER-INFO h-[4.4375rem] flex pb-2.5 border-solid border-b border-[#EEEEEE] gap-3.5">
-                <img src={message.profileImageURL} className="w-14" alt={message.sender} />
+                <img src={message.profileImageURL} className="w-14 h-14" alt={message.sender} />
                 <div className="flex flex-col gap-1.5">
                     <div>
                         <span className="text-black text-[1.25rem] leading-6 font-normal">From. </span>
@@ -27,8 +27,8 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE }: { message: MessageRetr
                     <RelationshipLabel relationship={message.relationship} />
                 </div>
             </div>
-            <div className="CONTENT grow truncate" dangerouslySetInnerHTML={{__html: message.content}} />
-            <div className="text-[#999999] DATE text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
+            <div className="CONTENT grow truncate text-wrap" dangerouslySetInnerHTML={{__html: message.content}} />
+            <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
         </div>
     )
 }

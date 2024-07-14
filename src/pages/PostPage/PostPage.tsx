@@ -4,7 +4,7 @@ function PostPage() {
 
     
     return (
-        <Posts id="8341" />
+        <Posts id="8316" />
     )
 }
 
