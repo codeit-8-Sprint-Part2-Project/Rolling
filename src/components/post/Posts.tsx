@@ -50,8 +50,6 @@ function Posts({ id }: { id: string }) {
     useEffect(() => {
         handleLoad();
     }, []);
-
-    console.log(recipient);
     
     return (
         <div style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " h-screen pt-[7.0625rem] bg-no-repeat bg-cover"}>
