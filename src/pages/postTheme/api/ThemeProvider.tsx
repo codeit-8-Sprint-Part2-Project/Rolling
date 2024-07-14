@@ -8,7 +8,7 @@ import {
 } from "react";
 import { getRecipients } from "./themeApi";
 
-//interface
+// interface
 export interface ThemeData {
   id: string;
   team: string;
@@ -26,21 +26,27 @@ export interface ThemeContextProps {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOptionClick: (optionType: string, value: string) => void;
   fetchThemeData: (team: string) => void;
+  isButtonDisabled: boolean;
+  setIsButtonDisabled: (isDisabled: boolean) => void;
+  handleButtonClick: () => void;
+  setThemeData: React.Dispatch<React.SetStateAction<ThemeData>>;
 }
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
   undefined
 );
 
-//ThemeProvider component
+// ThemeProvider component
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [themeData, setThemeData] = useState<ThemeData>({
     id: "",
     team: "",
     name: "",
-    backgroundColor: "purple",
+    backgroundColor: "beige",
     backgroundImageURL: null,
   });
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -82,9 +88,23 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   }, [themeData.team]);
 
+  const handleButtonClick = () => {
+    console.log("Button clicked with themeData:", themeData);
+    // 버튼 클릭 시 수행할 추가 작업을 여기에 정의하세요.
+  };
+
   return (
     <ThemeContext.Provider
-      value={{ themeData, handleChange, handleOptionClick, fetchThemeData }}
+      value={{
+        themeData,
+        handleChange,
+        handleOptionClick,
+        fetchThemeData,
+        isButtonDisabled,
+        setIsButtonDisabled,
+        handleButtonClick,
+        setThemeData,
+      }}
     >
       {children}
     </ThemeContext.Provider>

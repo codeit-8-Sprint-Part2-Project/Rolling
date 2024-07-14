@@ -12,12 +12,28 @@ const PostTheme: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const { handleChange, themeData } = themeContext;
+  const {
+    handleChange,
+    themeData,
+    isButtonDisabled,
+    handleButtonClick,
+    setIsButtonDisabled,
+    setThemeData,
+  } = themeContext;
 
   return (
-    <Form handleChange={handleChange} themeData={themeData}>
+    <Form
+      handleChange={handleChange}
+      themeData={themeData}
+      isButtonDisabled={isButtonDisabled}
+      handleButtonClick={handleButtonClick}
+      setThemeData={setThemeData}
+    >
       <ReceiverInput handleChange={handleChange} themeData={themeData} />
-      <ThemeSelection />
+      <ThemeSelection
+        setIsButtonDisabled={setIsButtonDisabled}
+        setThemeData={setThemeData}
+      />
     </Form>
   );
 };

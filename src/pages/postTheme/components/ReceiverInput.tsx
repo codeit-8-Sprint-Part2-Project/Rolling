@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { ThemeContextProps } from "../api/ThemeProvider";
 
 interface ReceiverInputProps {
@@ -10,15 +11,29 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
   themeData,
   handleChange,
 }) => {
+  const [error, setError] = useState<string>("");
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim();
+    if (!value) {
+      setError("이름을 입력하지 않았습니다.");
+    } else {
+      setError("");
+    }
+  };
+
   return (
-    <div>
+    <div className="flex flex-col gap-3">
       <label>To.</label>
       <input
         type="text"
         name="name"
         value={themeData?.name || ""}
         onChange={handleChange}
+        onBlur={handleBlur}
+        placeholder="받는 사람 이름을 입력해주세요"
       />
+      {error && <span className="text-red-500">{error}</span>}
     </div>
   );
 };

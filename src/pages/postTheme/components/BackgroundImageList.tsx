@@ -4,11 +4,15 @@ import { useState } from "react";
 interface BackgroundImageListProps {
   selectedOption: string;
   handleOptionClick: (optionType: string, value: string) => void;
+  themeData: any;
+  setThemeData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   selectedOption,
   handleOptionClick,
+  themeData,
+  setThemeData,
 }) => {
   const [images, setImages] = useState<string[]>([]);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -25,10 +29,6 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
       const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === "string") {
-          if (reader.result.length > 300) {
-            setUploadError("이미지 URL이 300자를 초과합니다.");
-            return;
-          }
           setImages((prevImages) => [...prevImages, reader.result as string]);
           setUploadError(null);
         }
@@ -38,6 +38,14 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleImageSelect = (image: string) => {
+    handleOptionClick("backgroundImageURL", image);
+    setThemeData((prevThemeData: any) => ({
+      ...prevThemeData,
+      backgroundImageURL: image,
+    }));
   };
 
   return (
@@ -53,7 +61,7 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
                 name="backgroundImageURL"
                 value={image}
                 checked={selectedOption === image}
-                onChange={() => handleOptionClick("backgroundImageURL", image)}
+                onChange={() => handleImageSelect(image)}
               />
               <img
                 src={image}

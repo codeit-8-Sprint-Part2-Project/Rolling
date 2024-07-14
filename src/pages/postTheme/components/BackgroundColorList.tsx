@@ -5,8 +5,8 @@ import { ThemeContext, ThemeContextProps } from "../api/ThemeProvider";
 
 // enum 정의
 enum BackgroundColor {
-  Purple = "purple",
   Beige = "beige",
+  Purple = "purple",
   Blue = "blue",
   Green = "green",
 }
@@ -28,6 +28,10 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
 
   useEffect(() => {
     setBackgroundColors(backgroundColorArray);
+    // 첫 번째 요소를 기본적으로 선택된 상태로 설정
+    if (backgroundColorArray.length > 0 && !selectedOption) {
+      handleOptionClick("backgroundColor", backgroundColorArray[0]);
+    }
   }, []);
 
   if (!themeContext) {
@@ -35,7 +39,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <ul>
+    <menu className="flex gap-x-4">
       {backgroundColors.map((color, index) => (
         <input
           name="backgroundColor"
@@ -48,8 +52,9 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
               selectedOption === color ? "lightgray" : "transparent",
             cursor: "pointer",
           }}
+          className="flex-1 h-[168px]"
         />
       ))}
-    </ul>
+    </menu>
   );
 };
