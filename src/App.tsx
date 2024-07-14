@@ -1,5 +1,5 @@
 import './App.css';
-import PostPage from './pages/PostPage';
+import PostPage from './pages/PostPage/PostPage';
 
 function App() {
   return (

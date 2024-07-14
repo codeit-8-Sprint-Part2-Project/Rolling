@@ -1,28 +1,51 @@
 import { useEffect, useState } from "react";
-import getRecipient from "./api/getRecipient";
+import getRecipient from "../../pages/PostPage/api/getRecipient";
 import PlusCard from "./PlusCard";
+import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
+import MessageCardList from "./MessageCardList";
+
+interface Recipient {
+    id? : number;
+    team : string;
+    name : string;
+    backgroundColor : string;
+    backgroundImageURL? : string;
+    createdAt? : Date;
+    messageCount? : string;
+    recentMessages? : MessageRetrieve[];
+    reactionCount? : number;
+    topReactions? : string;
+}
 
 const BACKGROUND_COLORS: {
-    [index:string]: any,
+    [index: string]: string,
 } = {
-    beige: "#FFE2AD",
-    purple: "#ECD9FF",
-    blue: "#B1E4FF",
-    green: "#D0F5C3",
+    beige: "bg-[#FFE2AD]",
+    purple: "bg-[#ECD9FF]",
+    blue: "bg-[#B1E4FF]",
+    green: "bg-[#D0F5C3]",
 }
 
-const INITIAL_VALUES = {
+const INITIAL_RECIPIENT_VALUE: Recipient = {
+    team: '',
+    name: '',
     backgroundColor: '',
+    backgroundImageURL: '',
 }
 
-function Posts({ id }: { id:string }) {
+function Posts({ id }: { id: string }) {
     
-    const [recipient, setRecipient] = useState(INITIAL_VALUES);
+    const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
 
     const handleLoad = async () => {
         const result = await getRecipient(id);
         setRecipient(result);
     }
+
+    const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor];
+    const backgroundImageURL: string = recipient.backgroundImageURL || '';
+
+    const recentMessages = recipient.recentMessages || [];
 
     useEffect(() => {
         handleLoad();
@@ -31,9 +54,10 @@ function Posts({ id }: { id:string }) {
     console.log(recipient);
     
     return (
-        <div className={`bg-[${BACKGROUND_COLORS[recipient.backgroundColor]}] h-screen pt-[7.0625rem]`}>
-            <div className="max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7">
+        <div style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " h-screen pt-[7.0625rem] bg-no-repeat bg-cover"}>
+            <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7">
                 <PlusCard />
+                <MessageCardList recentMessages={recentMessages} />
             </div>
         </div>
     )
