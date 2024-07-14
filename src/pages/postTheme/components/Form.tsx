@@ -89,7 +89,7 @@ const Form: React.FC<FormProps> = ({
         type="button"
         className="mt-6 h-[52px]"
         onClick={onButtonClick}
-        disabled={isButtonDisabled}
+        disabled={isDisabled}
       >
         생성하기
       </button>

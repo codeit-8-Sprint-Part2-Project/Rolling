@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useFormContext } from "../hooks/useFormContext";
 import { ThemeContext } from "../api/ThemeProvider";
 import { BackgroundColorList } from "./BackgroundColorList";
@@ -16,13 +16,33 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [isThemeType, setIsThemeType] = useState(true);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
 
   const { handleChange, themeData } = useFormContext(ThemeContext);
+
+  // isThemeType이 true일 때 selectedImageUrl을 null로 설정
+  useEffect(() => {
+    console.log(`isThemeType: ${isThemeType}`);
+    if (isThemeType) {
+      setSelectedImageUrl(null);
+    }
+  }, [isThemeType]);
+
+  // selectedImageUrl이 null일 때 themeData 업데이트
+  useEffect(() => {
+    if (selectedImageUrl === null) {
+      setThemeData((prevThemeData: any) => ({
+        ...prevThemeData,
+        backgroundImageURL: null,
+      }));
+    }
+  }, [selectedImageUrl, setThemeData]);
 
   // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값은 컬러
   const handleShowColorOptions = () => {
     setIsThemeType(true);
     setIsButtonDisabled(false);
+    setSelectedImageUrl(null); // 컬러 옵션을 선택할 때 이미지 선택을 초기화
   };
 
   const handleShowImageOptions = () => {
@@ -65,6 +85,9 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
           handleOptionClick={handleOptionClick}
           themeData={themeData}
           setThemeData={setThemeData}
+          isThemeType={isThemeType}
+          selectedImageUrl={selectedImageUrl}
+          setSelectedImageUrl={setSelectedImageUrl}
         />
       )}
     </section>

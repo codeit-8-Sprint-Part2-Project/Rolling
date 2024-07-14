@@ -1,11 +1,14 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface BackgroundImageListProps {
   selectedOption: string;
   handleOptionClick: (optionType: string, value: string) => void;
   themeData: any;
   setThemeData: React.Dispatch<React.SetStateAction<any>>;
+  isThemeType?: boolean;
+  selectedImageUrl: string | null;
+  setSelectedImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
@@ -13,13 +16,26 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
   themeData,
   setThemeData,
+  isThemeType,
+  selectedImageUrl,
+  setSelectedImageUrl,
 }) => {
-  const [images, setImages] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploadError, setUploadError] = useState<string | null>(null);
+
+  // selectedImageUrl이 변경될 때 themeData 업데이트
+  useEffect(() => {
+    if (selectedImageUrl) {
+      setThemeData((prevThemeData: any) => ({
+        ...prevThemeData,
+        backgroundImageURL: selectedImageUrl,
+      }));
+    }
+  }, [selectedImageUrl, setThemeData]);
 
   // 이미지 업로드 갯수 4개로 제한
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (images.length >= 4) {
+    if (imageUrls.length >= 4) {
       setUploadError("이미지는 최대 4개까지만 업로드할 수 있습니다.");
       return;
     }
@@ -29,7 +45,10 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
       const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === "string") {
-          setImages((prevImages) => [...prevImages, reader.result as string]);
+          setImageUrls((prevImages) => [
+            ...prevImages,
+            reader.result as string,
+          ]);
           setUploadError(null);
         }
       };
@@ -40,12 +59,9 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     }
   };
 
-  const handleImageSelect = (image: string) => {
-    handleOptionClick("backgroundImageURL", image);
-    setThemeData((prevThemeData: any) => ({
-      ...prevThemeData,
-      backgroundImageURL: image,
-    }));
+  const handleImageSelect = (imageUrl: string) => {
+    setSelectedImageUrl(imageUrl);
+    handleOptionClick("backgroundImageURL", imageUrl);
   };
 
   return (
@@ -53,18 +69,18 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       {uploadError && <p style={{ color: "red" }}>{uploadError}</p>}
       <ul>
-        {images.map((image, index) => (
+        {imageUrls.map((imageUrl, index) => (
           <li key={index} style={{ listStyleType: "none", margin: "10px 0" }}>
             <label>
               <input
                 type="radio"
                 name="backgroundImageURL"
-                value={image}
-                checked={selectedOption === image}
-                onChange={() => handleImageSelect(image)}
+                value={imageUrl}
+                checked={selectedImageUrl === imageUrl}
+                onChange={() => handleImageSelect(imageUrl)}
               />
               <img
-                src={image}
+                src={imageUrl}
                 alt={`background ${index}`}
                 style={{ width: "100px", height: "100px", marginLeft: "10px" }}
               />
