@@ -38,22 +38,43 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
     return null;
   }
 
+  // Tailwind CSS 클래스 이름을 value에 따라 동적으로 생성하는 함수
+  const getColorClass = (color: string) => {
+    switch (color) {
+      case BackgroundColor.Beige:
+        return "bg-beige";
+      case BackgroundColor.Purple:
+        return "bg-purple-200";
+      case BackgroundColor.Blue:
+        return "bg-blue-200";
+      case BackgroundColor.Green:
+        return "bg-green-200";
+      default:
+        return "";
+    }
+  };
+
   return (
     <menu className="flex gap-x-4">
       {backgroundColors.map((color, index) => (
-        <input
-          name="backgroundColor"
-          type="button"
-          value={color}
-          key={`${color}-${index}`}
-          onClick={() => handleOptionClick("backgroundColor", color)}
-          style={{
-            backgroundColor:
-              selectedOption === color ? "lightgray" : "transparent",
-            cursor: "pointer",
-          }}
-          className="flex-1 h-[168px]"
-        />
+        <div key={`${color}-${index}`} className="relative flex-1">
+          <input
+            name="backgroundColor"
+            type="button"
+            value={color}
+            onClick={() => handleOptionClick("backgroundColor", color)}
+            className={`w-full h-[168px] rounded-2xl outline outline-1 outline-gray-300 text-transparent cursor-pointer ${getColorClass(
+              color
+            )}`}
+          />
+          {selectedOption === color && (
+            <img
+              src="../assets/icons/ic_check_theme.png"
+              alt="배경화면 선택 아이콘"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+            />
+          )}
+        </div>
       ))}
     </menu>
   );
