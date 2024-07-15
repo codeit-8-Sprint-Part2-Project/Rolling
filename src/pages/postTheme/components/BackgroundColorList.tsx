@@ -3,11 +3,7 @@ import { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { getColorClass } from "../utils/getColorClass";
 import { BackgroundColor } from "../constants/enum";
-
-interface BackgroundColorListProps {
-  selectedColor: string;
-  handleOptionClick: (optionType: string, value: string) => void;
-}
+import { BackgroundColorListProps } from "../constants/propTypes";
 
 export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   selectedColor,

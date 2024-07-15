@@ -3,11 +3,7 @@ import { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import { BackgroundImageList } from "./BackgroundImageList";
-
-interface ThemeSelectionProps {
-  setIsButtonDisabled: (disabled: boolean) => void;
-  setThemeData: React.Dispatch<React.SetStateAction<any>>;
-}
+import { ThemeSelectionProps } from "../constants/propTypes";
 
 const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   setIsButtonDisabled,

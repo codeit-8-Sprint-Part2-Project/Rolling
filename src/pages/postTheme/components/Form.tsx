@@ -1,18 +1,7 @@
 import * as React from "react";
-import { ReactNode, useEffect, useState } from "react";
-import { ThemeContextProps } from "../api/ThemeProvider";
+import { useEffect, useState } from "react";
 import useSubmitForm from "../hooks/useSubmitForm";
-
-interface FormProps {
-  children: ReactNode;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  themeData: ThemeContextProps["themeData"];
-  setThemeData: React.Dispatch<
-    React.SetStateAction<ThemeContextProps["themeData"]>
-  >;
-  isButtonDisabled: boolean;
-  handleButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
+import { FormProps } from "../constants/propTypes";
 
 const Form: React.FC<FormProps> = ({
   children,

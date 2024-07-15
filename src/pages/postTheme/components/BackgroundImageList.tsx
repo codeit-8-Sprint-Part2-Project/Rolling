@@ -1,14 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-
-interface BackgroundImageListProps {
-  handleOptionClick: (optionType: string, value: string) => void;
-  themeData: any;
-  setThemeData: React.Dispatch<React.SetStateAction<any>>;
-  isThemeType?: boolean;
-  selectedImageUrl: string | null;
-  setSelectedImageUrl: React.Dispatch<React.SetStateAction<string | null>>;
-}
+import { BackgroundImageListProps } from "../constants/propTypes";
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,

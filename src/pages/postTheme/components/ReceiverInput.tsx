@@ -1,11 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { ThemeContextProps } from "../api/ThemeProvider";
-
-interface ReceiverInputProps {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  themeData: ThemeContextProps["themeData"];
-}
+import { ReceiverInputProps } from "../constants/propTypes";
 
 const ReceiverInput: React.FC<ReceiverInputProps> = ({
   themeData,
