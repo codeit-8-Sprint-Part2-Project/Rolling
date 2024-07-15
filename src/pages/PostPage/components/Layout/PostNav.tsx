@@ -1,7 +1,14 @@
 import React from "react";
+import ShareButton from "../UI/ShareButton";
+import EmojiAddButton from "../UI/EmojiAddButton";
 
-const Header: React.FC = () => {
-  return <div></div>;
+const PostNav: React.FC = () => {
+  return (
+    <div>
+      <EmojiAddButton />
+      <ShareButton />
+    </div>
+  );
 };
 
-export default Header;
+export default PostNav;
