@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContextProps } from "../api/ThemeProvider";
 
-const useSubmitForm = (themeData: ThemeContextProps["themeData"]) => {
+const useSubmitData = (themeData: ThemeContextProps["themeData"]) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -41,4 +41,4 @@ const useSubmitForm = (themeData: ThemeContextProps["themeData"]) => {
   return { handleSubmit, isSubmitting };
 };
 
-export default useSubmitForm;
+export default useSubmitData;

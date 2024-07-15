@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import useSubmitForm from "../hooks/useSubmitForm";
+import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
 
 const Form: React.FC<FormProps> = ({
@@ -10,7 +10,7 @@ const Form: React.FC<FormProps> = ({
   setThemeData,
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const { handleSubmit, isSubmitting } = useSubmitForm(themeData);
+  const { handleSubmit, isSubmitting } = useSubmitData(themeData);
 
   // 이름 유효성 검사
   const validateForm = () => {
