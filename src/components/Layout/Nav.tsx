@@ -2,7 +2,7 @@ import React from "react";
 import NavLogo from "../UI/NavLogo";
 import HeaderContainer from "../UI/NavContainer";
 
-const Header: React.FC = () => {
+const Nav: React.FC = () => {
   return (
     <HeaderContainer>
       <NavLogo />
@@ -10,4 +10,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Nav;

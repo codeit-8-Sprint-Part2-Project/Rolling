@@ -9,7 +9,7 @@ import TitleButton from "../UI/TitleButton";
 import HomepageTitle1 from "../../assets/images/HomepageTitle1.png";
 import HomepageTitle2 from "../../assets/images/HomepageTitle2.png";
 
-const HomePageMain: React.FC = () => {
+const HomepageMain: React.FC = () => {
   return (
     <>
       <BodyContainer>
@@ -51,4 +51,4 @@ const HomePageMain: React.FC = () => {
   );
 };
 
-export default HomePageMain;
+export default HomepageMain;

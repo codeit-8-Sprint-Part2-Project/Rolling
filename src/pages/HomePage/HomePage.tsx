@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../../components/Layout/Header";
-import HomePageMain from "./components/Layout/HomepageMain";
+import HomepageMain from "./components/Layout/HomepageMain";
 
 const HomePage: React.FC = () => {
   return (
     <div>
       <Header />
-      <HomePageMain />
+      <HomepageMain />
     </div>
   );
 };
