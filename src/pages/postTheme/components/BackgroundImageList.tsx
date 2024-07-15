@@ -12,12 +12,10 @@ interface BackgroundImageListProps {
 }
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
-  selectedOption,
   handleOptionClick,
-  themeData,
   setThemeData,
-  isThemeType,
   selectedImageUrl,
+  selectedOption,
   setSelectedImageUrl,
 }) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
@@ -35,8 +33,8 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
 
   // 이미지 업로드 갯수 4개로 제한
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (imageUrls.length >= 4) {
-      setUploadError("이미지는 최대 4개까지만 업로드할 수 있습니다.");
+    if (imageUrls.length >= 3) {
+      setUploadError("이미지는 최대 3개까지만 업로드할 수 있습니다.");
       return;
     }
 
@@ -45,6 +43,12 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
       const reader = new FileReader();
       reader.onloadend = () => {
         if (typeof reader.result === "string") {
+          // if (reader.result.length > 300) {
+          //   setUploadError(
+          //     "이미지 URL이 너무 깁니다. 300자 이하의 이미지를 업로드해주세요."
+          //   );
+          //   return;
+          // }
           setImageUrls((prevImages) => [
             ...prevImages,
             reader.result as string,
@@ -66,28 +70,54 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
 
   return (
     <div>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
-      {uploadError && <p style={{ color: "red" }}>{uploadError}</p>}
-      <ul>
+      <ul className="flex gap-x-4">
+        <label className="w-[168px] h-[168px] rounded-2xl bg-gray-100 cursor-pointer">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="hidden"
+          />
+          <div className="relative w-[168px] h-[168px]">
+            <img
+              src="../assets/icons/ic_plus_darkGray.png"
+              alt="배경화면 추가 아이콘"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+            />
+          </div>
+        </label>
         {imageUrls.map((imageUrl, index) => (
-          <li key={index} style={{ listStyleType: "none", margin: "10px 0" }}>
-            <label>
-              <input
-                type="radio"
-                name="backgroundImageURL"
-                value={imageUrl}
-                checked={selectedImageUrl === imageUrl}
-                onChange={() => handleImageSelect(imageUrl)}
-              />
+          <li key={index} className="relative">
+            <input
+              type="checkbox"
+              id={`checkbox-${index}`}
+              name="backgroundImageURL"
+              value={imageUrl}
+              checked={selectedImageUrl === imageUrl}
+              onChange={() => handleImageSelect(imageUrl)}
+              className="hidden"
+            />
+            <label
+              htmlFor={`checkbox-${index}`}
+              className="block w-[168px] h-[168px] rounded-2xl cursor-pointer relative"
+            >
               <img
                 src={imageUrl}
                 alt={`background ${index}`}
-                style={{ width: "100px", height: "100px", marginLeft: "10px" }}
+                className="absolute top-0 w-full h-full rounded-2xl"
               />
+              {selectedImageUrl === imageUrl && (
+                <img
+                  src="../assets/icons/ic_check_theme.png"
+                  alt="배경화면 선택 아이콘"
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+                />
+              )}
             </label>
           </li>
         ))}
       </ul>
+      {uploadError && <p className="text-red-500 mt-5">{uploadError}</p>}
     </div>
   );
 };
