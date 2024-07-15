@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
+import useUpdateThemeData from "../hooks/useUpdateThemeData";
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
@@ -10,18 +11,16 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
 }) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const updateThemeData = useUpdateThemeData(setThemeData);
 
-  // selectedImageUrl이 변경될 때 themeData 업데이트
+  // selectedImageUrl이 변경될 때마다 themeData 업데이트
   useEffect(() => {
     if (selectedImageUrl) {
-      setThemeData((prevThemeData: any) => ({
-        ...prevThemeData,
-        backgroundImageURL: selectedImageUrl,
-      }));
+      updateThemeData("backgroundImageURL", selectedImageUrl);
     }
   }, [selectedImageUrl, setThemeData]);
 
-  // 이미지 업로드 갯수 4개로 제한
+  // 업로드할 이미지 갯수 3개 제한
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (imageUrls.length >= 3) {
       setUploadError("이미지는 최대 3개까지만 업로드할 수 있습니다.");
@@ -32,6 +31,7 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        // 업로드 에러 처리
         if (typeof reader.result === "string") {
           // if (reader.result.length > 300) {
           //   setUploadError(
@@ -53,9 +53,19 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     }
   };
 
+  // 이미지 선택 처리
   const handleImageSelect = (imageUrl: string) => {
     setSelectedImageUrl(imageUrl);
     handleOptionClick("backgroundImageURL", imageUrl);
+  };
+
+  // 이미지 삭제 처리
+  const handleImageDelete = (imageUrl: string) => {
+    setImageUrls((prevImages) => prevImages.filter((url) => url !== imageUrl));
+    if (selectedImageUrl === imageUrl) {
+      setSelectedImageUrl("");
+      updateThemeData("backgroundImageURL", null);
+    }
   };
 
   return (
@@ -96,6 +106,12 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
                 alt={`background ${index}`}
                 className="absolute top-0 w-full h-full rounded-2xl"
               />
+              <button
+                onClick={() => handleImageDelete(imageUrl)}
+                className="absolute top-2 right-2 bg-violet-700 text-sm font-semibold text-white py-0.5 px-2 rounded-full"
+              >
+                X
+              </button>
               {selectedImageUrl === imageUrl && (
                 <img
                   src="../assets/icons/ic_check_theme.png"
