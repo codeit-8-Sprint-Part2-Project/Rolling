@@ -13,18 +13,20 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   setIsButtonDisabled,
   setThemeData,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("beige");
   const [isThemeType, setIsThemeType] = useState(true);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
 
-  const { handleChange, themeData } = useThemeContext();
+  const { themeData } = useThemeContext();
 
-  // isThemeType이 true일 때 selectedImageUrl을 null로 설정
+  // isThemeType이 변경될 때 selectedImageUrl 업데이트
   useEffect(() => {
     if (isThemeType) {
       setSelectedImageUrl(null);
+    } else {
+      setSelectedColor("beige");
     }
-  }, [isThemeType]);
+  }, [isThemeType, selectedImageUrl, setIsButtonDisabled]);
 
   // selectedImageUrl이 null일 때 themeData 업데이트
   useEffect(() => {
@@ -40,20 +42,31 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   const handleShowColorOptions = () => {
     setIsThemeType(true);
     setIsButtonDisabled(false);
-    setSelectedImageUrl(null); // 컬러 옵션을 선택할 때 이미지 선택을 초기화
+    setSelectedImageUrl(null);
   };
 
   const handleShowImageOptions = () => {
     setIsThemeType(false);
     setIsButtonDisabled(themeData.backgroundImageURL === null);
+    setSelectedColor("beige");
   };
 
   // 선택된 테마 타입과 옵션을 관리하는 이벤트 핸들러
   const handleOptionClick = (optionType: string, value: string) => {
-    setSelectedOption(value); // 선택된 옵션 업데이트
-    handleChange({
-      target: { name: optionType, value: value },
-    } as React.ChangeEvent<HTMLInputElement>);
+    console.log(`Option clicked: ${optionType} - ${value}`);
+    if (optionType === "backgroundColor") {
+      setSelectedColor(value);
+      setThemeData((prevThemeData: any) => ({
+        ...prevThemeData,
+        backgroundColor: value,
+      }));
+    } else if (optionType === "backgroundImageUrl") {
+      setSelectedImageUrl(value);
+      setThemeData((prevThemeData: any) => ({
+        ...prevThemeData,
+        backgroundImageURL: value,
+      }));
+    }
   };
 
   return (
@@ -88,16 +101,14 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
       </div>
       {isThemeType ? (
         <BackgroundColorList
-          selectedOption={selectedOption}
+          selectedColor={selectedColor}
           handleOptionClick={handleOptionClick}
         />
       ) : (
         <BackgroundImageList
-          selectedOption={selectedOption}
           handleOptionClick={handleOptionClick}
           themeData={themeData}
           setThemeData={setThemeData}
-          isThemeType={isThemeType}
           selectedImageUrl={selectedImageUrl}
           setSelectedImageUrl={setSelectedImageUrl}
         />

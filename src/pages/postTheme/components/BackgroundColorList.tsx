@@ -5,27 +5,25 @@ import { getColorClass } from "../utils/getColorClass";
 import { BackgroundColor } from "../constants/enum";
 
 interface BackgroundColorListProps {
-  selectedOption: string;
+  selectedColor: string;
   handleOptionClick: (optionType: string, value: string) => void;
 }
 
 export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
-  selectedOption,
+  selectedColor,
   handleOptionClick,
 }) => {
   const themeContext = useThemeContext();
   const [backgroundColors, setBackgroundColors] = useState<string[]>([]);
 
-  // Enum 값을 배열로 변환
   const backgroundColorArray = Object.values(BackgroundColor);
 
   useEffect(() => {
     setBackgroundColors(backgroundColorArray);
-    // 첫 번째 요소를 기본적으로 선택된 상태로 설정
-    if (backgroundColorArray.length > 0 && !selectedOption) {
+    if (backgroundColorArray.length > 0 && !selectedColor) {
       handleOptionClick("backgroundColor", backgroundColorArray[0]);
     }
-  }, []);
+  }, [selectedColor, handleOptionClick]);
 
   if (!themeContext) {
     return null;
@@ -44,7 +42,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
               color
             )}`}
           />
-          {selectedOption === color && (
+          {selectedColor === color && (
             <img
               src="../assets/icons/ic_check_theme.png"
               alt="배경화면 선택 아이콘"

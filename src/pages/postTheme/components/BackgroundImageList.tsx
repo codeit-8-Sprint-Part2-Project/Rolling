@@ -2,7 +2,6 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 
 interface BackgroundImageListProps {
-  selectedOption: string;
   handleOptionClick: (optionType: string, value: string) => void;
   themeData: any;
   setThemeData: React.Dispatch<React.SetStateAction<any>>;
@@ -15,7 +14,6 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
   setThemeData,
   selectedImageUrl,
-  selectedOption,
   setSelectedImageUrl,
 }) => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
