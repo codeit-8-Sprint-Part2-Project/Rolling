@@ -2,6 +2,8 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
+import IcPlusDarkGray from "../assets/icons/ic_plus_darkGray.png";
+import IcCheckTheme from "../assets/icons/ic_check_theme.png";
 
 export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
@@ -80,7 +82,7 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
           />
           <div className="relative w-[168px] h-[168px]">
             <img
-              src="../assets/icons/ic_plus_darkGray.png"
+              src={IcPlusDarkGray}
               alt="배경화면 추가 아이콘"
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
             />
@@ -114,7 +116,7 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
               </button>
               {selectedImageUrl === imageUrl && (
                 <img
-                  src="../assets/icons/ic_check_theme.png"
+                  src={IcCheckTheme}
                   alt="배경화면 선택 아이콘"
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
                 />
