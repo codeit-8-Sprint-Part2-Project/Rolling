@@ -1,7 +1,7 @@
 import React from "react";
 import Section from '../../../components/UI/Section';
 
-const BestRolling: React.FC = () => {
+const BestRecipient: React.FC = () => {
   return (
     <Section>
         <div>
@@ -11,4 +11,4 @@ const BestRolling: React.FC = () => {
   );
 };
 
-export default BestRolling;
+export default BestRecipient;

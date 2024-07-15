@@ -1,4 +1,4 @@
-const BASE_URL: string = "https://rolling-api.vercel.app/7-4/recipients/";
+const BASE_URL: string = "https://rolling-api.vercel.app/7-5/recipients/";
 
 async function getRecipient(id:string) {
     const response = await fetch(`${BASE_URL}${id}/`);
