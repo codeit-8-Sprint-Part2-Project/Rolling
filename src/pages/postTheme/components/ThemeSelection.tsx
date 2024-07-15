@@ -4,6 +4,7 @@ import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import { BackgroundImageList } from "./BackgroundImageList";
 import { ThemeSelectionProps } from "../constants/propTypes";
+import useUpdateThemeData from "../hooks/useUpdateThemeData";
 
 const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   setIsButtonDisabled,
@@ -14,6 +15,7 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
 
   const { themeData } = useThemeContext();
+  const updateThemeData = useUpdateThemeData(setThemeData);
 
   // isThemeType이 변경될 때 selectedImageUrl 업데이트
   useEffect(() => {
@@ -27,10 +29,7 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   // selectedImageUrl이 null일 때 themeData 업데이트
   useEffect(() => {
     if (selectedImageUrl === null) {
-      setThemeData((prevThemeData: any) => ({
-        ...prevThemeData,
-        backgroundImageURL: null,
-      }));
+      updateThemeData("backgroundImageURL", null);
     }
   }, [selectedImageUrl, setThemeData]);
 
@@ -50,18 +49,13 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   // 선택된 테마 타입과 옵션을 관리하는 이벤트 핸들러
   const handleOptionClick = (optionType: string, value: string) => {
     console.log(`Option clicked: ${optionType} - ${value}`);
+    console.log(selectedImageUrl);
     if (optionType === "backgroundColor") {
       setSelectedColor(value);
-      setThemeData((prevThemeData: any) => ({
-        ...prevThemeData,
-        backgroundColor: value,
-      }));
+      updateThemeData("backgroundColor", value);
     } else if (optionType === "backgroundImageUrl") {
       setSelectedImageUrl(value);
-      setThemeData((prevThemeData: any) => ({
-        ...prevThemeData,
-        backgroundImageURL: value,
-      }));
+      updateThemeData("backgroundImageURL", value);
     }
   };
 
