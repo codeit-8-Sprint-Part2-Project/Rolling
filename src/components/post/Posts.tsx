@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { getRecipient } from "../../pages/PostPage/api/api";
+import { deleteMessage, getRecipient } from "../../pages/PostPage/api/api";
 import PlusCard from "./PlusCard";
 import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
 import MessageCardList from "./MessageCardList";
+import { createPortal } from "react-dom";
+import LazyLoading from "./LazyLoading";
 
 interface Recipient {
     id? : number;
@@ -37,6 +39,7 @@ function Posts({ id, isEditing = false }: { id: string, isEditing?: boolean }) {
     
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
     const [selectDeletion, setSelectDeletion] = useState<number>(0);
+    const [isDeletionPending, setIsDeletionPending] = useState<boolean>(false);
 
     const handleLoad = async () => {
         const result = await getRecipient(id);
@@ -52,9 +55,25 @@ function Posts({ id, isEditing = false }: { id: string, isEditing?: boolean }) {
         setSelectDeletion(id);
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if(!selectDeletion) return;
-        alert("handleDelete is working");
+        alert("삭제는 아직 구현되지 않았습니다.");
+        
+        // try {
+        //     setIsDeletionPending(true);
+        //     await deleteMessage(selectDeletion);
+        // } catch(error: any) {
+        //     alert(error.message);
+        // } finally {
+        //     setIsDeletionPending(false);
+        // }
+
+        // const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== selectDeletion);
+        // setRecipient((preValues) => ({
+        //     ...preValues,
+        //     recentMessages: updatedMessages,
+        // }));
+        // setSelectDeletion(0);
     }
 
     useEffect(() => {
@@ -75,10 +94,15 @@ function Posts({ id, isEditing = false }: { id: string, isEditing?: boolean }) {
                     <button
                         className="w-[5.75rem] h-10 rounded-md border-none bg-[#9935FF] text-white text-base font-normal absolute right-6 top-[-3.125rem]"
                         onClick={handleDelete}
+                        disabled={isDeletionPending}
                     >
                         삭제하기
                     </button>
                 }
+                {isDeletionPending && createPortal(
+                    <LazyLoading />,
+                    document.body
+                )}
             </div>
         </div>
     )

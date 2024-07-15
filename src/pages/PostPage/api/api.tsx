@@ -8,4 +8,15 @@ async function getRecipient(id:string) {
     return result;
 }
 
-export { getRecipient };
+async function deleteMessage(messageId:number) {
+    const response = await fetch(`${BASE_URL}messages/${messageId}/`, {
+        method: "DELETE",
+    })
+    
+    if(!response.ok) throw new Error("메시지 삭제에 실패했습니다.");
+    const result = await response.json();
+
+    return result;
+}
+
+export { getRecipient, deleteMessage };
