@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useFormContext } from "../hooks/useFormContext";
-import { ThemeContext } from "../api/ThemeProvider";
+import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import { BackgroundImageList } from "./BackgroundImageList";
 
@@ -18,7 +17,7 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   const [isThemeType, setIsThemeType] = useState(true);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
 
-  const { handleChange, themeData } = useFormContext(ThemeContext);
+  const { handleChange, themeData } = useThemeContext();
 
   // isThemeType이 true일 때 selectedImageUrl을 null로 설정
   useEffect(() => {

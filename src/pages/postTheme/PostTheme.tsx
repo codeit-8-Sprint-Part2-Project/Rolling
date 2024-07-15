@@ -1,17 +1,10 @@
 import * as React from "react";
-import { useContext } from "react";
 import Form from "./components/Form";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeSelection from "./components/ThemeSelection";
-import { ThemeContext, ThemeContextProps } from "./api/ThemeProvider";
+import { useThemeContext } from "./hooks/useThemeContext";
 
 const PostTheme: React.FC = () => {
-  const themeContext = useContext<ThemeContextProps | undefined>(ThemeContext);
-
-  if (!themeContext) {
-    return <div>Loading...</div>;
-  }
-
   const {
     handleChange,
     themeData,
@@ -19,7 +12,7 @@ const PostTheme: React.FC = () => {
     handleButtonClick,
     setIsButtonDisabled,
     setThemeData,
-  } = themeContext;
+  } = useThemeContext();
 
   return (
     <Form

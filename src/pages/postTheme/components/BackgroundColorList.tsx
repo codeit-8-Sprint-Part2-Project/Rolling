@@ -1,15 +1,8 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useFormContext } from "../hooks/useFormContext";
-import { ThemeContext, ThemeContextProps } from "../api/ThemeProvider";
-
-// enum 정의
-enum BackgroundColor {
-  Beige = "beige",
-  Purple = "purple",
-  Blue = "blue",
-  Green = "green",
-}
+import { useThemeContext } from "../hooks/useThemeContext";
+import { getColorClass } from "../utils/getColorClass";
+import { BackgroundColor } from "../constants/enum";
 
 interface BackgroundColorListProps {
   selectedOption: string;
@@ -20,7 +13,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   selectedOption,
   handleOptionClick,
 }) => {
-  const themeContext = useFormContext<ThemeContextProps>(ThemeContext);
+  const themeContext = useThemeContext();
   const [backgroundColors, setBackgroundColors] = useState<string[]>([]);
 
   // Enum 값을 배열로 변환
@@ -37,22 +30,6 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   if (!themeContext) {
     return null;
   }
-
-  // Tailwind CSS 클래스 이름을 value에 따라 동적으로 생성하는 함수
-  const getColorClass = (color: string) => {
-    switch (color) {
-      case BackgroundColor.Beige:
-        return "bg-beige";
-      case BackgroundColor.Purple:
-        return "bg-purple-200";
-      case BackgroundColor.Blue:
-        return "bg-blue-200";
-      case BackgroundColor.Green:
-        return "bg-green-200";
-      default:
-        return "";
-    }
-  };
 
   return (
     <menu className="flex gap-x-4">
