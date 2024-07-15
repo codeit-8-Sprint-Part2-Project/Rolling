@@ -26,17 +26,19 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE }: { message: MessageRetr
     }
     
     return (
-        <div className="CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col gap-4 cursor-pointer" onClick={handleCardClick}>
-            <div className="pb-4 border-solid border-b border-[#EEEEEE]">
-                <SenderInfo message={message} />
+        <>
+            <div className="CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col gap-4 cursor-pointer" onClick={handleCardClick}>
+                <div className="pb-4 border-solid border-b border-[#EEEEEE]">
+                    <SenderInfo message={message} />
+                </div>
+                <div className="CONTENT grow truncate text-wrap" dangerouslySetInnerHTML={{__html: message.content}} />
+                <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
             </div>
-            <div className="CONTENT grow truncate text-wrap" dangerouslySetInnerHTML={{__html: message.content}} />
-            <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
             {isMessageModalOpen && createPortal(
-                <MessageModal message={message} setIsMessageModalOpen={setIsMessageModalOpen} />,
-                document.body
-            )}
-        </div>
+                    <MessageModal message={message} setIsMessageModalOpen={setIsMessageModalOpen} />,
+                    document.body
+                )}
+        </>
     )
 }
 

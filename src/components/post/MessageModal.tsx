@@ -10,8 +10,7 @@ type props = {
 
 function MessageModal({ message, setIsMessageModalOpen }: props) {
     
-    const handleButtonClick = (e: any) => {
-        e.stopPropagation();
+    const handleButtonClick = () => {
         setIsMessageModalOpen(false);
     }
     
