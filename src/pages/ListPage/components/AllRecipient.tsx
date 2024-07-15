@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Section from '../../../components/UI/Section';
 import { LinkButton } from '../../../components/UI/Button'; 
-import RecipientInfo from './RecipientInfo';
-import RecipientCardList from './RecipientList';
+import RecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient'; // getRecipient 함수 불러오기
 
 const AllRecipient: React.FC = () => {
