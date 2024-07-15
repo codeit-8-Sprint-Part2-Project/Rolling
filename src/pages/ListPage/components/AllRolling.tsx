@@ -12,7 +12,7 @@ const AllRolling: React.FC = () => {
           </div>
         </div>
       </Section>
-      
+      <div></div>
       <div className="mt-4">
         <LinkButton path="../post" btnName="나도 만들어보기" />
       </div>
