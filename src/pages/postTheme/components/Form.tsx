@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ReactNode, useEffect, useState } from "react";
 import { ThemeContextProps } from "../api/ThemeProvider";
+import { useNavigate } from "react-router-dom";
 
 interface FormProps {
   children: ReactNode;
@@ -18,10 +19,9 @@ const Form: React.FC<FormProps> = ({
   handleChange,
   themeData,
   setThemeData,
-  isButtonDisabled,
-  handleButtonClick,
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
+  const navigate = useNavigate();
 
   // 이름 유효성 검사
   const validateForm = () => {
@@ -60,6 +60,8 @@ const Form: React.FC<FormProps> = ({
 
       const result = await response.json();
       console.log("폼 데이터 전송 완료:", result);
+
+      navigate(`/post/${themeData.id}`);
     } catch (error) {
       console.error("폼 데이터 전송 실패:", error);
     }
