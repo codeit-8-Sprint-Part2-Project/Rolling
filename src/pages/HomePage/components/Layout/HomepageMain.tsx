@@ -6,6 +6,8 @@ import TitlePoint from "../UI/TitlePoint";
 import TitleHeadContents from "../UI/TitleHeadContents";
 import TitleContents from "../UI/TitleContents";
 import TitleButton from "../UI/TitleButton";
+import HomepageTitle1 from "../../assets/images/HomepageTitle1.png";
+import HomepageTitle2 from "../../assets/images/HomepageTitle2.png";
 
 const HomePageMain: React.FC = () => {
   return (
@@ -23,7 +25,7 @@ const HomePageMain: React.FC = () => {
             <TitleContents>로그인 없이 자유롭게 만들어요.</TitleContents>
           </TitleContainer>
           <img
-            src="/assets/images/HomepageTitle1.png"
+            src={HomepageTitle1}
             alt="자유롭게 롤링페이퍼를 생성하는 이미지"
           />
         </MainContainer>
@@ -39,7 +41,7 @@ const HomePageMain: React.FC = () => {
             </TitleContents>
           </TitleContainer>
           <img
-            src="/assets/images/HomepageTitle2.png"
+            src={HomepageTitle2}
             alt="롤링 페이퍼에 이모지를 선택하는 이미지"
           />
         </MainContainer>
