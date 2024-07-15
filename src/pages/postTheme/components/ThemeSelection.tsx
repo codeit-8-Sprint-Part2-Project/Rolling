@@ -21,7 +21,6 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
 
   // isThemeType이 true일 때 selectedImageUrl을 null로 설정
   useEffect(() => {
-    console.log(`isThemeType: ${isThemeType}`);
     if (isThemeType) {
       setSelectedImageUrl(null);
     }
