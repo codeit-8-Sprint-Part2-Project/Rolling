@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactNode, useEffect, useState } from "react";
 import { ThemeContextProps } from "../api/ThemeProvider";
-import { useNavigate } from "react-router-dom";
+import useSubmitForm from "../hooks/useSubmitForm";
 
 interface FormProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ const Form: React.FC<FormProps> = ({
   setThemeData,
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const navigate = useNavigate();
+  const { handleSubmit, isSubmitting } = useSubmitForm(themeData);
 
   // 이름 유효성 검사
   const validateForm = () => {
@@ -36,36 +36,6 @@ const Form: React.FC<FormProps> = ({
     const isValid = validateForm();
     setIsDisabled(!isValid);
   }, [themeData]);
-
-  // 서버로 폼 데이터 전송, 비동기 처리
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(
-        "https://rolling-api.vercel.app/8-1/recipients/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(themeData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`서버 응답 에러: ${response.status} ${errorText}`);
-      }
-
-      const result = await response.json();
-      console.log("폼 데이터 전송 완료:", result);
-
-      navigate(`/post/${themeData.id}`);
-    } catch (error) {
-      console.error("폼 데이터 전송 실패:", error);
-    }
-  };
 
   // 버튼 클릭 시 폼 제출
   const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -90,8 +60,9 @@ const Form: React.FC<FormProps> = ({
       <button
         type="button"
         onClick={onButtonClick}
-        disabled={isDisabled}
-        className="mt-6 h-[52px] rounded-xl bg-violet-500 text-white text-lg "
+        disabled={isDisabled || isSubmitting}
+        className={`mt-6 h-[52px] rounded-xl text-white text-lg
+         ${isDisabled ? "bg-gray-400" : "bg-violet-500"}`}
       >
         생성하기
       </button>
