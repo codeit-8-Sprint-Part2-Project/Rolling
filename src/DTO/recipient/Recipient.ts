@@ -1,4 +1,4 @@
-type BackgroundImageURL = "beige" | "purple" | "blue" | "green";
+type BackgroundColor = "beige" | "purple" | "blue" | "green";
 
 export interface Recipient {
   id?: number;

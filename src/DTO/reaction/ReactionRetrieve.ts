@@ -1,5 +1,5 @@
 export interface ReactionRetrieve {
-    id : number;
+    id? : number;
     emoji : string;
-    count : number;
+    count? : number;
 }

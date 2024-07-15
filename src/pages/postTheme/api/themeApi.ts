@@ -1,4 +1,4 @@
-import { Recipient } from "../../../models/recipient/Recipient";
+import { Recipient } from "../../../DTO/recipient/Recipient";
 
 export interface Recipients {
   count: number;
