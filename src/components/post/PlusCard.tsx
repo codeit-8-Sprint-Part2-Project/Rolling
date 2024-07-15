@@ -1,6 +1,6 @@
-function PlusCard() {
+import plusIcon from "../../assets/icons/plus.svg";
 
-    const plusIcon = require("../../assets/icons/plus.svg").default;
+function PlusCard() {
 
     return (
         <div className="h-[17.5rem] rounded-2xl bg-white flex justify-center items-center cursor-pointer">
