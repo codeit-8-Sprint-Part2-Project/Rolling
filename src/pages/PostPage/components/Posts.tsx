@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { deleteMessage, getRecipient } from "../../pages/PostPage/api/api";
+import { deleteMessage, getRecipient } from "../api/api";
 import PlusCard from "./PlusCard";
-import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCardList from "./MessageCardList";
 import { createPortal } from "react-dom";
 import LazyLoading from "./LazyLoading";

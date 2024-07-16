@@ -1,4 +1,4 @@
-import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCard from "./MessageCard";
 
 type prop = {

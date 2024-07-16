@@ -1,4 +1,4 @@
-import TrashcanIcon from "../../assets/icons/deleted.svg";
+import TrashcanIcon from "../../../assets/icons/deleted.svg";
 
 function TrashcanButton({ onClick }: { onClick: () => void }) {
 

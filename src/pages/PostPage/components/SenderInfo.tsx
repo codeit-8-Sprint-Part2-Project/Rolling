@@ -1,5 +1,5 @@
 import RelationshipLabel from "./RelationshipLabel";
-import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 
 function SenderInfo({ message }: { message: MessageRetrieve }) {
 

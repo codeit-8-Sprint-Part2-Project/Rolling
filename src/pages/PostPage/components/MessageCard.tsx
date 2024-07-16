@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { MessageRetrieve } from "../../DTO/message/MessageRetrieve";
-import formatComparedTime from "../../pages/PostPage/utils/formatComparedTime";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
+import formatComparedTime from "../utils/formatComparedTime";
 import SenderInfo from "./SenderInfo";
 import { createPortal } from "react-dom";
 import MessageModal from "./MessageModal";

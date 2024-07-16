@@ -4,7 +4,7 @@ import PostPage from './pages/PostPage/PostPage';
 
 function App() {
   return (
-    <PostEditPage />
+    <PostPage />
   );
 }
 
