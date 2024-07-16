@@ -8,8 +8,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="post">
-          <Route index element={<PostPage />} />
-          <Route path=":productid" />
+          <Route path=":productid" element={<PostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
