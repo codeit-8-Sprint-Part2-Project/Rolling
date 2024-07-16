@@ -27,9 +27,9 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <menu className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
+    <ul className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
       {backgroundColors.map((color, index) => (
-        <div
+        <li
           key={`${color}-${index}`}
           className="relative flex-1 max-md:aspect-w-1 max-md:aspect-h-1"
         >
@@ -51,8 +51,8 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
               />
             </div>
           )}
-        </div>
+        </li>
       ))}
-    </menu>
+    </ul>
   );
 };
