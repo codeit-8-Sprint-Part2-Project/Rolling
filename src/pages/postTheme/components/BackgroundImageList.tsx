@@ -52,31 +52,30 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     <div>
       <ul className="flex gap-x-4">
         {imageUrls.map((imageUrl, index) => (
-          <li key={index} className="relative">
+          <li key={index} className="relative w-full h-[168px] rounded-2xl">
             <input
               type="checkbox"
-              id={`checkbox-${index}`}
+              id={`img-${index}`}
               name="backgroundImageURL"
               value={imageUrl}
               checked={selectedImageUrl === imageUrl}
               onChange={() => handleImageSelect(imageUrl)}
               className="hidden"
             />
-            <label
-              htmlFor={`checkbox-${index}`}
-              className="block w-[168px] h-[168px] rounded-2xl cursor-pointer relative"
-            >
+            <label htmlFor={`img-${index}`} className="cursor-pointer">
               <img
                 src={imageUrl}
                 alt={`background ${index}`}
-                className="absolute top-0 w-full h-full rounded-2xl"
+                className="absolute top-0 w-full h-full object-cover rounded-2xl"
               />
               {selectedImageUrl === imageUrl && (
-                <img
-                  src={IcCheckTheme}
-                  alt="배경화면 선택 아이콘"
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
-                />
+                <div className="relative w-full h-[168px] rounded-2xl bg-white bg-opacity-60">
+                  <img
+                    src={IcCheckTheme}
+                    alt="배경화면 선택 아이콘"
+                    className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+                  />
+                </div>
               )}
             </label>
           </li>
