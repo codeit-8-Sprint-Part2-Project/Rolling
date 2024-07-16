@@ -27,7 +27,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="받는 사람 이름을 입력해주세요"
-        className="py-3 px-4 rounded-lg outline outline-1 outline-gray-300 text-gray-500"
+        className="py-3 px-4 rounded-lg outline outline-1 outline-gray-300 text-gray-500 placeholder-gray-500"
       />
       {error && <span className="text-red-500">{error}</span>}
     </div>

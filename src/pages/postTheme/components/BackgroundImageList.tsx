@@ -49,12 +49,15 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   };
 
   return (
-    <div className="max-md:grid">
-      <ul className="flex gap-x-4 max-md:grid grid-cols-2 row-span-2 gap-y-4">
+    <>
+      <ul
+        className="flex grow gap-x-4 h-[168px] max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:h-full max-md:mb-16
+      max-[1248px]:mb-60"
+      >
         {imageUrls.map((imageUrl, index) => (
           <li
             key={index}
-            className="relative w-full h-[154px] rounded-2xl max-md:grid"
+            className="relative w-full rounded-2xl max-md:grid max-md:aspect-w-1 max-md:aspect-h-1"
           >
             <input
               type="checkbox"
@@ -69,10 +72,11 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
               <img
                 src={imageUrl}
                 alt={`background ${index}`}
-                className="absolute top-0 w-full h-full object-cover rounded-2xl"
+                className="absolute top-0 w-full object-cover rounded-2xl
+                max-md: h-full "
               />
               {selectedImageUrl === imageUrl && (
-                <div className="relative w-full h-[168px] rounded-2xl bg-white bg-opacity-60">
+                <div className="relative w-full h-full rounded-2xl bg-white bg-opacity-60">
                   <img
                     src={IcCheckTheme}
                     alt="배경화면 선택 아이콘"
@@ -85,6 +89,6 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
         ))}
       </ul>
       {uploadError && <p className="text-red-500 mt-5">{uploadError}</p>}
-    </div>
+    </>
   );
 };
