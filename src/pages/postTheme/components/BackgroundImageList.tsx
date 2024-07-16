@@ -49,10 +49,13 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   };
 
   return (
-    <div>
-      <ul className="flex gap-x-4">
+    <div className="max-md:grid">
+      <ul className="flex gap-x-4 max-md:grid grid-cols-2 row-span-2 gap-y-4">
         {imageUrls.map((imageUrl, index) => (
-          <li key={index} className="relative w-full h-[168px] rounded-2xl">
+          <li
+            key={index}
+            className="relative w-full h-[154px] rounded-2xl max-md:grid"
+          >
             <input
               type="checkbox"
               id={`img-${index}`}
