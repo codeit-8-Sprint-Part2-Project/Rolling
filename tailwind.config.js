@@ -2,12 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        beige: "#FFE2AD",
+      },
+    },
   },
   plugins: [
     {
-    tailwindcss: {},
-    autoprefixer: {},
+      tailwindcss: {},
+      autoprefixer: {},
     },
   ],
-}
+};
