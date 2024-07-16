@@ -33,7 +33,7 @@ const Form: React.FC<FormProps> = ({
   };
 
   return (
-    <form className="flex flex-col mt-32 m-auto gap-12 max-w-3xl">
+    <form className="flex flex-col grow items-center mt-32 m-auto gap-12 max-w-3xl max-[1248px]:mx-6">
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           const childProps = {
@@ -50,7 +50,7 @@ const Form: React.FC<FormProps> = ({
         type="button"
         onClick={onButtonClick}
         disabled={isDisabled || isSubmitting}
-        className={`mt-6 h-[52px] rounded-xl text-white text-lg
+        className={`flex w-full justify-center items-center mt-6 h-[52px] rounded-xl text-white text-lg
          ${isDisabled ? "bg-gray-400" : "bg-violet-500"}`}
       >
         생성하기

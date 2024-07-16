@@ -27,7 +27,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <menu className="flex gap-x-4">
+    <menu className="flex gap-x-4 max-md:grid grid-cols-2 gap-y-4">
       {backgroundColors.map((color, index) => (
         <div key={`${color}-${index}`} className="relative flex-1">
           <input
@@ -35,7 +35,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
             type="button"
             value={color}
             onClick={() => handleOptionClick("backgroundColor", color)}
-            className={`w-full h-[168px] rounded-2xl outline outline-1 outline-gray-300 text-transparent cursor-pointer ${getColorClass(
+            className={`w-full h-[154px] rounded-2xl outline outline-1 outline-gray-300 text-transparent cursor-pointer ${getColorClass(
               color
             )}`}
           />

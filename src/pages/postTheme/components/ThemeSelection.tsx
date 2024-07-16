@@ -48,8 +48,6 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
 
   // 선택된 테마 타입과 옵션을 관리하는 이벤트 핸들러
   const handleOptionClick = (optionType: string, value: string) => {
-    console.log(`Option clicked: ${optionType} - ${value}`);
-    console.log(selectedImageUrl);
     if (optionType === "backgroundColor") {
       setSelectedColor(value);
       updateThemeData("backgroundColor", value);
@@ -60,7 +58,7 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   };
 
   return (
-    <section className="flex flex-col gap-12">
+    <section className="flex flex-col gap-12 w-full">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-2xl">배경화면을 선택해 주세요.</p>
