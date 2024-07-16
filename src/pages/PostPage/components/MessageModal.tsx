@@ -16,12 +16,12 @@ function MessageModal({ message, setIsMessageModalOpen }: props) {
     
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0">
-            <div className="w-[37.5rem] h-[29.75rem] bg-white rounded-2xl p-10 flex flex-col items-center">
+            <div className="w-[37.5rem] h-[29.75rem] mx-6 bg-white rounded-2xl p-10 flex flex-col items-center">
                 <div className="w-full flex justify-between items-center pb-5 border-solid border-b border-[#EEEEEE] mb-4">
                     <SenderInfo message={message} />
-                    <span className="DATE text-[#999999] text-sm font-normal">{formatComparedTime(message.createdAt)}</span>
+                    <div className="text-[#999999] text-sm font-normal ml-1">{formatComparedTime(message.createdAt)}</div>
                 </div>
-                <div className="w-full grow text-wrap mb-6" dangerouslySetInnerHTML={{__html: message.content}} />
+                <div className="w-full grow text-wrap mb-6 overflow-y-scroll" dangerouslySetInnerHTML={{__html: message.content}} />
                 <button className="w-[7.5rem] h-10 bg-[#9935FF] border-none text-white text-base font-normal rounded-lg" onClick={handleButtonClick}>
                     확인
                 </button>
