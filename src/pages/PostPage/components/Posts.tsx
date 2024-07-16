@@ -6,7 +6,7 @@ import MessageCardList from "./MessageCardList";
 import { createPortal } from "react-dom";
 import LazyLoading from "./LazyLoading";
 
-interface Recipient {
+export interface Recipient {
     id? : number;
     team : string;
     name : string;
@@ -81,30 +81,43 @@ function Posts({ id, isEditing = false }: { id: string, isEditing?: boolean }) {
     }, []);
     
     return (
-        <div style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " h-screen pt-[7.0625rem] bg-no-repeat bg-cover"}>
-            <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7 relative">
-                {isEditing || <PlusCard />}
-                <MessageCardList
-                    recentMessages={recentMessages}
-                    isEditing={isEditing}
-                    selectDeletion={selectDeletion}
-                    handleSelectDeletion={handleSelectDeletion}
-                />
-                {isEditing && 
-                    <button
-                        className="w-[5.75rem] h-10 rounded-md border-none bg-[#9935FF] text-white text-base font-normal absolute right-6 top-[-3.125rem]"
-                        onClick={handleDelete}
-                        disabled={isDeletionPending}
-                    >
-                        삭제하기
-                    </button>
-                }
-                {isDeletionPending && createPortal(
-                    <LazyLoading />,
-                    document.body
-                )}
-            </div>
-        </div>
+        <>
+            <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover"}>
+                <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7 relative max-[1200px]:grid-cols-2 max-[1200px]:gap-4 max-md:grid-cols-1">
+                    {isEditing || <PlusCard />}
+                    <MessageCardList
+                        recentMessages={recentMessages}
+                        isEditing={isEditing}
+                        selectDeletion={selectDeletion}
+                        handleSelectDeletion={handleSelectDeletion}
+                    />
+                    {isEditing && 
+                        <button
+                            className="w-[5.75rem] h-10 rounded-md border-none bg-[#9935FF] text-white text-base font-normal absolute right-6 top-[-3.125rem] max-[1200px]:hidden"
+                            onClick={handleDelete}
+                            disabled={isDeletionPending}
+                        >
+                            삭제하기
+                        </button>
+                    }
+                    {isEditing && 
+                        <div className="w-full fixed bottom-6 px-6 min-[1201px:hidden]">
+                            <button
+                                className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal min-[1201px]:hidden"
+                                onClick={handleDelete}
+                                disabled={isDeletionPending}
+                            >
+                                삭제하기
+                            </button>
+                        </div>
+                    }
+                    {isDeletionPending && createPortal(
+                        <LazyLoading />,
+                        document.body
+                    )}
+                </div>
+            </main>
+        </>
     )
 }
 
