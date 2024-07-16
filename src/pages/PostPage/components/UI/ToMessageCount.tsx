@@ -18,7 +18,7 @@ interface Recipient {
 
 function ToMessageCount() {
   const { productid } = useParams();
-  const [Count, setCount] = useState<Recipient | null>(null);
+  const [data, setData] = useState<Recipient | null>(null);
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -26,7 +26,7 @@ function ToMessageCount() {
         const params = productid ? { productid } : {};
         const Counts = await getByPostId(params);
 
-        setCount(Counts);
+        setData(Counts);
       } catch (error) {
         console.error("총 메세지를 불러오지 못했습니다.", error);
       }
@@ -35,11 +35,54 @@ function ToMessageCount() {
     fetchCount();
   }, [productid]);
 
-  if (!Count) {
+  if (!data) {
     return <p>총 메세지를 불러오지 못했습니다.</p>;
   }
 
-  return <p className="">{Count.recentMessages?.length}명이 작성했어요!</p>;
+  const displayedProfiles = data?.recentMessages?.slice(0, 3);
+  const countsProfiles =
+    data?.recentMessages && data.recentMessages.length > 3
+      ? data.recentMessages.length - 3
+      : 0;
+
+  return (
+    <div className="flex items-center">
+      <div
+        className="flex items-center relative"
+        style={{ width: `${(displayedProfiles?.length || 0) * 15}px` }}
+      ></div>
+      {displayedProfiles?.map((profile, index) => (
+        <img
+          key={profile.id}
+          className="border border-solid border-[#ffffff] border-[1.4px] absolute"
+          src={profile.profileImageURL}
+          alt="이모지 보낸 사람들 프로필사진"
+          width="24px"
+          height="24px"
+          style={{
+            left: `${index * 15}px`,
+            zIndex: `${index * 2}`,
+            clipPath: "circle(50%)",
+          }}
+        />
+      ))}
+      {countsProfiles > 0 && (
+        <div
+          className="w-[24px] h-[24px] border border-solid border-[#e3e3e3] rounded-full font-pretendard font-[500] text-[#484848] text-[12px]"
+          style={{
+            left: `${(displayedProfiles?.length || 0) * 15}px`,
+            zIndex: `${(displayedProfiles?.length || 0) * 2}}`,
+          }}
+        >
+          +{countsProfiles}
+        </div>
+      )}
+      <p className="font-pretendard font-[400] text-[18px] text-[#181818] ml-[18px]">
+        <span className="font-[700]">{data.recentMessages?.length}</span>명이
+        작성했어요!
+      </p>
+    </div>
+  );
 }
 
 export default ToMessageCount;

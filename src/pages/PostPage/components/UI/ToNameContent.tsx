@@ -18,7 +18,7 @@ interface Recipient {
 
 function ToNameContent() {
   const { productid } = useParams();
-  const [name, setName] = useState<Recipient | null>(null);
+  const [data, setData] = useState<Recipient | null>(null);
 
   useEffect(() => {
     const fetchName = async () => {
@@ -26,7 +26,7 @@ function ToNameContent() {
         const params = productid ? { productid } : {};
         const names = await getByPostId(params);
 
-        setName(names);
+        setData(names);
       } catch (error) {
         console.error("이름을 불러오지 못했습니다.", error);
       }
@@ -35,13 +35,13 @@ function ToNameContent() {
     fetchName();
   }, [productid]);
 
-  if (!name) {
+  if (!data) {
     return <p>이름을 불러오지 못했습니다.</p>;
   }
 
   return (
     <h1 className="font-pretendard font-bold text-[28px] text-[#2b2b2b]">
-      To. {name.name}
+      To. {data.name}
     </h1>
   );
 }
