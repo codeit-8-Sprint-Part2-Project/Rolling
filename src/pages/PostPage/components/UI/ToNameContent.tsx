@@ -37,7 +37,11 @@ function ToNameContent() {
     return <p>이름을 불러오지 못했습니다.</p>;
   }
 
-  return <h1>To. {name.name}</h1>;
+  return (
+    <h1 className="font-pretendard font-bold text-[28px] text-[#2b2b2b]">
+      To. {name.name}
+    </h1>
+  );
 }
 
 export default ToNameContent;
