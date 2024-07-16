@@ -50,7 +50,7 @@ const Form: React.FC<FormProps> = ({
         type="button"
         onClick={onButtonClick}
         disabled={isDisabled || isSubmitting}
-        className={`flex w-full justify-center items-center mt-6 h-[52px] rounded-xl text-white text-lg
+        className={`flex w-full justify-center items-center my-6 py-3.5 h-[52px] rounded-xl text-white text-lg
          ${isDisabled ? "bg-gray-400" : "bg-violet-500"}`}
       >
         생성하기
