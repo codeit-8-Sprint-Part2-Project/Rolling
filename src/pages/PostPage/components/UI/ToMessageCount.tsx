@@ -16,34 +16,30 @@ interface Recipient {
   topReactions?: string;
 }
 
-function ToNameContent() {
+function ToMessageCount() {
   const { productid } = useParams();
-  const [name, setName] = useState<Recipient | null>(null);
+  const [Count, setCount] = useState<Recipient | null>(null);
 
   useEffect(() => {
-    const fetchName = async () => {
+    const fetchCount = async () => {
       try {
         const params = productid ? { productid } : {};
-        const names = await getByPostId(params);
+        const Counts = await getByPostId(params);
 
-        setName(names);
+        setCount(Counts);
       } catch (error) {
-        console.error("이름을 불러오지 못했습니다.", error);
+        console.error("총 메세지를 불러오지 못했습니다.", error);
       }
     };
 
-    fetchName();
+    fetchCount();
   }, [productid]);
 
-  if (!name) {
-    return <p>이름을 불러오지 못했습니다.</p>;
+  if (!Count) {
+    return <p>총 메세지를 불러오지 못했습니다.</p>;
   }
 
-  return (
-    <h1 className="font-pretendard font-bold text-[28px] text-[#2b2b2b]">
-      To. {name.name}
-    </h1>
-  );
+  return <p className="">{Count.recentMessages?.length}명이 작성했어요!</p>;
 }
 
-export default ToNameContent;
+export default ToMessageCount;
