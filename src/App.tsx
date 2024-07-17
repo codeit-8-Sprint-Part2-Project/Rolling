@@ -5,7 +5,7 @@ import * as React from "react";
 import ThemeProvider from "./pages/postTheme/api/ThemeProvider";
 import PostTheme from "./pages/postTheme/PostTheme";
 
-const App: React.FC = () => {
+function App() {
   return (
     <BrowserRouter>
       <Routes>

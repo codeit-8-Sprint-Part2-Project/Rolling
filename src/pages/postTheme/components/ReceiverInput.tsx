@@ -18,7 +18,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full">
       <label className="font-bold text-2xl">To.</label>
       <input
         type="text"
@@ -27,7 +27,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="받는 사람 이름을 입력해주세요"
-        className="py-3 px-4 rounded-lg outline outline-1 outline-gray-300 text-gray-500"
+        className="py-3 px-4 rounded-lg outline outline-1 outline-gray-300 text-gray-500 placeholder-gray-500"
       />
       {error && <span className="text-red-500">{error}</span>}
     </div>

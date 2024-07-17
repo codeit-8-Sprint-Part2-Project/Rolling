@@ -27,24 +27,29 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <menu className="flex gap-x-4">
+    <menu className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
       {backgroundColors.map((color, index) => (
-        <div key={`${color}-${index}`} className="relative flex-1">
+        <div
+          key={`${color}-${index}`}
+          className="relative flex-1 max-md:aspect-w-1 max-md:aspect-h-1"
+        >
           <input
             name="backgroundColor"
             type="button"
             value={color}
             onClick={() => handleOptionClick("backgroundColor", color)}
-            className={`w-full h-[168px] rounded-2xl outline outline-1 outline-gray-300 text-transparent cursor-pointer ${getColorClass(
+            className={`relative w-full h-[168px] rounded-2xl outline outline-1 outline-gray-300 text-transparent cursor-pointer ${getColorClass(
               color
             )}`}
           />
           {selectedColor === color && (
-            <img
-              src={IcCheckTheme}
-              alt="배경화면 선택 아이콘"
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
-            />
+            <div className="absolute top-0 w-full h-full rounded-2xl">
+              <img
+                src={IcCheckTheme}
+                alt="배경화면 선택 아이콘"
+                className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+              />
+            </div>
           )}
         </div>
       ))}
