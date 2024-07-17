@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactElement } from "react";
 import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
+import { CreateButton } from "../UI/CreateButton";
 
-const Form: React.FC<FormProps> = ({
+const ThemeForm: React.FC<FormProps> = ({
   children,
   handleChange,
   themeData,
@@ -12,18 +12,9 @@ const Form: React.FC<FormProps> = ({
   const [isDisabled, setIsDisabled] = useState(true);
   const { handleSubmit, isSubmitting } = useSubmitData(themeData);
 
-  // 이름 유효성 검사
-  const validateForm = () => {
-    if (themeData.name && themeData.name.trim() !== "") {
-      return true;
-    }
-    return false;
-  };
-
-  // 데이터 값이 변경될 때마다 유효성 검사
+  // 데이터 값이 변경될 때마다 이름 유효성 검사
   useEffect(() => {
-    const isValid = validateForm();
-    setIsDisabled(!isValid);
+    setIsDisabled(!themeData.name?.trim());
   }, [themeData]);
 
   // 버튼 클릭 시 폼 제출
@@ -36,27 +27,22 @@ const Form: React.FC<FormProps> = ({
     <form className="flex flex-col grow items-center mt-32 m-auto gap-12 max-w-3xl max-[1248px]:mx-6">
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          const childProps = {
+          return React.cloneElement(child as ReactElement, {
             handleChange,
             themeData,
             setThemeData,
             setIsDisabled,
-          };
-          return React.cloneElement(child, childProps);
+          });
         }
         return child;
       })}
-      <button
-        type="button"
-        onClick={onButtonClick}
-        disabled={isDisabled || isSubmitting}
-        className={`flex w-full justify-center items-center my-6 py-3.5 h-[52px] rounded-xl text-white text-lg
-         ${isDisabled ? "bg-gray-400" : "bg-violet-500"}`}
-      >
-        생성하기
-      </button>
+      <CreateButton
+        onButtonClick={onButtonClick}
+        isDisabled={isDisabled}
+        isSubmitting={isSubmitting}
+      />
     </form>
   );
 };
 
-export default Form;
+export default ThemeForm;

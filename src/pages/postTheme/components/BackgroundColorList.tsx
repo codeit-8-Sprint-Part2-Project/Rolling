@@ -4,7 +4,7 @@ import { useThemeContext } from "../hooks/useThemeContext";
 import { getColorClass } from "../utils/getColorClass";
 import { BackgroundColor } from "../constants/enum";
 import { BackgroundColorListProps } from "../constants/propTypes";
-import IcCheckTheme from "../assets/icons/ic_check_theme.png";
+import ThemeCheckIc from "../UI/ThemeCheckIc";
 
 export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   selectedColor,
@@ -27,9 +27,9 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <menu className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
+    <ul className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
       {backgroundColors.map((color, index) => (
-        <div
+        <li
           key={`${color}-${index}`}
           className="relative flex-1 max-md:aspect-w-1 max-md:aspect-h-1"
         >
@@ -44,15 +44,11 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
           />
           {selectedColor === color && (
             <div className="absolute top-0 w-full h-full rounded-2xl">
-              <img
-                src={IcCheckTheme}
-                alt="배경화면 선택 아이콘"
-                className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
-              />
+              <ThemeCheckIc />
             </div>
           )}
-        </div>
+        </li>
       ))}
-    </menu>
+    </ul>
   );
 };

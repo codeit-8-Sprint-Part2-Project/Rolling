@@ -1,6 +1,31 @@
-import { ReactNode } from "react";
-import { ThemeContextProps } from "../api/ThemeProvider";
+import { ReactNode, ChangeEvent } from "react";
 
+//context type
+export interface ThemeData {
+  id: string;
+  team: string;
+  name: string;
+  backgroundColor: string;
+  backgroundImageURL?: string | null;
+}
+
+//context propTypes
+export interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export interface ThemeContextProps {
+  themeData: ThemeData;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleOptionClick: (optionType: string, value: string) => void;
+  fetchThemeData: (team: string) => void;
+  isButtonDisabled: boolean;
+  setIsButtonDisabled: (isDisabled: boolean) => void;
+  handleButtonClick: () => void;
+  setThemeData: React.Dispatch<React.SetStateAction<ThemeData>>;
+}
+
+//theme components proptypes
 export interface FormProps {
   children: ReactNode;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

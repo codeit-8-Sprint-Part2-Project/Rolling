@@ -9,33 +9,33 @@ import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
 
 export interface Recipient {
-    id? : number;
-    team : string;
-    name : string;
-    backgroundColor : string;
-    backgroundImageURL? : string;
-    createdAt? : Date;
-    messageCount? : string;
-    recentMessages? : MessageRetrieve[];
-    reactionCount? : number;
-    topReactions? : string;
+  id?: number;
+  team: string;
+  name: string;
+  backgroundColor: string;
+  backgroundImageURL?: string;
+  createdAt?: Date;
+  messageCount?: string;
+  recentMessages?: MessageRetrieve[];
+  reactionCount?: number;
+  topReactions?: string;
 }
 
 const BACKGROUND_COLORS: {
-    [index: string]: string,
+  [index: string]: string;
 } = {
-    beige: "bg-[#FFE2AD]",
-    purple: "bg-[#ECD9FF]",
-    blue: "bg-[#B1E4FF]",
-    green: "bg-[#D0F5C3]",
-}
+  beige: "bg-[#FFE2AD]",
+  purple: "bg-[#ECD9FF]",
+  blue: "bg-[#B1E4FF]",
+  green: "bg-[#D0F5C3]",
+};
 
 const INITIAL_RECIPIENT_VALUE: Recipient = {
-    team: '',
-    name: '',
-    backgroundColor: '',
-    backgroundImageURL: '',
-}
+  team: "",
+  name: "",
+  backgroundColor: "",
+  backgroundImageURL: "",
+};
 
 function Posts({ id }: { id: string }) {
     

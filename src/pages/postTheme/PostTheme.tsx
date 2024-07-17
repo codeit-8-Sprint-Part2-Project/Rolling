@@ -1,5 +1,5 @@
 import * as React from "react";
-import Form from "./components/Form";
+import ThemeForm from "./components/ThemeForm";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeSelection from "./components/ThemeSelection";
 import { useThemeContext } from "./hooks/useThemeContext";
@@ -15,8 +15,8 @@ const PostTheme: React.FC = () => {
   } = useThemeContext();
 
   return (
-    <main className="flex justify-center ">
-      <Form
+    <main className="flex justify-center">
+      <ThemeForm
         handleChange={handleChange}
         themeData={themeData}
         isButtonDisabled={isButtonDisabled}
@@ -28,7 +28,7 @@ const PostTheme: React.FC = () => {
           setIsButtonDisabled={setIsButtonDisabled}
           setThemeData={setThemeData}
         />
-      </Form>
+      </ThemeForm>
     </main>
   );
 };

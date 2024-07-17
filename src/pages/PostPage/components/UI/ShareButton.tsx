@@ -19,6 +19,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
   };
 
   const shareToKakao = () => {};
+
   const shareToUrl = () => {
     navigator.clipboard.writeText(url);
     setIsModalOpen(true);
