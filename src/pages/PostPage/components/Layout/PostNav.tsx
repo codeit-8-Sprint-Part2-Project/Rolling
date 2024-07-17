@@ -14,7 +14,7 @@ const PostNav: React.FC = () => {
         <PostNavTitleContainer>
           <ToMessageCount />
           <ToEmojiCount />
-          <ShareButton />
+          <ShareButton url={""} />
         </PostNavTitleContainer>
       </PostNavContainer>
     </div>
