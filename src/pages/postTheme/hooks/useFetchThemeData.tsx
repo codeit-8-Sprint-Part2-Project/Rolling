@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getRecipients } from "../api/themeApi";
+import { getRecipients } from "../api/getRecipients";
 import { ThemeData } from "../constants/propTypes";
 import { INIT_THEME_VALUE } from "../constants/initial";
 
