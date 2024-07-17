@@ -7,7 +7,7 @@ interface FetchUrlsResult {
 
 const useFetchUrls = (
   urlType: string,
-  setSelectedImageUrl: (url: string) => void
+  extractUrls: (data: any) => string[]
 ): FetchUrlsResult => {
   const [urls, setUrls] = useState<string[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -19,11 +19,10 @@ const useFetchUrls = (
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        if (data && data.imageUrls && data.imageUrls.length > 0) {
-          setUrls(data.imageUrls);
+        const extractedUrls = extractUrls(data);
 
-          // 첫 번째 이미지 URL 선택
-          setSelectedImageUrl(data.imageUrls[0]);
+        if (extractedUrls && extractedUrls.length > 0) {
+          setUrls(extractedUrls);
         }
       } catch (error) {
         console.error(`${urlType} 패치 실패:`, error);

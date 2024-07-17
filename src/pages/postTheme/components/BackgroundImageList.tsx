@@ -13,9 +13,17 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
 }) => {
   const { urls: imageUrls, error: fetchError } = useFetchUrls(
     "background-images",
-    setSelectedImageUrl
+    (data) => data.imageUrls || []
   );
+
   const updateThemeData = useUpdateThemeData(setThemeData);
+
+  // 로드할 때마다 첫 번째 이미지 URL 선택
+  useEffect(() => {
+    if (imageUrls.length > 0 && !selectedImageUrl) {
+      setSelectedImageUrl(imageUrls[0]);
+    }
+  }, [imageUrls, selectedImageUrl, setSelectedImageUrl]);
 
   // selectedImageUrl이 변경될 때마다 themeData 업데이트
   useEffect(() => {
