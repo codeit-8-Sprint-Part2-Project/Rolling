@@ -1,15 +1,23 @@
-// RecipientCardList.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
 
+interface Recipient {
+    id: string;
+    name: string;
+    recentMessages: string;
+    topReactions: { emoji: string; count: number }[];
+}
+
 interface RecipientCardListProps {
-    data: any; // 수신자 데이터
+    data: {
+        results: Recipient[];
+    };
 }
 
 const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const cardsToShow = 4; // 한 번에 보여줄 카드 수
+    const cardsToShow = 4;
 
     const totalCards = data.results.length;
     const maxIndex = Math.ceil(totalCards / cardsToShow) - 1;
@@ -36,12 +44,13 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                     className="flex transition-transform duration-500"
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                    {data.results.map((recipient: any, index: number) => (
+                    {data.results.map((recipient, index) => (
                         <div className="min-w-[25%] box-border p-2" key={recipient.id}>
                             <Link to={`/post/${recipient.id}`}>
                                 <RecipientCard
                                     name={recipient.name}
-                                    recentMessages={recipient.recentMessages} 
+                                    recentMessages={recipient.recentMessages}
+                                    topReactions={recipient.topReactions} // topReactions 전달
                                 />
                             </Link>
                         </div>

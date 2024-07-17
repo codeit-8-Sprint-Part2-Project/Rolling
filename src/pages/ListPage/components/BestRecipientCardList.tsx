@@ -2,19 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
 
-interface RecipientCardListProps {
-  data: any; // 수신자 데이터
+// 수정: Recipient 타입에 topReactions 추가
+interface Recipient {
+  id: string;
+  name: string;
+  recentMessages: string;
+  messageCount: number;
+  topReactions: { emoji: string; count: number }[]; // topReactions 정보 추가
 }
 
-const BestRecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
+interface BestRecipientCardListProps {
+  data: {
+    results: Recipient[];
+  };
+}
+
+const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsToShow = 4; // 한 번에 보여줄 카드 수
 
-  const [sortedData, setSortedData] = useState(data.results);
+  // 데이터를 메시지 수 기준으로 내림차순 정렬하는 상태 변수
+  const [sortedData, setSortedData] = useState<Recipient[]>([]);
 
+  // 데이터가 변경될 때마다 정렬하여 sortedData 업데이트
   useEffect(() => {
     const sortedRecipients = [...data.results].sort(
-      (a, b) => b.messageCount - a.messageCount
+      (a, b) => b.recentMessages.length - a.recentMessages.length
     );
     setSortedData(sortedRecipients);
   }, [data.results]);
@@ -44,12 +57,13 @@ const BestRecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
           className="flex transition-transform duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {sortedData.map((recipient: any, index: number) => (
+          {sortedData.map((recipient, index) => (
             <div className="min-w-[25%] box-border p-2" key={recipient.id}>
               <Link to={`/post/${recipient.id}`}>
                 <RecipientCard
                   name={recipient.name}
-                  recentMessages={recipient.recentMessages} 
+                  recentMessages={recipient.recentMessages}
+                  topReactions={recipient.topReactions} // 수정 필요: topReactions 정보 전달
                 />
               </Link>
             </div>
