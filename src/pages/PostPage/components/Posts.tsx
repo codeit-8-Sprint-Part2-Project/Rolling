@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import LazyLoading from "./LazyLoading";
 import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
+import MainSectionButtons from "./MainSectionButtons";
 
 export interface Recipient {
     id?: number;
@@ -102,6 +103,10 @@ function Posts({ id }: { id: string }) {
         setIsEditing(!isEditing);
     }
 
+    const handleBackButtonclick = () => {
+        navigate("/list");
+    }
+
     useEffect(() => {
         handleLoad();
     }, []);
@@ -111,7 +116,11 @@ function Posts({ id }: { id: string }) {
             <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover"}>
                 <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7 relative max-[1200px]:grid-cols-2 max-[1200px]:gap-4 max-md:grid-cols-1">
                     {isEditing
-                        ? <RecipientDeleteCard isRecipientDeleteOpen={isRecipientDeleteOpen} setIsRecipientDeleteOpen={setIsRecipientDeleteOpen} handleRecipientDelete={handleRecipientDelete} />
+                        ? <RecipientDeleteCard
+                            isRecipientDeleteOpen={isRecipientDeleteOpen}
+                            setIsRecipientDeleteOpen={setIsRecipientDeleteOpen}
+                            handleRecipientDelete={handleRecipientDelete}
+                        />
                         : <PlusCard />
                     }
                     <MessageCardList
@@ -119,22 +128,12 @@ function Posts({ id }: { id: string }) {
                         isEditing={isEditing}
                         handleMessageDelete={handleMessageDelete}
                     />
-                    <button
-                        className="w-[5.75rem] h-10 rounded-md border-none bg-[#9935FF] text-white text-base font-normal absolute right-6 top-[-3.125rem] max-[1200px]:hidden hover:bg-[#861DEE]"
-                        onClick={handleEditButtonClick}
-                        disabled={isDeletionPending}
-                    >
-                        {whatsButtonText()}
-                    </button>
-                    <div className="w-full fixed bottom-6 px-6 min-[1201px:hidden]">
-                        <button
-                            className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal min-[1201px]:hidden hover:bg-[#861DEE]"
-                            onClick={handleEditButtonClick}
-                            disabled={isDeletionPending}
-                        >
-                            {whatsButtonText()}
-                        </button>
-                    </div>
+                    <MainSectionButtons
+                        handleEditButtonClick={handleEditButtonClick}
+                        handleBackButtonClick={handleBackButtonclick}
+                        isDeletionPending={isDeletionPending}
+                        whatsButtonText={whatsButtonText}
+                    />
                     {isDeletionPending && createPortal(
                         <LazyLoading />,
                         document.body
