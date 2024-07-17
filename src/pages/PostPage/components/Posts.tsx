@@ -9,33 +9,33 @@ import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
 
 export interface Recipient {
-  id?: number;
-  team: string;
-  name: string;
-  backgroundColor: string;
-  backgroundImageURL?: string;
-  createdAt?: Date;
-  messageCount?: string;
-  recentMessages?: MessageRetrieve[];
-  reactionCount?: number;
-  topReactions?: string;
+    id?: number;
+    team: string;
+    name: string;
+    backgroundColor: string;
+    backgroundImageURL?: string;
+    createdAt?: Date;
+    messageCount?: string;
+    recentMessages?: MessageRetrieve[];
+    reactionCount?: number;
+    topReactions?: string;
 }
 
 const BACKGROUND_COLORS: {
-  [index: string]: string;
+    [index: string]: string;
 } = {
-  beige: "bg-[#FFE2AD]",
-  purple: "bg-[#ECD9FF]",
-  blue: "bg-[#B1E4FF]",
-  green: "bg-[#D0F5C3]",
+    beige: "bg-[#FFE2AD]",
+    purple: "bg-[#ECD9FF]",
+    blue: "bg-[#B1E4FF]",
+    green: "bg-[#D0F5C3]",
 };
 
 const INITIAL_RECIPIENT_VALUE: Recipient = {
-  team: "",
-  name: "",
-  backgroundColor: "",
-  backgroundImageURL: "",
-};
+    team: "",
+    name: "",
+    backgroundColor: "",
+    backgroundImageURL: "",
+    };
 
 function Posts({ id }: { id: string }) {
     
@@ -98,7 +98,7 @@ function Posts({ id }: { id: string }) {
     }
 
     // 수정하기 / 돌아가기 버튼 클릭 제어 함수
-    const handleButtonClick = () => {
+    const handleEditButtonClick = () => {
         setIsEditing(!isEditing);
     }
 
@@ -121,7 +121,7 @@ function Posts({ id }: { id: string }) {
                     />
                     <button
                         className="w-[5.75rem] h-10 rounded-md border-none bg-[#9935FF] text-white text-base font-normal absolute right-6 top-[-3.125rem] max-[1200px]:hidden hover:bg-[#861DEE]"
-                        onClick={handleButtonClick}
+                        onClick={handleEditButtonClick}
                         disabled={isDeletionPending}
                     >
                         {whatsButtonText()}
@@ -129,7 +129,7 @@ function Posts({ id }: { id: string }) {
                     <div className="w-full fixed bottom-6 px-6 min-[1201px:hidden]">
                         <button
                             className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal min-[1201px]:hidden hover:bg-[#861DEE]"
-                            onClick={handleButtonClick}
+                            onClick={handleEditButtonClick}
                             disabled={isDeletionPending}
                         >
                             {whatsButtonText()}
