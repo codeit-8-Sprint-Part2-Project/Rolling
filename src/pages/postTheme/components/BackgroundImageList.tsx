@@ -1,8 +1,9 @@
 import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import ThemeCheckIc from "../UI/ThemeCheckIc";
+import useFetchUrls from "../hooks/useFetchUrls";
 
 const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
@@ -10,30 +11,11 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   selectedImageUrl,
   setSelectedImageUrl,
 }) => {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const { urls: imageUrls, error: fetchError } = useFetchUrls(
+    "background-images",
+    setSelectedImageUrl
+  );
   const updateThemeData = useUpdateThemeData(setThemeData);
-
-  useEffect(() => {
-    const fetchImageUrls = async () => {
-      try {
-        const backgroundImageUrl =
-          "https://rolling-api.vercel.app/background-images/";
-        const response = await fetch(backgroundImageUrl);
-        const data = await response.json();
-
-        if (data && data.imageUrls && data.imageUrls.length > 0) {
-          setImageUrls(data.imageUrls);
-          // 첫 번째 이미지 URL 선택
-          setSelectedImageUrl(data.imageUrls[0]);
-        }
-      } catch (error) {
-        console.error("backgroundImageUrl 패치 실패:", error);
-      }
-    };
-
-    fetchImageUrls();
-  }, []);
 
   // selectedImageUrl이 변경될 때마다 themeData 업데이트
   useEffect(() => {
@@ -87,7 +69,7 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
           </li>
         ))}
       </ul>
-      {uploadError && <p className="text-red-500 mt-5">{uploadError}</p>}
+      {fetchError && <p className="text-red-500 mt-5">{fetchError.message}</p>}
     </>
   );
 };
