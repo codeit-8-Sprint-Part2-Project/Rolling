@@ -1,3 +1,4 @@
+// RecipientCardList.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
@@ -40,7 +41,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                             <Link to={`/post/${recipient.id}`}>
                                 <RecipientCard
                                     name={recipient.name}
-                                    messageCount={recipient.messageCount}
+                                    recentMessages={recipient.recentMessages} 
                                 />
                             </Link>
                         </div>

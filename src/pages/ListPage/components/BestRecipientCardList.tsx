@@ -49,7 +49,7 @@ const BestRecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
               <Link to={`/post/${recipient.id}`}>
                 <RecipientCard
                   name={recipient.name}
-                  messageCount={recipient.messageCount}
+                  recentMessages={recipient.recentMessages} 
                 />
               </Link>
             </div>
