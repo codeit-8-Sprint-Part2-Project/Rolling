@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeContextProps } from "../api/ThemeProvider";
+import { ThemeContextProps } from "../constants/propTypes";
 
 const useSubmitData = (themeData: ThemeContextProps["themeData"]) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
