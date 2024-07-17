@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
+import { CreateButton } from "../UI/CreateButton";
 
 const Form: React.FC<FormProps> = ({
   children,
@@ -46,15 +47,11 @@ const Form: React.FC<FormProps> = ({
         }
         return child;
       })}
-      <button
-        type="button"
-        onClick={onButtonClick}
-        disabled={isDisabled || isSubmitting}
-        className={`flex w-full justify-center items-center my-6 py-3.5 h-[52px] rounded-xl text-white text-lg
-         ${isDisabled ? "bg-gray-400" : "bg-violet-500"}`}
-      >
-        생성하기
-      </button>
+      <CreateButton
+        onButtonClick={onButtonClick}
+        isDisabled={isDisabled}
+        isSubmitting={isSubmitting}
+      />
     </form>
   );
 };
