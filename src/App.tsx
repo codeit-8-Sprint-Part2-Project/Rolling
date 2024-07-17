@@ -1,32 +1,10 @@
 
-import * as React from "react";
-import ThemeProvider from "./pages/postTheme/api/ThemeProvider";
-import PostTheme from "./pages/postTheme/PostTheme";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ListPage from "./pages/ListPage/ListPage";
+import './App.css';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/post"
-          index
-          element={
-            <ThemeProvider>
-              <PostTheme />
-            </ThemeProvider>
-          }
-        />
-        <Route
-          path="/list"
-          index
-          element={
-              <ListPage />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div>
+    </div>
   );
 };
 

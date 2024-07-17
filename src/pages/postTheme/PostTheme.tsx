@@ -15,19 +15,21 @@ const PostTheme: React.FC = () => {
   } = useThemeContext();
 
   return (
-    <Form
-      handleChange={handleChange}
-      themeData={themeData}
-      isButtonDisabled={isButtonDisabled}
-      handleButtonClick={handleButtonClick}
-      setThemeData={setThemeData}
-    >
-      <ReceiverInput handleChange={handleChange} themeData={themeData} />
-      <ThemeSelection
-        setIsButtonDisabled={setIsButtonDisabled}
+    <main className="flex justify-center ">
+      <Form
+        handleChange={handleChange}
+        themeData={themeData}
+        isButtonDisabled={isButtonDisabled}
+        handleButtonClick={handleButtonClick}
         setThemeData={setThemeData}
-      />
-    </Form>
+      >
+        <ReceiverInput handleChange={handleChange} themeData={themeData} />
+        <ThemeSelection
+          setIsButtonDisabled={setIsButtonDisabled}
+          setThemeData={setThemeData}
+        />
+      </Form>
+    </main>
   );
 };
 
