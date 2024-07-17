@@ -12,7 +12,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
   topReactions,
 }) => {
   return (
-    <div className="w-[275px] h-[260px] p-4 mb-4 border rounded-tl-[16px] rounded-tr-[0px] rounded-br-[0px] rounded-bl-[0px] opacity-[1]">
+    <div className="w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md">
       <h2 className="font-pretendard text-[24px] font-bold leading-[36px] tracking-[-0.01em] text-left">
         To. {name}
       </h2>
