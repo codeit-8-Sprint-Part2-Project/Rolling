@@ -55,7 +55,7 @@ function EmojiDropdown() {
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-wrap gap-[10px] rounded-[8px] border border-[#b6b6b6] shadow-custom p-[24px] bg-[#ffffff] absolute top-[40px] left-[-30px]">
+        <div className="max-w-[320px] flex flex-wrap gap-[10px] rounded-[8px] border border-[#b6b6b6] shadow-custom p-[24px] bg-[#ffffff] absolute top-[40px] left-[-40px]">
           {displayedEmojis?.map((emoji) => (
             <div className="flex gap-[2px] rounded-[32px] w-[66px] px-[12px] py-[8px] bg-black/50 font-pretendard font-[400] text-[16px] text-[#ffffff] justify-center items-center">
               {emoji.emoji}
