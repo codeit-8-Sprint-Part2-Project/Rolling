@@ -35,7 +35,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
     return (
         <div className="relative">
             <button
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
+                className="rounded-full absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
                 onClick={prevSlide}
                 disabled={currentIndex === 0}
             >
@@ -62,7 +62,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                 </div>
             </div>
             <button
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
+                className="rounded-full absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
                 onClick={nextSlide}
                 disabled={currentIndex === maxIndex}
             >
