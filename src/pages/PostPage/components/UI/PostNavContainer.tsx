@@ -6,7 +6,7 @@ interface PostNavContainerProps {
 
 const PostNavContainer: React.FC<PostNavContainerProps> = ({ children }) => {
   return (
-    <div className="w-screen border-b border-solid border-[#ededed] h-[68px] flex items-center">
+    <div className="w-full border-b border-solid border-[#ededed] h-[68px] flex items-center">
       <div className="container mx-auto max-w-[1200px] flex justify-between items-center">
         {children}
       </div>
