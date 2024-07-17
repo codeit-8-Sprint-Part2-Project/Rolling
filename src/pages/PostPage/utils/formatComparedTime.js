@@ -24,13 +24,13 @@ function formatComparedTime(targetTime) {
         return dateFormat;
     }
 
-    else if(comparedTime > 2 * DAY) return `${comparedTime / DAY}일 전`;
+    else if(comparedTime > 2 * DAY) return `${Math.floor(comparedTime / DAY)}일 전`;
 
     else if(comparedTime > DAY) return "어제";
 
-    else if(comparedTime > HOUR) return `${comparedTime / HOUR}시간 전`;
+    else if(comparedTime > HOUR) return `${Math.floor(comparedTime / HOUR)}시간 전`;
 
-    else if(comparedTime > MIN) return `${compareTime / MIN}분 전`;
+    else if(comparedTime > MIN) return `${Math.floor(compareTime / MIN)}분 전`;
 
     else return "방금 전";
 }
