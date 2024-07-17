@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
 import { getRecipients } from "../api/themeApi";
 import { ThemeData } from "../constants/propTypes";
+import { INIT_THEME_VALUE } from "../constants/initial";
 
 const useFetchThemeData = (initialTeam: string) => {
-  const [themeData, setThemeData] = useState<ThemeData>({
-    id: "",
-    team: initialTeam,
-    name: "",
-    backgroundColor: "beige",
-    backgroundImageURL: null,
-  });
+  const [themeData, setThemeData] = useState<ThemeData>(INIT_THEME_VALUE);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
