@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         beige: "#FFE2AD",
       },
+      boxShadow: {
+        custom: "0 2px 12px rgba(0, 0, 0, 0.08)",
+      },
     },
   },
   plugins: [
