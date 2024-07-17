@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
 
-interface HeaderContainerProps {
+interface NavContainerProps {
   children: ReactNode;
 }
 
-const HeaderContainer: React.FC<HeaderContainerProps> = ({ children }) => {
+const NavContainer: React.FC<NavContainerProps> = ({ children }) => {
   return (
     <div className="w-screen border-b border-solid border-gray-300 h-16 flex items-center">
-      <div className="container mx-auto max-w-[1200px] h-[40px] flex justify-between items-center">
+      <div className="container mx-auto max-w-[1200px]  flex justify-between items-center">
         {children}
       </div>
     </div>
   );
 };
 
-export default HeaderContainer;
+export default NavContainer;

@@ -1,12 +1,12 @@
 import React from "react";
 import NavLogo from "../UI/NavLogo";
-import HeaderContainer from "../UI/NavContainer";
+import NavContainer from "../UI/NavContainer";
 
 const Nav: React.FC = () => {
   return (
-    <HeaderContainer>
+    <NavContainer>
       <NavLogo />
-    </HeaderContainer>
+    </NavContainer>
   );
 };
 
