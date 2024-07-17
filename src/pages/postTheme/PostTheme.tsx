@@ -15,7 +15,7 @@ const PostTheme: React.FC = () => {
   } = useThemeContext();
 
   return (
-    <main className="flex justify-center ">
+    <main className="flex justify-center">
       <Form
         handleChange={handleChange}
         themeData={themeData}

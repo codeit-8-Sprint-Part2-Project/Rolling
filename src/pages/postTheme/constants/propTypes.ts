@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { ThemeContextProps } from "../api/ThemeProvider";
 
+//components
 export interface FormProps {
   children: ReactNode;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
