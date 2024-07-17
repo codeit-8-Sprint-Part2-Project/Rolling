@@ -25,7 +25,7 @@ const useFetchUrls = (
           setUrls(extractedUrls);
         }
       } catch (error) {
-        console.error(`${urlType} 패치 실패:`, error);
+        console.error(`${urlType} apiCall 실패:`, error);
         setError(error as Error);
       }
     };
