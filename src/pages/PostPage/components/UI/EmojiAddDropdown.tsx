@@ -93,7 +93,7 @@ function EmojiAddDropdown() {
   ];
 
   return (
-    <>
+    <div className="relative">
       <button
         onClick={toggleDropdown}
         className="px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] font-pretendard font-[500] text-[16px] text-[#181818] flex gap-[4px]"
@@ -103,11 +103,11 @@ function EmojiAddDropdown() {
       </button>
 
       {isDropdownVisible && (
-        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[40px] left-[-70px]">
+        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-270px]">
           <EmojiPicker searchPlaceholder="검색" categories={customNames} />
         </div>
       )}
-    </>
+    </div>
   );
 }
 
