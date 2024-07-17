@@ -103,7 +103,7 @@ function EmojiAddDropdown() {
       </button>
 
       {isDropdownVisible && (
-        <div className="border border-[#cccccc] shadow-custom absolute top-[40px] left-[-70px]">
+        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[40px] left-[-70px]">
           <EmojiPicker searchPlaceholder="검색" categories={customNames} />
         </div>
       )}
