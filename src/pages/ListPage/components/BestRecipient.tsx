@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Section from '../../../components/UI/Section';
 import BestRecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient';
 
@@ -28,20 +27,16 @@ const BestRecipient: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <Section>
-                <div>
-                    <div className="flex-grow-3 flex-shrink-0 basis-0">
-                        <h2 className="font-bold text-2xl">인기 롤링 페이퍼 🔥️</h2>
-                    </div>
+        <div className="max-w-[1201px] mx-auto">
+            <div>
+                <div className="flex-grow-3 flex-shrink-0 basis-0">
+                    <h2 className="font-bold text-2xl">인기 롤링 페이퍼 🔥️</h2>
                 </div>
-            </Section>
+            </div>
 
             {recipientData && (
                 <>
-                    <Section>
-                        <BestRecipientCardList data={recipientData} />
-                    </Section>
+                    <BestRecipientCardList data={recipientData} />
                 </>
             )}
         </div>

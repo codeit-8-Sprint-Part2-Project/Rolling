@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Section from '../../../components/UI/Section';
 import { LinkButton } from '../../../components/UI/Button'; 
 import RecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient'; // getRecipient 함수 불러오기
@@ -21,20 +20,16 @@ const AllRecipient: React.FC = () => {
     }, []);
 
     return (
-        <div>
-            <Section>
-                <div>
-                    <div className="flex-grow-3 flex-shrink-0 basis-0">
-                        <h2 className="font-bold text-2xl">최근에 만든 롤링 페이퍼 ⭐️️</h2>
-                    </div>
+        <div className="max-w-[1201px] mx-auto">
+            <div>
+                <div className="flex-grow-3 flex-shrink-0 basis-0">
+                    <h2 className="font-bold text-2xl">최근에 만든 롤링 페이퍼 ⭐️️</h2>
                 </div>
-            </Section>
+            </div>
 
             {recipientData && (
                 <>
-                    <Section>
-                        <RecipientCardList data={recipientData} /> {/* RecipientCardList에 데이터 전달 */}
-                    </Section>
+                    <RecipientCardList data={recipientData} />
                 </>
             )}
             <div className="mt-4">
