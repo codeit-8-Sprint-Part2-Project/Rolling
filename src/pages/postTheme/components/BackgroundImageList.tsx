@@ -1,39 +1,27 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
-import IcCheckTheme from "../assets/icons/ic_check_theme.png";
+import ThemeCheckIc from "../UI/ThemeCheckIc";
+import useFetchUrls from "../hooks/useFetchUrls";
 
-export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
+const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
   setThemeData,
   selectedImageUrl,
   setSelectedImageUrl,
 }) => {
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [uploadError, setUploadError] = useState<string | null>(null);
+  const { urls: imageUrls, error: fetchError } = useFetchUrls(
+    "background-images",
+    (data) => data.imageUrls || []
+  );
   const updateThemeData = useUpdateThemeData(setThemeData);
 
+  // 로드할 때마다 첫 번째 이미지 URL 선택
   useEffect(() => {
-    const fetchImageUrls = async () => {
-      try {
-        const backgroundImageUrl =
-          "https://rolling-api.vercel.app/background-images/";
-        const response = await fetch(backgroundImageUrl);
-        const data = await response.json();
-
-        if (data && data.imageUrls && data.imageUrls.length > 0) {
-          setImageUrls(data.imageUrls);
-          // 첫 번째 이미지 URL 선택
-          setSelectedImageUrl(data.imageUrls[0]);
-        }
-      } catch (error) {
-        console.error("backgroundImageUrl 패치 실패:", error);
-      }
-    };
-
-    fetchImageUrls();
-  }, []);
+    if (imageUrls.length > 0 && !selectedImageUrl) {
+      setSelectedImageUrl(imageUrls[0]);
+    }
+  }, [imageUrls, selectedImageUrl, setSelectedImageUrl]);
 
   // selectedImageUrl이 변경될 때마다 themeData 업데이트
   useEffect(() => {
@@ -43,10 +31,13 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   }, [selectedImageUrl, setThemeData]);
 
   // 이미지 선택 처리
-  const handleImageSelect = (imageUrl: string) => {
-    setSelectedImageUrl(imageUrl);
-    handleOptionClick("backgroundImageURL", imageUrl);
-  };
+  const handleImageSelect = useCallback(
+    (imageUrl: string) => {
+      setSelectedImageUrl(imageUrl);
+      handleOptionClick("backgroundImageURL", imageUrl);
+    },
+    [handleOptionClick, setSelectedImageUrl]
+  );
 
   return (
     <>
@@ -77,18 +68,16 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
               />
               {selectedImageUrl === imageUrl && (
                 <div className="relative w-full h-full rounded-2xl bg-white bg-opacity-60">
-                  <img
-                    src={IcCheckTheme}
-                    alt="배경화면 선택 아이콘"
-                    className="absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12"
-                  />
+                  <ThemeCheckIc />
                 </div>
               )}
             </label>
           </li>
         ))}
       </ul>
-      {uploadError && <p className="text-red-500 mt-5">{uploadError}</p>}
+      {fetchError && <p className="text-red-500 mt-5">{fetchError.message}</p>}
     </>
   );
 };
+
+export default React.memo(BackgroundImageList);
