@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import IcCheckTheme from "../assets/icons/ic_check_theme.png";
 
-export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
+const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
   setThemeData,
   selectedImageUrl,
@@ -43,10 +43,13 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   }, [selectedImageUrl, setThemeData]);
 
   // 이미지 선택 처리
-  const handleImageSelect = (imageUrl: string) => {
-    setSelectedImageUrl(imageUrl);
-    handleOptionClick("backgroundImageURL", imageUrl);
-  };
+  const handleImageSelect = useCallback(
+    (imageUrl: string) => {
+      setSelectedImageUrl(imageUrl);
+      handleOptionClick("backgroundImageURL", imageUrl);
+    },
+    [handleOptionClick, setSelectedImageUrl]
+  );
 
   return (
     <>
@@ -92,3 +95,5 @@ export const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     </>
   );
 };
+
+export default React.memo(BackgroundImageList);
