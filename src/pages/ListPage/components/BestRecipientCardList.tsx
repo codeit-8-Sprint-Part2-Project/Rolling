@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
 
-// 수정: Recipient 타입에 topReactions 추가
 interface Recipient {
   id: string;
   name: string;
   recentMessages: string;
   messageCount: number;
-  topReactions: { emoji: string; count: number }[]; // topReactions 정보 추가
+  topReactions: { emoji: string; count: number }[]; 
+  backgroundColor: string;
+  backgroundImageURL?: string | null; 
 }
 
 interface BestRecipientCardListProps {
@@ -63,7 +64,9 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
                 <RecipientCard
                   name={recipient.name}
                   recentMessages={recipient.recentMessages}
-                  topReactions={recipient.topReactions} // 수정 필요: topReactions 정보 전달
+                  topReactions={recipient.topReactions}
+                  backgroundColor={recipient.backgroundColor}
+                  backgroundImageURL={recipient.backgroundImageURL} // 배경 이미지 URL 전달
                 />
               </Link>
             </div>

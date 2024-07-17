@@ -7,6 +7,8 @@ interface Recipient {
     name: string;
     recentMessages: string;
     topReactions: { emoji: string; count: number }[];
+    backgroundColor: string;
+    backgroundImageURL?: string | null; // backgroundImageURL이 null일 수 있음을 명시
 }
 
 interface RecipientCardListProps {
@@ -50,7 +52,9 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                                 <RecipientCard
                                     name={recipient.name}
                                     recentMessages={recipient.recentMessages}
-                                    topReactions={recipient.topReactions} // topReactions 전달
+                                    topReactions={recipient.topReactions}
+                                    backgroundColor={recipient.backgroundColor}
+                                    backgroundImageURL={recipient.backgroundImageURL} // 배경 이미지 URL을 전달
                                 />
                             </Link>
                         </div>
