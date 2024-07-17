@@ -1,14 +1,15 @@
+import React, { SetStateAction } from "react";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCard from "./MessageCard";
 
 type prop = {
     recentMessages: MessageRetrieve[];
     isEditing?: boolean;
-    selectDeletion?: number;
-    handleSelectDeletion?: (id: number) => void;
+    setSelectDeletion?: React.Dispatch<SetStateAction<number>>;
+    handleMessageDelete?: () => void;
 }
 
-function MessageCardList({ recentMessages, isEditing = false, selectDeletion, handleSelectDeletion }: prop) {
+function MessageCardList({ recentMessages, isEditing = false, setSelectDeletion, handleMessageDelete }: prop) {
 
     return (
         <>
@@ -18,8 +19,8 @@ function MessageCardList({ recentMessages, isEditing = false, selectDeletion, ha
                         key={message.id}
                         message={message}
                         isEditing={isEditing}
-                        selectDeletion={selectDeletion}
-                        handleSelectDeletion={handleSelectDeletion}
+                        setSelectDeletion={setSelectDeletion}
+                        handleMessageDelete={handleMessageDelete}
                     />
             )}
         </>

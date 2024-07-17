@@ -19,4 +19,15 @@ async function deleteMessage(messageId:number) {
     return result;
 }
 
-export { getRecipient, deleteMessage };
+async function deleteRecipient(id:string) {
+    const response = await fetch(`${BASE_URL}recipients/${id}/`, {
+        method: "DELETE",
+    })
+
+    if(!response.ok) throw new Error("게시판 삭제에 실패했습니다.");
+    const result = await response.json();
+
+    return result;
+}
+
+export { getRecipient, deleteMessage, deleteRecipient };
