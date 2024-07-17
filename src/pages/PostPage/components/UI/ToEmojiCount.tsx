@@ -44,8 +44,13 @@ function ToEmojiCount() {
 
   const displayedEmojis = data?.topReactions?.slice(0, 3);
 
+  const onEmojiadded = async (emoji: string) => {
+    const Counts = await getByPostId({ productid });
+    setData(Counts);
+  };
+
   return (
-    <div className="flex items-center gap-[8px] border-x-[1px] pl-[28px] pr-[13px] h-[28px] relative">
+    <div className="flex items-center gap-[8px] border-x-[1px] pl-[28px] pr-[13px] h-[28px] relative z-10">
       {displayedEmojis?.map((emoji) => (
         <div className="flex gap-[2px] rounded-[32px] w-[66px] px-[12px] py-[8px] bg-black/50 font-pretendard font-[400] text-[16px] text-[#ffffff] justify-center items-center">
           {emoji.emoji}
@@ -53,7 +58,7 @@ function ToEmojiCount() {
         </div>
       ))}
       <EmojiDropdown />
-      <EmojiAddDropdown />
+      <EmojiAddDropdown onEmojiAdded={onEmojiadded} />
     </div>
   );
 }

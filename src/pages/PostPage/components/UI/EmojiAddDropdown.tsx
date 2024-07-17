@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import { getByPostId } from "../../api/getByPostId";
 import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
 import { ReactionRetrieve } from "../../../../DTO/reaction/ReactionRetrieve";
-import EmojiPicker from "emoji-picker-react";
-import { Categories } from "emoji-picker-react";
+import EmojiPicker, { EmojiClickData, Categories } from "emoji-picker-react";
 import IconAdd from "../../assets/icons/IconEmojiAdd.png";
 
 interface Recipient {
@@ -20,7 +19,11 @@ interface Recipient {
   topReactions?: ReactionRetrieve[];
 }
 
-function EmojiAddDropdown() {
+interface EmojiAddDropdownProps {
+  onEmojiAdded: (emoji: string) => void;
+}
+
+function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
   const { productid } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -92,6 +95,32 @@ function EmojiAddDropdown() {
     },
   ];
 
+  const onEmojiClick = async (emojiData: EmojiClickData, event: MouseEvent) => {
+    const { emoji } = emojiData;
+
+    try {
+      await fetch(
+        `https://rolling-api.vercel.app/7-5/recipients/${productid}/reactions/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken":
+              "cMrDN6scAovJZnyjsmRlPqlWgHxn6RcG5aPP0i5ECbnDn8s04GQsqPBWDSyvnNsy",
+          },
+          body: JSON.stringify({
+            emoji: emoji,
+            type: "increase",
+          }),
+        }
+      );
+
+      onEmojiAdded(emoji);
+    } catch (error) {
+      console.error("이모티콘을 추가하는데 실패했습니다.", error);
+    }
+  };
+
   return (
     <div className="relative">
       <button
@@ -104,7 +133,11 @@ function EmojiAddDropdown() {
 
       {isDropdownVisible && (
         <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-270px] z-10">
-          <EmojiPicker searchPlaceholder="검색" categories={customNames} />
+          <EmojiPicker
+            searchPlaceholder="검색"
+            categories={customNames}
+            onEmojiClick={onEmojiClick}
+          />
         </div>
       )}
     </div>
