@@ -12,7 +12,7 @@ const NavLogo: React.FC = () => {
             alt="Rolling 로고"
             width="27.82"
           />
-          <p className="font-poppins font-bold text-xl text-gray-800">
+          <p className="font-nanumsonpyeonji font-bold text-xl text-gray-800">
             Rolling
           </p>
         </div>

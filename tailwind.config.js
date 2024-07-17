@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         pretendard: ["Pretendard", "sans-serif"],
+        notosans: ["Noto Sans", "sans-serif"],
+        nanummyeongjo: ["NanumMyeongjo", "sans-serif"],
+        nanumsonwrite: ["NanumGoDigANiGoGoDing", "sans-serif"],
+        nanumsonpyeonji: ["NanumSonPyeonJiCe", "sans-serif"],
       },
       colors: {
         beige: "#FFE2AD",
