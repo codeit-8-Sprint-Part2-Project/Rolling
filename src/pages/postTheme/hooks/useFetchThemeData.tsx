@@ -23,7 +23,6 @@ const useFetchThemeData = (initialTeam: string) => {
           backgroundColor: recipient.backgroundColor,
           backgroundImageURL: recipient.backgroundImageURL,
         });
-        console.log("apiCall 성공:", recipient);
       }
     } catch (error) {
       setError(error);
