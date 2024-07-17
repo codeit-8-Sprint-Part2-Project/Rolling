@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import ThemeCheckIc from "../UI/ThemeCheckIc";

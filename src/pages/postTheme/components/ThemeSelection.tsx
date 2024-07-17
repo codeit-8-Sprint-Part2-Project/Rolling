@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import BackgroundImageList from "./BackgroundImageList";
