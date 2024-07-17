@@ -13,18 +13,9 @@ const ThemeForm: React.FC<FormProps> = ({
   const [isDisabled, setIsDisabled] = useState(true);
   const { handleSubmit, isSubmitting } = useSubmitData(themeData);
 
-  // 이름 유효성 검사
-  const validateForm = () => {
-    if (themeData.name && themeData.name.trim() !== "") {
-      return true;
-    }
-    return false;
-  };
-
-  // 데이터 값이 변경될 때마다 유효성 검사
+  // 데이터 값이 변경될 때마다 이름 유효성 검사
   useEffect(() => {
-    const isValid = validateForm();
-    setIsDisabled(!isValid);
+    setIsDisabled(!themeData.name?.trim());
   }, [themeData]);
 
   // 버튼 클릭 시 폼 제출
