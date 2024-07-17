@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactElement } from "react";
 import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
 import { CreateButton } from "../UI/CreateButton";
@@ -28,13 +27,12 @@ const ThemeForm: React.FC<FormProps> = ({
     <form className="flex flex-col grow items-center mt-32 m-auto gap-12 max-w-3xl max-[1248px]:mx-6">
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          const childProps = {
+          return React.cloneElement(child as ReactElement, {
             handleChange,
             themeData,
             setThemeData,
             setIsDisabled,
-          };
-          return React.cloneElement(child, childProps);
+          });
         }
         return child;
       })}
