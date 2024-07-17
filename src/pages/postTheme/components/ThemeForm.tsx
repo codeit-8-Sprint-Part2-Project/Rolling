@@ -4,7 +4,7 @@ import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
 import { CreateButton } from "../UI/CreateButton";
 
-const Form: React.FC<FormProps> = ({
+const ThemeForm: React.FC<FormProps> = ({
   children,
   handleChange,
   themeData,
@@ -56,4 +56,4 @@ const Form: React.FC<FormProps> = ({
   );
 };
 
-export default Form;
+export default ThemeForm;
