@@ -13,8 +13,8 @@ function DeletionConfirmModal({ handleModalOpen, handleDelete, isRecipientDeleti
         handleModalOpen(false);
     }
 
-    const confirmMessage = (method: boolean) => {
-        return method ? "정말 게시판을 삭제할까요?" : "정말 메시지를 삭제할까요?";
+    const confirmMessage = (isRecipientDeletion: boolean) => {
+        return isRecipientDeletion ? "정말 게시판을 삭제할까요?" : "정말 메시지를 삭제할까요?";
     }
     
     return (

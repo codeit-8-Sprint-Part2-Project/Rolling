@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import formatComparedTime from "../utils/formatComparedTime";
 import SenderInfo from "./SenderInfo";
@@ -18,14 +18,13 @@ const INITIAL_MESSAGE_VALUE: MessageRetrieve = {
     createdAt : new Date(),
 }
 
-type prop = {
+type props = {
     message: MessageRetrieve;
     isEditing?: boolean;
-    setSelectDeletion?: React.Dispatch<SetStateAction<number>>;
-    handleMessageDelete?: () => void;
+    handleMessageDelete?: (messageId: number) => void;
 }
 
-function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, setSelectDeletion = () => {return}, handleMessageDelete }: prop) {
+function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handleMessageDelete = () => {return} }: props) {
 
     const [isMessageModalOpen, setIsMessageModalOpen] = useState<boolean>(false);
     const [isDeletionModalOpen, setIsDeletionModalOpen] = useState<boolean>(false);
@@ -39,8 +38,11 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, setSe
 
     const handleTrashcanClick = () => {
         if(!isEditing) return;
-        setSelectDeletion(id);
         setIsDeletionModalOpen(true);
+    }
+
+    const handleMessageDeleteWrapper = () => {
+        handleMessageDelete(id);
     }
 
     const hoverCursor = () => {
@@ -63,7 +65,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, setSe
                     document.body
                 )}
             {(isDeletionModalOpen) && createPortal(
-                    <DeletionConfirmModal handleModalOpen={setIsDeletionModalOpen} handleDelete={handleMessageDelete} />,
+                    <DeletionConfirmModal handleModalOpen={setIsDeletionModalOpen} handleDelete={handleMessageDeleteWrapper} />,
                     document.body
                 )}
         </>

@@ -42,11 +42,9 @@ function Posts({ id }: { id: string }) {
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
-    const [selectDeletion, setSelectDeletion] = useState<number>(0);
     const [isDeletionPending, setIsDeletionPending] = useState<boolean>(false);
 
     const navigate = useNavigate();
-    
 
     const handleLoad = async () => {
         const result = await getRecipient(id);
@@ -61,37 +59,29 @@ function Posts({ id }: { id: string }) {
     const backgroundImageURL: string = recipient.backgroundImageURL || '';
     const recentMessages: MessageRetrieve[] = recipient.recentMessages || [];
 
-    // 휴지통 아이콘 클릭시 선택된 카드를 스테이트로 관리하는 함수.
-    const handleSelectDeletion = (id: number) => {
-        setSelectDeletion(id);
-    }
-
     // 메시지 삭제 함수
-    const handleMessageDelete = async () => {
-        if(!selectDeletion) return;
+    const handleMessageDelete = async (messageId: number) => {
         alert("삭제는 아직 구현되지 않았습니다.");
         return;
         
         // try {
         //     setIsDeletionPending(true);
-        //     await deleteMessage(selectDeletion);
+        //     await deleteMessage(messageId);
         // } catch(error: any) {
         //     alert(error.message);
         // } finally {
         //     setIsDeletionPending(false);
         // }
 
-        // const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== selectDeletion);
+        // const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
         // setRecipient((preValues) => ({
         //     ...preValues,
         //     recentMessages: updatedMessages,
         // }));
-        // setSelectDeletion(0);
     }
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        
         alert("삭제는 아직 구현되지 않았습니다.");
         return;
 
@@ -127,7 +117,6 @@ function Posts({ id }: { id: string }) {
                     <MessageCardList
                         recentMessages={recentMessages}
                         isEditing={isEditing}
-                        setSelectDeletion={setSelectDeletion}
                         handleMessageDelete={handleMessageDelete}
                     />
                     <button
