@@ -9,6 +9,7 @@ export interface ThemeData {
   backgroundImageURL?: string | null;
 }
 
+//context propTypes
 export interface ThemeProviderProps {
   children: ReactNode;
 }
@@ -24,7 +25,7 @@ export interface ThemeContextProps {
   setThemeData: React.Dispatch<React.SetStateAction<ThemeData>>;
 }
 
-//theme components type
+//theme components proptypes
 export interface FormProps {
   children: ReactNode;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
