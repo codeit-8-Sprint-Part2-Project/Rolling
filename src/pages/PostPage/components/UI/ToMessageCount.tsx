@@ -46,7 +46,7 @@ function ToMessageCount() {
       : 0;
 
   return (
-    <div className="flex items-center gap-[11px]">
+    <div className="flex items-center gap-[11px] pr-[28px]">
       <div
         className="flex items-center relative"
         style={{ width: `${((displayedProfiles?.length || 0) - 1) * 24}px` }}
