@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import BackgroundImageList from "./BackgroundImageList";
-import { ThemeSelectionProps } from "../constants/propTypes";
+import { ThemeTypeSelectionProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import ThemeTypeButton from "../UI/ThemeTypeButton";
 
-const ThemeSelection: React.FC<ThemeSelectionProps> = ({
+const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   setIsButtonDisabled,
   setThemeData,
 }) => {
@@ -97,4 +97,4 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   );
 };
 
-export default ThemeSelection;
+export default ThemeTypeSelection;
