@@ -1,7 +1,7 @@
 import * as React from "react";
 import ThemeForm from "./components/ThemeForm";
 import ReceiverInput from "./components/ReceiverInput";
-import ThemeSelection from "./components/ThemeSelection";
+import ThemeTypeSelection from "./components/ThemeTypeSelection";
 import { useThemeContext } from "./hooks/useThemeContext";
 
 const PostTheme: React.FC = () => {
@@ -24,7 +24,7 @@ const PostTheme: React.FC = () => {
         setThemeData={setThemeData}
       >
         <ReceiverInput handleChange={handleChange} themeData={themeData} />
-        <ThemeSelection
+        <ThemeTypeSelection
           setIsButtonDisabled={setIsButtonDisabled}
           setThemeData={setThemeData}
         />
