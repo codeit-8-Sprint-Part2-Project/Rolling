@@ -15,16 +15,6 @@ function RecipientDeleteCard( { isRecipientDeleteOpen, setIsRecipientDeleteOpen,
         setIsRecipientDeleteOpen(true);
     }
     
-    const handleModalOpen = (num: number) => {
-        if (num > 0) {
-            setIsRecipientDeleteOpen(true);
-            return;
-        } else {
-            setIsRecipientDeleteOpen(false);
-            return;
-        }
-    }
-    
     return (
         <>
             <div className="h-[17.5rem] rounded-2xl bg-white flex flex-col justify-center items-center gap-4 cursor-pointer max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]" onClick={handleCardClick}>
