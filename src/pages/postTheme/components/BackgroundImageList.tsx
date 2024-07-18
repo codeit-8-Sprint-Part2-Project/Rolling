@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import ThemeCheckIc from "../UI/ThemeCheckIc";
-import useFetchUrls from "../hooks/useFetchUrls";
+import useGetUrls from "../hooks/useGetUrls";
 
 const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   handleOptionClick,
@@ -10,7 +10,7 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   selectedImageUrl,
   setSelectedImageUrl,
 }) => {
-  const { urls: imageUrls, error: fetchError } = useFetchUrls(
+  const { urls: imageUrls, error: fetchError } = useGetUrls(
     "background-images",
     (data) => data.imageUrls || []
   );

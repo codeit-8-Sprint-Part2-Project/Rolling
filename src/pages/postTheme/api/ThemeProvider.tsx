@@ -7,7 +7,7 @@ import {
   ChangeEvent,
 } from "react";
 import { ThemeContextProps } from "../constants/propTypes";
-import useFetchThemeData from "../hooks/useFetchThemeData";
+import useGetThemeData from "../hooks/useGetThemeData";
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
   undefined
@@ -15,7 +15,7 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(
 
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { themeData, fetchThemeData, isLoading, error, setThemeData } =
-    useFetchThemeData("");
+    useGetThemeData("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
