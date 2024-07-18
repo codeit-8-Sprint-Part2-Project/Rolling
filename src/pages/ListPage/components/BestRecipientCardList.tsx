@@ -27,10 +27,8 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
     const [currentIndex, setCurrentIndex] = useState(0);
     const cardsToShow = 4;
 
-    // 데이터를 메시지 수 기준으로 내림차순 정렬하는 상태 변수
     const [sortedData, setSortedData] = useState<Recipient[]>([]);
 
-    // 데이터가 변경될 때마다 정렬하여 sortedData 업데이트
     useEffect(() => {
         const sortedRecipients = [...data.results].sort(
             (a, b) => b.recentMessages.length - a.recentMessages.length
@@ -39,7 +37,7 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
     }, [data.results]);
 
     const totalCards = sortedData.length;
-    const maxIndex = Math.ceil(totalCards / cardsToShow) - 1;
+    const maxIndex = Math.max(0, totalCards - cardsToShow);
 
     const prevSlide = () => {
         setCurrentIndex((prev) => Math.max(prev - 1, 0));
@@ -61,9 +59,9 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
             <div className="overflow-hidden w-full">
                 <div
                     className="flex transition-transform duration-500"
-                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                    style={{ transform: `translateX(-${currentIndex * 25}%)` }}
                 >
-                    {sortedData.map((recipient, index) => (
+                    {sortedData.map((recipient) => (
                         <div className="min-w-[25%] box-border p-2" key={recipient.id}>
                             <Link to={`/post/${recipient.id}`}>
                                 <RecipientCard
@@ -71,7 +69,7 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
                                     recentMessages={recipient.recentMessages}
                                     topReactions={recipient.topReactions}
                                     backgroundColor={recipient.backgroundColor}
-                                    backgroundImageURL={recipient.backgroundImageURL} // 배경 이미지 URL 전달
+                                    backgroundImageURL={recipient.backgroundImageURL}
                                 />
                             </Link>
                         </div>
