@@ -54,7 +54,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                     style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
                 >
                     {data.results.map((recipient, index) => (
-                        <div className="min-w-[25%] box-border p-2" key={recipient.id}>
+                        <div className="min-w-[25%] box-border p-3" key={recipient.id}>
                             <Link to={`/post/${recipient.id}`}>
                                 <RecipientCard
                                     name={recipient.name}
