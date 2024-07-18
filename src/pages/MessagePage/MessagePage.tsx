@@ -3,6 +3,7 @@ import InputProfileSection from "./components/InputProfileSection";
 import RelationshipSelectSection from "./components/RelationshipSelectSection";
 import FontSelectSection from "./components/FontSelectSection";
 import InputSenderSection from "./components/InputSenderSection";
+import ToastEditor from "./components/ToastEditor";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 면조" | "나눔손글씨" | "손편지체";
@@ -20,6 +21,12 @@ const MessagePage: React.FC = () => {
   
   const handleRelationshipChange = (newRelationship: RelationShip) => {
     setRelationship(newRelationship);
+  };
+
+  const [body, setBody] = React.useState('');
+
+  const handleToastEditorChange = (value: string) => {
+    setBody(value);
   };
 
   const [font, setFont] = useState<Font>("Noto Sans");
@@ -45,6 +52,10 @@ const MessagePage: React.FC = () => {
         <RelationshipSelectSection
           selectedRelationship={relationship}
           onRelationshipChange={handleRelationshipChange}
+        />
+        <ToastEditor
+          body={body}
+          setBody={handleToastEditorChange} 
         />
         <FontSelectSection
           selectedFont={font}
