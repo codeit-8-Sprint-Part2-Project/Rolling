@@ -25,16 +25,16 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ onImageUpload
       <div className="flex flex-col gap-1">
         <p className="font-bold text-2xl">프로필 이미지</p>
         <div>
-          <img src={getDisplayImageUrl()} alt="프로필 이미지" className="rounded-full" />
+          <img src={getDisplayImageUrl()} alt="프로필 이미지" className="rounded-full w-20 h-20" />
           <p className="text-gray-500">프로필 이미지를 선택해주세요!</p>
           <div className="flex flex-wrap gap-1">
             {profileImages?.imageUrls.map((imageUrl, index) => (
               <button
                 key={index}
-                className="rounded-full px-4 py-2"
+                className="rounded-full px-1 py-1"
                 onClick={() => setSelectedImageUrl(imageUrl)}
               >
-                <img src={imageUrl} alt={`Image ${index}`} className="w-20 h-20 rounded-full" />
+                <img src={imageUrl} alt={`Image ${index}`} className="w-14 h-14 rounded-full" />
               </button>
             ))}
           </div>
