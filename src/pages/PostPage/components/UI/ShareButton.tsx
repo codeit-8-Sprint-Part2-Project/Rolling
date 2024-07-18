@@ -18,12 +18,33 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     setIsDropdownVisible(!isDropdownVisible);
   };
 
-  const shareToKakao = () => {};
+  const shareToKakao = () => {
+    if (window.Kakao && window.Kakao.Link) {
+      window.Kakao.Link.sendCustom({
+        templateId: 110180,
+      });
+    } else {
+      console.error("카카오 공유하기를 실행하는데 오류가 있습니다.");
+    }
+  };
 
   const shareToUrl = () => {
     navigator.clipboard.writeText(url);
     setIsModalOpen(true);
   };
+
+  useEffect(() => {
+    if (window.Kakao) {
+      try {
+        if (!window.Kakao.isInitialized()) {
+          window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+          console.log("Kakao SDK initialized"); // 초기화 로그
+        }
+      } catch (e) {
+        console.error("Kakao SDK initialization error:", e);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     let timerId: number;
@@ -47,7 +68,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px]">
+        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
