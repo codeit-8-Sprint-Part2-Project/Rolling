@@ -4,7 +4,7 @@ import ReceiverInput from "./components/ReceiverInput";
 import ThemeTypeSelection from "./components/ThemeTypeSelection";
 import { useThemeContext } from "./hooks/useThemeContext";
 
-const PostTheme: React.FC = () => {
+const PostCreate: React.FC = () => {
   const {
     handleChange,
     themeData,
@@ -35,4 +35,4 @@ const PostTheme: React.FC = () => {
   );
 };
 
-export default PostTheme;
+export default PostCreate;

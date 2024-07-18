@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ReactElement } from "react";
 import useSubmitData from "../hooks/useSubmitData";
 import { FormProps } from "../constants/propTypes";
-import { CreateButton } from "../UI/CreateButton";
+import { CreateButton } from "./UI/CreateButton";
 
 const ThemeForm: React.FC<FormProps> = ({
   children,
