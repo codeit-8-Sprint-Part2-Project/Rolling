@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { getByPostId } from "../../api/getByPostId";
 import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
 
+interface ToNameContentProps {
+  className?: string;
+}
+
 interface Recipient {
   id?: number;
   team: string;
@@ -16,7 +20,7 @@ interface Recipient {
   topReactions?: string;
 }
 
-function ToNameContent() {
+const ToNameContent: React.FC<ToNameContentProps> = ({ className }) => {
   const { productid } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
 
@@ -40,10 +44,12 @@ function ToNameContent() {
   }
 
   return (
-    <h1 className="font-pretendard font-bold text-[28px] text-[#2b2b2b]">
+    <h1
+      className={`font-pretendard font-bold text-[18px] md:text-[28px] text-[#2b2b2b] ${className}`}
+    >
       To. {data.name}
     </h1>
   );
-}
+};
 
 export default ToNameContent;
