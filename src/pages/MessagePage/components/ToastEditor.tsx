@@ -21,21 +21,24 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ body, setBody }) => {
   };
 
   return (
-    <Editor
-      toolbarItems={[
-        ['heading', 'bold', 'italic', 'strike'],
-        ['hr', 'quote'],
-        ['ul', 'ol', 'task']
-      ]}
-      height="260px"
-      initialEditType="wysiwyg"
-      hideModeSwitch={true}
-      previewStyle="vertical"
-      ref={editorRef}
-      useCommandShortcut={false}
-      plugins={[colorSyntax]}
-      onChange={onChangeGetHTML}
-    />
+    <div className="flex flex-col gap-3 w-full">
+        <p className="font-bold text-2xl">내용을 입력해 주세요</p>
+        <Editor
+            toolbarItems={[
+                ['heading', 'bold', 'italic', 'strike'],
+                ['hr', 'quote'],
+                ['ul', 'ol', 'task']
+            ]}
+            height="260px"
+            initialEditType="wysiwyg"
+            hideModeSwitch={true}
+            previewStyle="vertical"
+            ref={editorRef}
+            useCommandShortcut={false}
+            plugins={[colorSyntax]}
+            onChange={onChangeGetHTML}
+        />
+    </div>
   );
 };
 

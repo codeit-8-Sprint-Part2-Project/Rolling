@@ -28,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left w-80">
       <div>
         <button
           type="button"
