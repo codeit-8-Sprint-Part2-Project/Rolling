@@ -20,29 +20,28 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ onImageUpload
   };
   
   return (
-    <section className="flex flex-col gap-12 w-full">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-1">
-          <p className="font-bold text-2xl">프로필 이미지</p>
-          <div>
-            <img src={getDisplayImageUrl()} alt="프로필 이미지" />
-            <input type="file" />
-            <p className="text-gray-500">프로필 이미지를 선택해주세요!</p>
+  <section className="flex flex-col gap-12 w-full">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1">
+        <p className="font-bold text-2xl">프로필 이미지</p>
+        <div>
+          <img src={getDisplayImageUrl()} alt="프로필 이미지" className="rounded-full" />
+          <p className="text-gray-500">프로필 이미지를 선택해주세요!</p>
+          <div className="flex flex-wrap gap-1">
+            {profileImages?.imageUrls.map((imageUrl, index) => (
+              <button
+                key={index}
+                className="rounded-full px-4 py-2"
+                onClick={() => setSelectedImageUrl(imageUrl)}
+              >
+                <img src={imageUrl} alt={`Image ${index}`} className="w-20 h-20 rounded-full" />
+              </button>
+            ))}
           </div>
         </div>
-        <div className="flex flex-wrap gap-4">
-          {profileImages?.imageUrls.map((imageUrl, index) => (
-            <button
-              key={index}
-              className="bg-gray-200 rounded-md px-4 py-2 hover:bg-gray-300"
-              onClick={() => setSelectedImageUrl(imageUrl)}
-            >
-              <img src={imageUrl} alt={`Image ${index}`} className="w-20 h-20 object-cover" />
-            </button>
-          ))}
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
 

@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import InputProfileSection from "./components/InputProfileSection";
+import RelationshipSelectSection from "./components/RelationshipSelectSection";
+type RelationShip = "친구" | "지인" | "동료" | "가족";
 
 const MessagePage: React.FC = () => {
-    const handleImageUpload = (imageUrl: string) => {
-      console.log('Uploaded image URL:', imageUrl);
-    };
-  
-    return (
-      <div>
-        <InputProfileSection onImageUpload={handleImageUpload} />
-      </div>
-    );
+  const [relationship, setRelationship] = useState<RelationShip>("지인");
+
+  const handleImageUpload = (imageUrl: string) => {
+    console.log("Uploaded image URL:", imageUrl);
   };
-  
-  export default MessagePage;
+
+  const handleRelationshipChange = (newRelationship: RelationShip) => {
+    setRelationship(newRelationship);
+  };
+
+  return (
+    <div>
+      <InputProfileSection onImageUpload={handleImageUpload} />
+      <RelationshipSelectSection
+        selectedRelationship={relationship}
+        onRelationshipChange={handleRelationshipChange}
+      />
+    </div>
+  );
+};
+
+export default MessagePage;

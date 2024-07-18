@@ -5,7 +5,7 @@ export interface Recipient {
     team : string;
     name : string;
     backgroundColor : string;
-    backgroundImageURL? : string;
+    backgroundImageURL? : BackgroundImageURL;
     createdAt? : Date;
     messageCount? : string;
     recentMessages? : string;
