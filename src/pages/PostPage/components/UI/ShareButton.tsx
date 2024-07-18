@@ -38,7 +38,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       try {
         if (!window.Kakao.isInitialized()) {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
-          console.log("Kakao SDK initialized"); // 초기화 로그
+          console.log("Kakao SDK initialized");
         }
       } catch (e) {
         console.error("Kakao SDK initialization error:", e);
@@ -62,9 +62,13 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] ml-[13px]"
+        className="px-[8px] md:px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] ml-[13px]"
       >
-        <img src={IconShare} alt="공유하기 버튼" />
+        <img
+          src={IconShare}
+          alt="공유하기 버튼"
+          className="min-w-[20px] min-h-[20px] md:w-[24px] md:h-[24px]"
+        />
       </button>
 
       {isDropdownVisible && (

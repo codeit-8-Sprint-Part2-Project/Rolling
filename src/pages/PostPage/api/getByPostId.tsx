@@ -1,15 +1,15 @@
 interface Params {
-  productid?: string;
+  recipientId?: string;
 }
 
 export async function getByPostId(params: Params | null = null) {
-  const { productid } = params || {};
+  const { recipientId } = params || {};
 
   try {
     let url = "https://rolling-api.vercel.app/8-1/recipients/";
 
-    if (productid) {
-      url += `${productid}/`;
+    if (recipientId) {
+      url += `${recipientId}/`;
     }
 
     const response = await fetch(url);
