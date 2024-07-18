@@ -4,7 +4,6 @@ import { ThemePreviewProps } from "../constants/propTypes";
 import { getColorClass } from "../utils/getColorClass";
 import PreviewPlusCard from "../../postTheme/UI/PreviewPlusCard";
 
-// backgroundColorClass  themeData.backgroundImageURL
 interface ExtendedThemePreviewProps extends ThemePreviewProps {
   isThemeType: boolean;
 }

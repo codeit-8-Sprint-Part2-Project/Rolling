@@ -37,6 +37,10 @@ export interface FormProps {
   handleButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+export interface ThemePreviewProps {
+  themeData: ThemeData;
+}
+
 export interface ThemeTypeSelectionProps {
   setIsButtonDisabled: (disabled: boolean) => void;
   setThemeData: React.Dispatch<React.SetStateAction<any>>;
