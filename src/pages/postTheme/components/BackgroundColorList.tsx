@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { getColorClass } from "../utils/getColorClass";
 import { BackgroundColor } from "../constants/enum";
@@ -13,14 +13,17 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   const themeContext = useThemeContext();
   const [backgroundColors, setBackgroundColors] = useState<string[]>([]);
 
-  const backgroundColorArray = Object.values(BackgroundColor);
+  const backgroundColorArray = useMemo(
+    () => Object.values(BackgroundColor),
+    []
+  );
 
   useEffect(() => {
     setBackgroundColors(backgroundColorArray);
     if (backgroundColorArray.length > 0 && !selectedColor) {
       handleOptionClick("backgroundColor", backgroundColorArray[0]);
     }
-  }, [selectedColor, handleOptionClick]);
+  }, [selectedColor, handleOptionClick, backgroundColorArray]);
 
   if (!themeContext) {
     return null;
