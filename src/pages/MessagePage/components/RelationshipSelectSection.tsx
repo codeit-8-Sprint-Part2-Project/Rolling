@@ -1,39 +1,45 @@
 import React, { useState } from 'react';
+import Dropdown, { DropdownOption } from './Dropdown';
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 
 interface RelationshipSelectSectionProps {
-    selectedRelationship: RelationShip;
-    onRelationshipChange: (relationship: RelationShip) => void;
-  }
-  
-  const RelationshipSelectSection: React.FC<RelationshipSelectSectionProps> = ({
-    selectedRelationship,
-    onRelationshipChange,
-  }) => {
-    const [relationship, setRelationship] = useState<RelationShip>(selectedRelationship);
-  
-    const handleRelationshipChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      const newRelationship = event.target.value as RelationShip;
-      setRelationship(newRelationship);
-      onRelationshipChange(newRelationship);
-    };
-    return (
-        <div>
-            <p className='font-bold text-2xl'>상대와의 관계</p>
-            <select
-            id="relationship"
-            value={relationship}
-            onChange={handleRelationshipChange}
-            >
-            <option value="친구">친구</option>
-            <option value="지인">지인</option>
-            <option value="동료">동료</option>
-            <option value="가족">가족</option>
-            </select>
-        </div>
-        );
-    }
+  selectedRelationship: RelationShip;
+  onRelationshipChange: (relationship: RelationShip) => void;
+}
 
+const RelationshipSelectSection: React.FC<RelationshipSelectSectionProps> = ({
+  selectedRelationship,
+  onRelationshipChange,
+}) => {
+  const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(
+    selectedRelationship
+      ? { label: selectedRelationship, value: selectedRelationship }
+      : null
+  );
+
+  const options: DropdownOption[] = [
+    { label: '친구', value: '친구' },
+    { label: '지인', value: '지인' },
+    { label: '동료', value: '동료' },
+    { label: '가족', value: '가족' },
+  ];
+
+  const handleOptionSelect = (option: DropdownOption) => {
+    setSelectedOption(option);
+    onRelationshipChange(option.value as RelationShip);
+  };
+
+  return (
+    <div>
+      <p className="font-bold text-2xl">상대와의 관계</p>
+      <Dropdown
+        options={options}
+        selectedOption={selectedOption}
+        onOptionSelect={handleOptionSelect}
+      />
+    </div>
+  );
+};
 
 export default RelationshipSelectSection;
