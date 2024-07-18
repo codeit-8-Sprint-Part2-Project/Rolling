@@ -56,7 +56,7 @@ const ThemePreview: React.FC<ExtendedThemePreviewProps> = ({ themeData }) => {
           <div className="flex flex-grow flex-col h-4/5">
             <header className="h-[4.25rem] bg-white top-0 z-10 border-b border-solid border-[#EDEDED] max-md:h-12">
               <div className="h-full max-w-[78rem] mx-auto px-6 flex items-center">
-                <span className="text-[1.75rem] leading-[2.625rem] font-bold text-lg text-[#2B2B2B] grow max-md:text-[10px]">
+                <span className="font-pretendard text-[1.75rem] leading-[2.625rem] font-bold text-lg text-[#2B2B2B] grow max-md:text-[10px]">
                   To. {themeData.name}
                 </span>
               </div>
