@@ -1,12 +1,3 @@
-import { Recipient } from "../../../DTO/recipient/Recipient";
-
-export interface Recipients {
-  count: number;
-  next: string;
-  previous: string;
-  results: Recipient[];
-}
-
 interface GetRecipientsParams {
   team: string;
   limit?: number;
@@ -14,7 +5,7 @@ interface GetRecipientsParams {
 }
 
 //apiCall
-const BASE_URL = "https://rolling-api.vercel.app";
+export const BASE_URL = "https://rolling-api.vercel.app";
 
 export async function getRecipients({
   team,

@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ReceiverInputProps } from "../constants/propTypes";
 
 const ReceiverInput: React.FC<ReceiverInputProps> = ({
@@ -8,6 +7,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
 }) => {
   const [error, setError] = useState<string>("");
 
+  // 네임 필드가 비어있을 때 에러메세지
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     if (!value) {
@@ -18,7 +18,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <section className="flex flex-col gap-3 w-full">
       <label className="font-bold text-2xl">To.</label>
       <input
         type="text"
@@ -30,7 +30,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
         className="py-3 px-4 rounded-lg outline outline-1 outline-gray-300 text-gray-500 placeholder-gray-500"
       />
       {error && <span className="text-red-500">{error}</span>}
-    </div>
+    </section>
   );
 };
 

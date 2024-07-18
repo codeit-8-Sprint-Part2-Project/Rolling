@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeContextProps } from "../api/ThemeProvider";
+import { ThemeContextProps } from "../constants/propTypes";
+import { INIT_THEME_VALUE } from "../constants/initial";
 
-const useSubmitData = (themeData: ThemeContextProps["themeData"]) => {
+const useSubmitData = (
+  themeData: ThemeContextProps["themeData"],
+  setThemeData: (data: ThemeContextProps["themeData"]) => void
+) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -30,6 +34,8 @@ const useSubmitData = (themeData: ThemeContextProps["themeData"]) => {
       const result = await response.json();
       console.log("폼 데이터 전송 완료:", result);
 
+      // 데이터 전송 후 입력 필드 초기화
+      setThemeData(INIT_THEME_VALUE);
       navigate(`/post/${themeData.id}`);
     } catch (error) {
       console.error("폼 데이터 전송 실패:", error);

@@ -1,12 +1,12 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
-import { BackgroundImageList } from "./BackgroundImageList";
-import { ThemeSelectionProps } from "../constants/propTypes";
+import BackgroundImageList from "./BackgroundImageList";
+import { ThemeTypeSelectionProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
+import ThemeTypeButton from "../UI/ThemeTypeButton";
 
-const ThemeSelection: React.FC<ThemeSelectionProps> = ({
+const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   setIsButtonDisabled,
   setThemeData,
 }) => {
@@ -67,24 +67,16 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
           </p>
         </div>
         <menu className="flex gap-1">
-          <button
-            type="button"
-            onClick={handleShowColorOptions}
-            className={`w-[122px] h-[40px] rounded-sm ${
-              isThemeType ? "font-bold text-violet-500 outline" : "bg-gray-200"
-            }`}
-          >
-            컬러
-          </button>
-          <button
-            type="button"
-            onClick={handleShowImageOptions}
-            className={`w-[122px] h-[40px] rounded-sm ${
-              !isThemeType ? "font-bold text-violet-500 outline" : "bg-gray-200"
-            }`}
-          >
-            이미지
-          </button>
+          <ThemeTypeButton
+            isThemeType={isThemeType}
+            handleClick={handleShowColorOptions}
+            label="컬러"
+          />
+          <ThemeTypeButton
+            isThemeType={!isThemeType}
+            handleClick={handleShowImageOptions}
+            label="이미지"
+          />
         </menu>
       </div>
       {isThemeType ? (
@@ -105,4 +97,4 @@ const ThemeSelection: React.FC<ThemeSelectionProps> = ({
   );
 };
 
-export default ThemeSelection;
+export default ThemeTypeSelection;

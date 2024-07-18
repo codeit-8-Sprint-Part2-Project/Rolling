@@ -4,11 +4,10 @@ import MessageCard from "./MessageCard";
 type prop = {
     recentMessages: MessageRetrieve[];
     isEditing?: boolean;
-    selectDeletion?: number;
-    handleSelectDeletion?: (id: number) => void;
+    handleMessageDelete?: (messageId: number) => void;
 }
 
-function MessageCardList({ recentMessages, isEditing = false, selectDeletion, handleSelectDeletion }: prop) {
+function MessageCardList({ recentMessages, isEditing = false, handleMessageDelete }: prop) {
 
     return (
         <>
@@ -18,8 +17,7 @@ function MessageCardList({ recentMessages, isEditing = false, selectDeletion, ha
                         key={message.id}
                         message={message}
                         isEditing={isEditing}
-                        selectDeletion={selectDeletion}
-                        handleSelectDeletion={handleSelectDeletion}
+                        handleMessageDelete={handleMessageDelete}
                     />
             )}
         </>
