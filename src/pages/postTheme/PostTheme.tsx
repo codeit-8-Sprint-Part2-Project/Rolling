@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ThemeForm from "./components/ThemeForm";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeTypeSelection from "./components/ThemeTypeSelection";
@@ -16,7 +16,7 @@ const PostTheme: React.FC = () => {
 
   return (
     <>
-      <main className="flex justify-center">
+      <main className="flex justify-center font-pretendard">
         <ThemeForm
           handleChange={handleChange}
           themeData={themeData}

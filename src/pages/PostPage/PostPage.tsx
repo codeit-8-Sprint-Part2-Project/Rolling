@@ -4,12 +4,12 @@ import Posts from "./components/Posts";
 import { useParams } from "react-router-dom";
 
 const PostPage: React.FC = () => {
-  const { productid } = useParams() as { productid: string };
+  const { recipientId } = useParams() as { recipientId: string };
 
   return (
     <div>
       <PostNav />
-      <Posts id={productid} />
+      <Posts id={recipientId} />
     </div>
   );
 };

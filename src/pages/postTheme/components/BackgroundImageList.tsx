@@ -28,7 +28,7 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
     if (selectedImageUrl) {
       updateThemeData("backgroundImageURL", selectedImageUrl);
     }
-  }, [selectedImageUrl, setThemeData]);
+  }, [selectedImageUrl, setThemeData, updateThemeData]);
 
   // 이미지 선택 처리
   const handleImageSelect = useCallback(

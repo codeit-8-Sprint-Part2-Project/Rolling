@@ -32,7 +32,7 @@ const useGetUrls = (
     };
 
     fetchUrls();
-  }, [urlType]);
+  }, [urlType, extractUrls]);
 
   return { urls, error };
 };

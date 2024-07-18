@@ -40,13 +40,14 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
 
     return (
         <div className="relative">
-            <button
-                className="rounded-full absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
-                onClick={prevSlide}
-                disabled={currentIndex === 0}
-            >
-                {"<"}
-            </button>
+            {currentIndex > 0 && (
+                <button
+                    className="rounded-full absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
+                    onClick={prevSlide}
+                >
+                    {"<"}
+                </button>
+            )}
             <div className="overflow-hidden w-full">
                 <div
                     className="flex transition-transform duration-500"
@@ -67,15 +68,17 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                     ))}
                 </div>
             </div>
-            <button
-                className="rounded-full absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
-                onClick={nextSlide}
-                disabled={currentIndex === maxIndex}
-            >
-                {">"}
-            </button>
+            {currentIndex < maxIndex && (
+                <button
+                    className="rounded-full absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
+                    onClick={nextSlide}
+                >
+                    {">"}
+                </button>
+            )}
         </div>
     );
 };
 
 export default RecipientCardList;
+
