@@ -8,6 +8,7 @@ import LazyLoading from "./LazyLoading";
 import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
 import MainSectionButtons from "./MainSectionButtons";
+import WriteModal from "./WriteModal";
 
 export interface Recipient {
     id?: number;
@@ -44,6 +45,7 @@ function Posts({ id }: { id: string }) {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
     const [isDeletionPending, setIsDeletionPending] = useState<boolean>(false);
+    const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
 
     const navigate = useNavigate();
 
@@ -107,6 +109,10 @@ function Posts({ id }: { id: string }) {
         navigate("/list");
     }
 
+    const handleWriteModalOpen = (isOpen: boolean) => {
+        setIsWriteModalOpen(isOpen);
+    }
+
     useEffect(() => {
         handleLoad();
     }, []);
@@ -121,7 +127,7 @@ function Posts({ id }: { id: string }) {
                             setIsRecipientDeleteOpen={setIsRecipientDeleteOpen}
                             handleRecipientDelete={handleRecipientDelete}
                         />
-                        : <PlusCard />
+                        : <PlusCard handleWriteModalOpen={handleWriteModalOpen} />
                     }
                     <MessageCardList
                         recentMessages={recentMessages}
@@ -134,12 +140,16 @@ function Posts({ id }: { id: string }) {
                         isDeletionPending={isDeletionPending}
                         whatsButtonText={whatsButtonText}
                     />
-                    {isDeletionPending && createPortal(
+                </div>
+            </main>
+            {isDeletionPending && createPortal(
                         <LazyLoading />,
                         document.body
                     )}
-                </div>
-            </main>
+            {isWriteModalOpen && createPortal(
+                <WriteModal />,
+                document.body
+            )}
         </>
     )
 }
