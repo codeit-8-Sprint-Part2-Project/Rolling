@@ -17,13 +17,13 @@ interface Recipient {
 }
 
 function ToMessageCount() {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
 
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const Counts = await getByPostId(params);
 
         setData(Counts);
@@ -33,7 +33,7 @@ function ToMessageCount() {
     };
 
     fetchCount();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>총 메세지를 불러오지 못했습니다.</p>;
