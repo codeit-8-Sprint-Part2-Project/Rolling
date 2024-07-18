@@ -25,7 +25,7 @@ export interface ThemeContextProps {
   setThemeData: React.Dispatch<React.SetStateAction<ThemeData>>;
 }
 
-//theme components proptypes
+//theme components propTypes
 export interface FormProps {
   children: ReactNode;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
