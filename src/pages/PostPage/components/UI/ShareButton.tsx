@@ -38,7 +38,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       try {
         if (!window.Kakao.isInitialized()) {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
-          console.log("Kakao SDK initialized"); // 초기화 로그
+          console.log("Kakao SDK initialized");
         }
       } catch (e) {
         console.error("Kakao SDK initialization error:", e);

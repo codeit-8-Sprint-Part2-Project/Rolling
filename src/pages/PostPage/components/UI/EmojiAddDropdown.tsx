@@ -24,7 +24,7 @@ interface EmojiAddDropdownProps {
 }
 
 function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -35,7 +35,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const Counts = await getByPostId(params);
 
         setData(Counts);
@@ -45,7 +45,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
     };
 
     fetchCount();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>총 이모티콘을 불러오지 못했습니다.</p>;
@@ -100,7 +100,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
 
     try {
       await fetch(
-        `https://rolling-api.vercel.app/7-5/recipients/${productid}/reactions/`,
+        `https://rolling-api.vercel.app/8-1/recipients/${recipientId}/reactions/`,
         {
           method: "POST",
           headers: {

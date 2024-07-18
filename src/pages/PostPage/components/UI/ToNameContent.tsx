@@ -21,13 +21,13 @@ interface Recipient {
 }
 
 const ToNameContent: React.FC<ToNameContentProps> = ({ className }) => {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
 
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const names = await getByPostId(params);
 
         setData(names);
@@ -37,7 +37,7 @@ const ToNameContent: React.FC<ToNameContentProps> = ({ className }) => {
     };
 
     fetchName();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>이름을 불러오지 못했습니다.</p>;
