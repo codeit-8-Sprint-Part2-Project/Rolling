@@ -21,7 +21,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
   const shareToKakao = () => {
     if (window.Kakao && window.Kakao.Link) {
       window.Kakao.Link.sendCustom({
-        templateID: 110180,
+        templateId: 110180,
       });
     } else {
       console.error("카카오 공유하기를 실행하는데 오류가 있습니다.");
@@ -68,7 +68,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px]">
+        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
