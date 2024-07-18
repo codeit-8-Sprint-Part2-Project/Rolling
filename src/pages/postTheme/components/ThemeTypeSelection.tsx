@@ -34,7 +34,7 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
     if (selectedImageUrl === null) {
       updateThemeData("backgroundImageURL", null);
     }
-  }, [selectedImageUrl, setThemeData]);
+  }, [selectedImageUrl, setThemeData, updateThemeData]);
 
   // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값 컬러
   const handleShowColorOptions = () => {
