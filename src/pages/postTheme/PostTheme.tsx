@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ThemeForm from "./components/ThemeForm";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeTypeSelection from "./components/ThemeTypeSelection";
