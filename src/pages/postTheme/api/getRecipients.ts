@@ -5,7 +5,7 @@ interface GetRecipientsParams {
 }
 
 //apiCall
-const BASE_URL = "https://rolling-api.vercel.app";
+export const BASE_URL = "https://rolling-api.vercel.app";
 
 export async function getRecipients({
   team,

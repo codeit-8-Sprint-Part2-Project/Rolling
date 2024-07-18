@@ -7,6 +7,7 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
 }) => {
   const [error, setError] = useState<string>("");
 
+  // 네임 필드가 비어있을 때 에러메세지
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     if (!value) {

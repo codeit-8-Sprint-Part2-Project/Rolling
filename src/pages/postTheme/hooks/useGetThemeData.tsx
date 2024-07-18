@@ -3,9 +3,8 @@ import { getRecipients } from "../api/getRecipients";
 import { ThemeData } from "../constants/propTypes";
 import { INIT_THEME_VALUE } from "../constants/initial";
 
-const useFetchThemeData = (initialTeam: string) => {
+const useGetThemeData = (initialTeam: string) => {
   const [themeData, setThemeData] = useState<ThemeData>(INIT_THEME_VALUE);
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<unknown>(null);
 
@@ -41,4 +40,4 @@ const useFetchThemeData = (initialTeam: string) => {
   return { themeData, fetchThemeData, isLoading, error, setThemeData };
 };
 
-export default useFetchThemeData;
+export default useGetThemeData;
