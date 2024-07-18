@@ -21,7 +21,7 @@ function App() {
               </ThemeProvider>
             }
           />
-          <Route path=":productid" element={<PostPage />} />
+          <Route path=":recipientId" element={<PostPage />} />
         </Route>
         <Route path="list">
           <Route
