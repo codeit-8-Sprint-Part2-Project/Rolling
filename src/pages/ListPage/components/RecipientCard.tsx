@@ -53,6 +53,49 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
             className={`w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden`}
             style={cardStyle}
         >
+            {backgroundColor === "purple" && (
+                <div 
+                    className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
+                    style={{
+                        background: 'rgba(220, 185, 255, 0.4)',
+                        transform: 'translate(55%, 30%)',
+                    }}
+                />
+            )}
+            {backgroundColor === "beige" && backgroundImageURL === null &&(
+                <div 
+                    className="absolute right-0 bottom-0 w-[332px] h-[169px] rounded-tl-[51px] overflow-hidden"
+                    style={{
+                        background: 'rgba(255, 211, 130, 0.7)',
+                        transform: 'translate(60%, 30%)',
+                    }}
+                />
+            )}
+            {backgroundColor === "blue" && (
+                <svg
+                    className="absolute"
+                    style={{ transform: 'translate(85%, 70%)' }}
+                    width="142"
+                    height="142"
+                    viewBox="0 0 142 142"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M74.4299 16.6978C88.1712 -5.00283 119.829 -5.00284 133.57 16.6978L202.482 125.526C217.239 148.829 200.495 179.25 172.912 179.25H35.0878C7.5049 179.25 -9.23877 148.829 5.51768 125.526L74.4299 16.6978Z"
+                        fill="#9DDDFF"
+                    />
+                </svg>
+            )}
+            {backgroundColor === "green" && (
+                <div 
+                    className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
+                    style={{
+                        background: 'rgba(155, 226, 130, 0.3)',
+                        transform: 'translate(55%, 30%)',
+                    }}
+                />
+            )}
             {backgroundImageURL && (
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             )}
@@ -65,15 +108,15 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                         <div className="flex flex-wrap gap-[-30px] h-7">
                             {recentMessages.map((message, index) => (
                                 <img
-                                    key={message.id}
-                                    src={message.profileImageURL}
-                                    alt={message.sender}
-                                    className="w-7 h-7 object-cover rounded-full border-2 border-white"
-                                    style={{
-                                        position: "absolute",
-                                        left: `${index * 20}px`,
-                                        zIndex: recentMessages.length - index,
-                                    }}
+                                key={message.id}
+                                src={message.profileImageURL}
+                                alt={message.sender}
+                                className="w-7 h-7 object-cover rounded-full border-2 border-white"
+                                style={{
+                                    position: "absolute",
+                                    left: `${index * 20}px`,
+                                    zIndex: index,
+                                }}
                                 />
                             ))}
                         </div>
