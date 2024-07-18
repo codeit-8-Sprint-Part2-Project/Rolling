@@ -1,4 +1,4 @@
-import plusIcon from "../../../assets/icons/plus.svg";
+import plusIcon from "../../../../assets/icons/plus.svg";
 
 function PreviewPlusCard() {
   return (

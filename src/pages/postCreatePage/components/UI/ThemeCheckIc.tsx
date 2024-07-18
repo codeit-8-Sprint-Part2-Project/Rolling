@@ -1,5 +1,5 @@
 import * as React from "react";
-import IcCheckTheme from "../assets/icons/ic_check_theme.png";
+import IcCheckTheme from "../../assets/icons/ic_check_theme.png";
 
 const ThemeCheckIc: React.FC = () => (
   <img

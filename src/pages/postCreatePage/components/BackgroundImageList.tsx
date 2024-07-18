@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { BackgroundImageListProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
-import ThemeCheckIc from "../UI/ThemeCheckIc";
+import ThemeCheckIc from "./UI/ThemeCheckIc";
 import useGetUrls from "../hooks/useGetUrls";
 
 const BackgroundImageList: React.FC<BackgroundImageListProps> = ({

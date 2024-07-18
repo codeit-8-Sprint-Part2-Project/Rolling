@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { ThemePreviewProps } from "../constants/propTypes";
 import { getColorClass } from "../utils/getColorClass";
-import PreviewPlusCard from "../../postTheme/UI/PreviewPlusCard";
+import PreviewPlusCard from "./UI/PreviewPlusCard";
 
 interface ExtendedThemePreviewProps extends ThemePreviewProps {
   isThemeType: boolean;
