@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { BackgroundColorList } from "./BackgroundColorList";
 import BackgroundImageList from "./BackgroundImageList";
-import { ThemeTypeSelectionProps } from "../constants/propTypes";
+import { ThemeTypeSelectionProps, ThemeData } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
 import ThemeTypeButton from "../UI/ThemeTypeButton";
+import ThemePreview from "./ThemePreview";
 
 const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   setIsButtonDisabled,
@@ -66,7 +67,7 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
             컬러를 선택하거나, 이미지를 선택할 수 있습니다.
           </p>
         </div>
-        <menu className="flex gap-1">
+        <menu className="relative flex gap-2">
           <ThemeTypeButton
             isThemeType={isThemeType}
             handleClick={handleShowColorOptions}
@@ -77,6 +78,7 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
             handleClick={handleShowImageOptions}
             label="이미지"
           />
+          <ThemePreview themeData={themeData} isThemeType={isThemeType} />
         </menu>
       </div>
       {isThemeType ? (

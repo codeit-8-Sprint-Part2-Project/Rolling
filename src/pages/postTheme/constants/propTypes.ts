@@ -26,6 +26,10 @@ export interface ThemeContextProps {
 }
 
 //theme components proptypes
+export interface ThemePreviewProps {
+  themeData: ThemeData;
+}
+
 export interface FormProps {
   children: ReactNode;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
