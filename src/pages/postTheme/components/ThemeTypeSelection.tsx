@@ -61,11 +61,11 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   };
 
   return (
-    <section className="flex flex-col gap-12 w-full">
+    <section className="flex flex-col gap-16 w-full mt-4 max-[1248px]:gap-10">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-2xl">배경화면을 선택해 주세요.</p>
-          <p className="text-gray-500">
+          <p className="text-gray-500 mt-1 mb-4">
             컬러를 선택하거나, 이미지를 선택할 수 있습니다.
           </p>
         </div>
