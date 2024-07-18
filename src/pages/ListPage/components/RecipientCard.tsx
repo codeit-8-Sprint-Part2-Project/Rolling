@@ -105,30 +105,70 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                         To. {name}
                     </h2>
                     <div className="mt-2 relative">
-                        <div className="flex flex-wrap gap-[-30px] h-7">
-                            {recentMessages.map((message, index) => (
-                                <img
-                                key={message.id}
-                                src={message.profileImageURL}
-                                alt={message.sender}
-                                className="w-7 h-7 object-cover rounded-full border-2 border-white"
-                                style={{
-                                    position: "absolute",
-                                    left: `${index * 20}px`,
-                                    zIndex: index,
-                                }}
-                                />
-                            ))}
-                        </div>
-                        <div className="mt-2">
-                            <p className={`font-pretendard text-[16px] font-bold leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                {recentMessages.length}
-                            </p>
-                            <span className={`font-pretendard text-[16px] font-normal leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                명이 작성했어요!
-                            </span>
-                        </div>
+<div className="flex flex-wrap gap-[-30px] h-7">
+    {recentMessages.map((message, index) => (
+        <React.Fragment key={message.id}>
+            <img
+                src={message.profileImageURL}
+                alt={message.sender}
+                className="w-7 h-7 object-cover rounded-full border-2 border-white"
+                style={{
+                    position: "absolute",
+                    left: `${index * 20}px`,
+                    zIndex: index,
+                }}
+            />
+            {index === recentMessages.length - 1 && (
+                <div
+                    style={{
+                        position: "absolute",
+                        left: `${(index + 1) * 20}px`,
+                        zIndex: index + 1,
+                    }}
+                >
+                    <div
+                        style={{
+                            width: "28px", // 동일한 크기
+                            height: "28px", // 동일한 크기
+                            backgroundColor: "white",
+                            borderRadius: "50%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        <p
+                            style={{
+                                fontFamily: "Pretendard",
+                                fontSize: "12px",
+                                fontWeight: 400,
+                                lineHeight: "18px",
+                                letterSpacing: "-0.005em",
+                                textAlign: "left",
+                                color: "rgba(85, 85, 85, 1)",
+                                margin: 0,
+                            }}
+                        >
+                            <span>+</span>
+                            {recentMessages.length}
+                        </p>
                     </div>
+                </div>
+            )}
+        </React.Fragment>
+    ))}
+</div>
+
+    <div className="mt-2">
+        <p className={`font-pretendard text-[16px] font-bold leading-[26px] tracking-[-0.01em] text-left inline`}>
+            {recentMessages.length}
+        </p>
+        <span className={`font-pretendard text-[16px] font-normal leading-[26px] tracking-[-0.01em] text-left inline`}>
+            명이 작성했어요!
+        </span>
+    </div>
+</div>
+
                 </div>
                 <div className="mt-2">
                     <ul className={`flex flex-wrap gap-2 border-t border-solid ${backgroundImageURL ? 'border-[#FFFFFF4D]' : 'border-[#0000001F]'} w-227 pt-4`}>
