@@ -18,23 +18,25 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   const { themeData } = useThemeContext();
   const updateThemeData = useUpdateThemeData(setThemeData);
 
-  // isThemeType이 변경될 때 selectedImageUrl 업데이트
+  // isThemeType이 변경될 때 selectedImageUrd, selectedColor 업데이트
   useEffect(() => {
     if (isThemeType) {
       setSelectedImageUrl(null);
+      setSelectedColor("beige");
+      updateThemeData("backgroundColor", "beige");
     } else {
       setSelectedColor("beige");
     }
-  }, [isThemeType, selectedImageUrl, setIsButtonDisabled]);
+  }, [isThemeType, setIsButtonDisabled, updateThemeData]);
 
-  // selectedImageUrl이 null일 때 themeData 업데이트
+  // selectedImageUrl이 null일 때 themeData 초기화
   useEffect(() => {
     if (selectedImageUrl === null) {
       updateThemeData("backgroundImageURL", null);
     }
   }, [selectedImageUrl, setThemeData]);
 
-  // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값은 컬러
+  // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값 컬러
   const handleShowColorOptions = () => {
     setIsThemeType(true);
     setIsButtonDisabled(false);
