@@ -38,7 +38,10 @@ function ToEmojiCount() {
   return (
     <div className="flex items-center gap-[8px] border-x-[1px] pl-[28px] pr-[13px] h-[28px] relative z-10">
       {displayedEmojis?.map((emoji) => (
-        <div className="flex gap-[2px] rounded-[32px] w-[66px] px-[12px] py-[8px] bg-black/50 font-pretendard font-[400] text-[16px] text-[#ffffff] justify-center items-center">
+        <div
+          key={emoji.id}
+          className="flex gap-[2px] rounded-[32px] w-[66px] px-[12px] py-[8px] bg-black/50 font-pretendard font-[400] text-[16px] text-[#ffffff] justify-center items-center"
+        >
           {emoji.emoji}
           {emoji.count}
         </div>
