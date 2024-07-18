@@ -18,12 +18,33 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     setIsDropdownVisible(!isDropdownVisible);
   };
 
-  const shareToKakao = () => {};
+  const shareToKakao = () => {
+    if (window.Kakao && window.Kakao.Link) {
+      window.Kakao.Link.sendCustom({
+        templateID: 110180,
+      });
+    } else {
+      console.error("카카오 공유하기를 실행하는데 오류가 있습니다.");
+    }
+  };
 
   const shareToUrl = () => {
     navigator.clipboard.writeText(url);
     setIsModalOpen(true);
   };
+
+  useEffect(() => {
+    if (window.Kakao) {
+      try {
+        if (!window.Kakao.isInitialized()) {
+          window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+          console.log("Kakao SDK initialized"); // 초기화 로그
+        }
+      } catch (e) {
+        console.error("Kakao SDK initialization error:", e);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     let timerId: number;
