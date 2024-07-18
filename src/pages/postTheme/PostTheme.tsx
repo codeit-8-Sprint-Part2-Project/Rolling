@@ -1,9 +1,8 @@
-import * as React from "react";
+import React from "react";
 import ThemeForm from "./components/ThemeForm";
 import ReceiverInput from "./components/ReceiverInput";
 import ThemeTypeSelection from "./components/ThemeTypeSelection";
 import { useThemeContext } from "./hooks/useThemeContext";
-import Nav from "../../components/Layout/Nav";
 
 const PostTheme: React.FC = () => {
   const {
@@ -17,7 +16,6 @@ const PostTheme: React.FC = () => {
 
   return (
     <>
-      <Nav />
       <main className="flex justify-center">
         <ThemeForm
           handleChange={handleChange}
