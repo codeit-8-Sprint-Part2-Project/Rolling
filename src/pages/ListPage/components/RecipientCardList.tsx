@@ -31,11 +31,11 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
     const maxIndex = Math.ceil(totalCards / cardsToShow) - 1;
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+        setCurrentIndex((prev) => Math.max(prev - cardsToShow, 0));
     };
 
     const nextSlide = () => {
-        setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+        setCurrentIndex((prev) => Math.min(prev + cardsToShow, maxIndex * cardsToShow));
     };
 
     return (
@@ -51,7 +51,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
             <div className="overflow-hidden w-full">
                 <div
                     className="flex transition-transform duration-500"
-                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                    style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
                 >
                     {data.results.map((recipient, index) => (
                         <div className="min-w-[25%] box-border p-2" key={recipient.id}>
@@ -61,14 +61,14 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                                     recentMessages={recipient.recentMessages}
                                     topReactions={recipient.topReactions}
                                     backgroundColor={recipient.backgroundColor}
-                                    backgroundImageURL={recipient.backgroundImageURL} // 배경 이미지 URL을 전달
+                                    backgroundImageURL={recipient.backgroundImageURL}
                                 />
                             </Link>
                         </div>
                     ))}
                 </div>
             </div>
-            {currentIndex < maxIndex && (
+            {currentIndex < maxIndex * cardsToShow && (
                 <button
                     className="rounded-full absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
                     onClick={nextSlide}
@@ -81,4 +81,3 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
 };
 
 export default RecipientCardList;
-

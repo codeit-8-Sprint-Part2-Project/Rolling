@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { LinkButton } from '../../../components/UI/Button'; 
 import RecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient'; // getRecipient 함수 불러오기
+import TitleButton from "./UI/TitleButton";
 
 const AllRecipient: React.FC = () => {
     const [recipientData, setRecipientData] = useState<any>(null); // 수신자 데이터 상태
@@ -33,7 +33,7 @@ const AllRecipient: React.FC = () => {
                 </>
             )}
             <div className="mt-4">
-                <LinkButton path="../post" btnName="나도 만들어보기" />
+            <TitleButton>나도 만들어보기</TitleButton>
             </div>
 
         </div>
