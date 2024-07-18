@@ -100,7 +100,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
 
     try {
       await fetch(
-        `https://rolling-api.vercel.app/7-5/recipients/${productid}/reactions/`,
+        `https://rolling-api.vercel.app/8-1/recipients/${productid}/reactions/`,
         {
           method: "POST",
           headers: {

@@ -6,7 +6,7 @@ export async function getByPostId(params: Params | null = null) {
   const { productid } = params || {};
 
   try {
-    let url = "https://rolling-api.vercel.app/7-5/recipients/";
+    let url = "https://rolling-api.vercel.app/8-1/recipients/";
 
     if (productid) {
       url += `${productid}/`;
