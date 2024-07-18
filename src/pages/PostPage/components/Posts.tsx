@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { deleteMessage, deleteRecipient, getRecipient } from "../api/api";
 import PlusCard from "./PlusCard";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
@@ -49,10 +49,10 @@ function Posts({ id }: { id: string }) {
 
     const navigate = useNavigate();
 
-    const handleLoad = async () => {
+    const handleLoad = useCallback (async () => {
         const result = await getRecipient(id);
         setRecipient(result);
-    }
+    }, [id])
 
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
     const whatsButtonText = () => {
@@ -64,40 +64,34 @@ function Posts({ id }: { id: string }) {
 
     // 메시지 삭제 함수
     const handleMessageDelete = async (messageId: number) => {
-        alert("삭제는 아직 구현되지 않았습니다.");
-        return;
-        
-        // try {
-        //     setIsDeletionPending(true);
-        //     await deleteMessage(messageId);
-        // } catch(error: any) {
-        //     alert(error.message);
-        // } finally {
-        //     setIsDeletionPending(false);
-        // }
+        try {
+            setIsDeletionPending(true);
+            await deleteMessage(messageId);
+        } catch(error: any) {
+            alert(error.message);
+        } finally {
+            setIsDeletionPending(false);
+        }
 
-        // const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
-        // setRecipient((preValues) => ({
-        //     ...preValues,
-        //     recentMessages: updatedMessages,
-        // }));
+        const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
+        setRecipient((preValues) => ({
+            ...preValues,
+            recentMessages: updatedMessages,
+        }));
     }
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        alert("삭제는 아직 구현되지 않았습니다.");
-        return;
+        try {
+            setIsDeletionPending(true);
+            await deleteRecipient(id);
+        } catch(error: any) {
+            alert(error.message);
+        } finally {
+            setIsDeletionPending(false);
+        }
 
-        // try {
-        //     setIsDeletionPending(true);
-        //     await deleteRecipient(id);
-        // } catch(error: any) {
-        //     alert(error.message);
-        // } finally {
-        //     setIsDeletionPending(false);
-        // }
-
-        // navigate("/list");
+        navigate("/list");
     }
 
     // 수정하기 / 돌아가기 버튼 클릭 제어 함수
@@ -115,7 +109,7 @@ function Posts({ id }: { id: string }) {
 
     useEffect(() => {
         handleLoad();
-    }, []);
+    }, [handleLoad]);
     
     return (
         <>
