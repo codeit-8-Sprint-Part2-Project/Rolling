@@ -1,4 +1,4 @@
-const BASE_URL: string = "https://rolling-api.vercel.app/7-5/recipients/";
+const BASE_URL: string = "https://rolling-api.vercel.app/8-1/recipients/";
 
 interface Recipient {
   id: number;
