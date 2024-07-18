@@ -17,8 +17,8 @@ function formatComparedTime(targetTime) {
         const date = new Date(targetTime);
         const month = fitDigits(date.getMonth() + 1);
         const day = fitDigits(date.getDate());
-        const hour = fitDigits(date.getHours());
-        const min = fitDigits(date.getMinutes());
+        // const hour = fitDigits(date.getHours());
+        // const min = fitDigits(date.getMinutes());
         const dateFormat = `${date.getFullYear()}.${month}.${day}`;
 
         return dateFormat;

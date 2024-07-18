@@ -24,7 +24,7 @@ const useSelectedTheme = (
     if (selectedImageUrl === null) {
       updateThemeData("backgroundImageURL", null);
     }
-  }, [selectedImageUrl]);
+  }, [selectedImageUrl, updateThemeData]);
 
   const handleOptionClick = (optionType: string, value: string) => {
     if (optionType === "backgroundColor") {
