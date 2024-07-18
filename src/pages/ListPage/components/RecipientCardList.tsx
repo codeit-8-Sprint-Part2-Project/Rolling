@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
 
+interface RecentMessage {
+    id: number;
+    sender: string;
+    profileImageURL: string;
+}
+
 interface Recipient {
     id: string;
     name: string;
-    recentMessages: string;
+    recentMessages: RecentMessage[];
     topReactions: { emoji: string; count: number }[];
     backgroundColor: string;
-    backgroundImageURL?: string | null; // backgroundImageURL이 null일 수 있음을 명시
+    backgroundImageURL?: string | null;
 }
 
 interface RecipientCardListProps {
