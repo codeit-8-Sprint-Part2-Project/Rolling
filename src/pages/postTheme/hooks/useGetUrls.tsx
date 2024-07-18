@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { BASE_URL } from "../api/getRecipients";
 
 interface FetchUrlsResult {
   urls: string[];
   error: Error | null;
 }
 
-const useFetchUrls = (
+const useGetUrls = (
   urlType: string,
   extractUrls: (data: any) => string[]
 ): FetchUrlsResult => {
@@ -15,7 +16,7 @@ const useFetchUrls = (
   useEffect(() => {
     const fetchUrls = async () => {
       try {
-        const apiUrl = `https://rolling-api.vercel.app/${urlType}/`;
+        const apiUrl = `${BASE_URL}/${urlType}/`;
         const response = await fetch(apiUrl);
         const data = await response.json();
 
@@ -36,4 +37,4 @@ const useFetchUrls = (
   return { urls, error };
 };
 
-export default useFetchUrls;
+export default useGetUrls;
