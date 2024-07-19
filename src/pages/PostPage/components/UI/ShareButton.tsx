@@ -28,9 +28,20 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     }
   };
 
-  const shareToUrl = () => {
-    navigator.clipboard.writeText(url);
-    setIsModalOpen(true);
+  const shareToUrl = async () => {
+    if (!navigator.clipboard) {
+      console.error("이 브라우저는 Clipboard API를 지원하지 않습니다.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      console.log("URL이 클립보드에 성공적으로 복사되었습니다.");
+      setIsModalOpen(true);
+    } catch (e) {
+      console.error("URL 복사에 실패했습니다. 오류 메시지:", e);
+      setIsModalOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -72,7 +83,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
+        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-85px] md:left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
@@ -102,7 +113,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
             left: "50%",
             right: "auto",
             top: "auto",
-            bottom: "3%",
+            bottom: "6%",
             transform: "translate(-50%, -50%)",
             height: "auto",
             background: "none",
@@ -115,7 +126,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
           },
         }}
       >
-        <div className="w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
+        <div className="w-[320px] md:w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
           <div className="flex gap-[12px]">
             <img
               className="max-w-[24px] max-h-[24px]"
