@@ -1,4 +1,4 @@
-const BASE_URL: string = "https://rolling-api.vercel.app/7-5/";
+const BASE_URL: string = "https://rolling-api.vercel.app/8-1/";
 
 async function getRecipient(id:string) {
     const response = await fetch(`${BASE_URL}recipients/${id}/`);
@@ -25,9 +25,6 @@ async function deleteRecipient(id:string) {
     })
 
     if(!response.ok) throw new Error("게시판 삭제에 실패했습니다.");
-    const result = await response.json();
-
-    return result;
 }
 
 export { getRecipient, deleteMessage, deleteRecipient };
