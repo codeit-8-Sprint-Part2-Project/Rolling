@@ -25,9 +25,6 @@ async function deleteRecipient(id:string) {
     })
 
     if(!response.ok) throw new Error("게시판 삭제에 실패했습니다.");
-    const result = await response.json();
-
-    return result;
 }
 
 export { getRecipient, deleteMessage, deleteRecipient };
