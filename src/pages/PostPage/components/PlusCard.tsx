@@ -6,7 +6,7 @@ function PlusCard({ id }: { id:string }) {
     const navigate = useNavigate();
     
     const handleCardClick = () => {
-        navigate(`message`);
+        navigate('message');
     }
 
     return (
