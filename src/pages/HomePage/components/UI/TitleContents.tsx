@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
 
-interface TitleContentesProps {
+interface TitleContentsProps {
   children: ReactNode;
 }
 
-const TitleContents: React.FC<TitleContentesProps> = ({ children }) => {
+const TitleContents: React.FC<TitleContentsProps> = ({ children }) => {
   return (
     <p className="font-pretendard font-[400] text-[18px] text-[#555555]">
       {children}

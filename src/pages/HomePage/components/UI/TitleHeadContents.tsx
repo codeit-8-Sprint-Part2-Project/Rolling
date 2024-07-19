@@ -6,7 +6,7 @@ interface TitleHeadContentesProps {
 
 const TitleHeadContents: React.FC<TitleHeadContentesProps> = ({ children }) => {
   return (
-    <h2 className="font-pretendard font-[700] text-[24px] text-[#181818] font-bold">
+    <h2 className="font-pretendard text-[24px] text-[#181818] font-bold">
       {children}
     </h2>
   );

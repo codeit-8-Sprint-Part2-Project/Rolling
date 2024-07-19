@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 interface TitleContainerProps {
   children: ReactNode;
-  reverse?: Boolean;
+  reverse?: boolean;
 }
 
 const TitleContainer: React.FC<TitleContainerProps> = ({
@@ -13,9 +13,9 @@ const TitleContainer: React.FC<TitleContainerProps> = ({
     <div
       className={`${
         reverse
-          ? "px-[24px] md:px-[40px] min-1155:px-[0]"
-          : "px-[24px] md:px-[40px] min-1155:pl-[60px]"
-      } flex flex-col items-start gap-[16px]`}
+          ? "px-6 md:px-10 min-1155:px-[0]"
+          : "px-6 md:px-10 min-1155:pl-[60px]"
+      } flex flex-col items-start gap-4`}
     >
       {children}
     </div>

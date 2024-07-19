@@ -1,14 +1,14 @@
 import React, { ReactNode } from "react";
 
-interface TitleContentesProps {
+interface TitlePointProps {
   children: ReactNode;
 }
 
-const TitlePoint: React.FC<TitleContentesProps> = ({ children }) => {
+const TitlePoint: React.FC<TitlePointProps> = ({ children }) => {
   return (
-    <div className="bg-[#9935ff] rounded-[50px] px-[12px] py-[6px] font-pretendard font-[700] text-[14px] text-[#ffffff] inline-block font-bold">
+    <p className="bg-[#9935ff] rounded-[50px] px-3 py-1.5 font-pretendard text-[14px] text-white inline-block font-bold">
       {children}
-    </div>
+    </p>
   );
 };
 
