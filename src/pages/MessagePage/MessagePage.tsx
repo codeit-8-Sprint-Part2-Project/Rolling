@@ -10,15 +10,40 @@ import { useParams } from "react-router-dom";
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
 
+type SubmitFormType = {
+  recipientId: number,
+  sender: string,
+  profileImageURL: string,
+  relationship: RelationShip,
+  content: string,
+  font: Font,
+}
+
+const INITIAL_FORM_VALUES: SubmitFormType = {
+  recipientId: 0,
+  sender: '',
+  profileImageURL: '',
+  relationship: "친구",
+  content: '',
+  font: "Noto Sans",
+}
 
 const MessagePage: React.FC = () => {
 
   const { recipientId } = useParams() as { recipientId: string };
+  const [formData, setFormData] = useState<SubmitFormType>(INITIAL_FORM_VALUES);
+
+  const changeFormData = (key: string, value: any) => {
+    setFormData((prev: SubmitFormType) => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
   
   const [sender, setSender] = useState<string>('');
 
   const handleSenderChange = (newSender: string) => {
-    setSender(newSender);
+    changeFormData("sender", newSender);
   };
 
   const [relationship, setRelationship] = useState<RelationShip>("지인");
