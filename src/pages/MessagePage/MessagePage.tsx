@@ -52,7 +52,6 @@ const MessagePage: React.FC = () => {
 
   const handleToastEditorChange = (newContent: string) => {
     changeFormData("content", newContent);
-    console.log("handleToastEditorChange called");
   };
 
   const handleFontChange = (newFont: Font) => {
@@ -69,7 +68,6 @@ const MessagePage: React.FC = () => {
     const textContent = editorState.getCurrentContent();
     const rawContent = convertToRaw(textContent);
     const stringified = JSON.stringify(rawContent);
-    console.log(stringified);
     handleToastEditorChange(stringified);
 
     if(!isFormValid) {
