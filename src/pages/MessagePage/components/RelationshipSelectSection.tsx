@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Dropdown, { DropdownOption } from "./DropDown";
+import Dropdown, { DropdownOption } from "./Dropdown";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 

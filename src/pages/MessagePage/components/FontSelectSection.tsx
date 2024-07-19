@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Dropdown, { DropdownOption } from "./DropDown";
+import Dropdown, { DropdownOption } from "./Dropdown";
 
 type Font =
   | "Noto Sans"
