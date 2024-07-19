@@ -32,7 +32,7 @@ const FontSelectSection: React.FC<FontSelectSectionProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 w-full">
       <p className="font-bold text-2xl">폰트 선택</p>
       <Dropdown
         options={options}

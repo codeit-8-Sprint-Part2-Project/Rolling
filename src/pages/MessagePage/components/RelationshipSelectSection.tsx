@@ -31,7 +31,7 @@ const RelationshipSelectSection: React.FC<RelationshipSelectSectionProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 w-full">
       <p className="font-bold text-2xl">상대와의 관계</p>
       <Dropdown
         options={options}
