@@ -49,7 +49,7 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
     setSelectedColor("beige");
   };
 
-  // 선택된 테마 타입과 옵션을 관리하는 이벤트 핸들러
+  // 선택된 테마 타입과 옵션 업데이팅을 관리하는 이벤트 핸들러
   const handleOptionClick = (optionType: string, value: string) => {
     if (optionType === "backgroundColor") {
       setSelectedColor(value);
