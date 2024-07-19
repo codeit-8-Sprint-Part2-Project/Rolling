@@ -5,3 +5,10 @@ export const INIT_THEME_VALUE = {
   backgroundColor: "beige",
   backgroundImageURL: null,
 };
+
+export enum BackgroundColor {
+  Beige = "beige",
+  Purple = "purple",
+  Blue = "blue",
+  Green = "green",
+}

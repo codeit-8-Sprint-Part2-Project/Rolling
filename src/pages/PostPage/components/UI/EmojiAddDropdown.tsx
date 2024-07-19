@@ -24,7 +24,7 @@ interface EmojiAddDropdownProps {
 }
 
 function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -35,7 +35,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const Counts = await getByPostId(params);
 
         setData(Counts);
@@ -45,7 +45,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
     };
 
     fetchCount();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>총 이모티콘을 불러오지 못했습니다.</p>;
@@ -100,7 +100,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
 
     try {
       await fetch(
-        `https://rolling-api.vercel.app/7-5/recipients/${productid}/reactions/`,
+        `https://rolling-api.vercel.app/8-1/recipients/${recipientId}/reactions/`,
         {
           method: "POST",
           headers: {
@@ -125,10 +125,14 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] font-pretendard font-[500] text-[16px] text-[#181818] flex gap-[4px]"
+        className="px-[8px] md:px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] font-pretendard font-[500] text-[16px] text-[#181818] flex gap-[4px]"
       >
-        <img src={IconAdd} alt="이모지 추가 버튼" />
-        <p>추가</p>
+        <img
+          src={IconAdd}
+          alt="이모지 추가 버튼"
+          className="min-w-[20px] min-h-[20px] md:w-[24px] md:h-[24px]"
+        />
+        <p className="hidden md:block">추가</p>
       </button>
 
       {isDropdownVisible && (

@@ -11,14 +11,16 @@ import HomepageTitle2 from "../../assets/images/HomepageTitle2.png";
 
 const HomepageMain: React.FC = () => {
   return (
-    <>
+    <div className="px-6">
       <BodyContainer>
         <MainContainer>
           <TitleContainer>
             <TitlePoint>Point. 01</TitlePoint>
             <TitleHeadContents>
-              <span className="inline sm:block">누구나 손쉽게, 온라인 </span>
-              <span className="inline sm:block">
+              <span className="inline min-1155:block">
+                누구나 손쉽게, 온라인{" "}
+              </span>
+              <span className="inline min-1155:block">
                 롤링 페이퍼를 만들 수 있어요
               </span>
             </TitleHeadContents>
@@ -30,11 +32,13 @@ const HomepageMain: React.FC = () => {
           />
         </MainContainer>
         <MainContainer reverse>
-          <TitleContainer>
+          <TitleContainer reverse>
             <TitlePoint>Point. 02</TitlePoint>
             <TitleHeadContents>
-              <span className="inline sm:block">서로에게 이모지로 감정을</span>
-              <span className="inline sm:block">표현해보세요</span>
+              <span className="inline min-1155:block">
+                서로에게 이모지로 감정을{" "}
+              </span>
+              <span className="inline min-1155:block">표현해보세요</span>
             </TitleHeadContents>
             <TitleContents>
               롤링 페이퍼에 이모지를 추가할 수 있어요.
@@ -43,11 +47,12 @@ const HomepageMain: React.FC = () => {
           <img
             src={HomepageTitle2}
             alt="롤링 페이퍼에 이모지를 선택하는 이미지"
+            className="pt-[12px]"
           />
         </MainContainer>
       </BodyContainer>
       <TitleButton>구경해보기</TitleButton>
-    </>
+    </div>
   );
 };
 

@@ -44,6 +44,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",
+        transition: "background-color 0.3s ease", // 배경색 변화에 대한 transition 추가
     };
 
     const textColorClass = backgroundImageURL ? "text-white" : "text-black";

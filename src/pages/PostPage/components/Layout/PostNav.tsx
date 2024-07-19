@@ -9,8 +9,14 @@ import PostNavTitleContainer from "../UI/PostNavTitleContainer";
 const PostNav: React.FC = () => {
   return (
     <div>
-      <PostNavContainer>
+      <PostNavContainer className={"block md:hidden"} justifyName="">
         <ToNameContent />
+      </PostNavContainer>
+      <PostNavContainer
+        justifyName={"justify-end md:justify-between"}
+        className=""
+      >
+        <ToNameContent className={"hidden md:block"} />
         <PostNavTitleContainer>
           <ToMessageCount />
           <ToEmojiCount />

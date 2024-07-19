@@ -11,6 +11,9 @@ module.exports = {
         nanumsonwrite: ["NanumGoDigANiGoGoDing", "sans-serif"],
         nanumsonpyeonji: ["NanumSonPyeonJiCe", "sans-serif"],
       },
+      screens: {
+        "min-1155": "1155px",
+      },
       colors: {
         beige: "#FFE2AD",
       },
@@ -24,9 +27,10 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
-    {
+    { 
       tailwindcss: {},
       autoprefixer: {},
     },
   ],
+  
 };

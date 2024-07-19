@@ -7,7 +7,7 @@ interface PostNavTitleContainerProps {
 const PostNavTitleContainer: React.FC<PostNavTitleContainerProps> = ({
   children,
 }) => {
-  return <div className="flex items-center">{children}</div>;
+  return <div className="flex items-center justify-end">{children}</div>;
 };
 
 export default PostNavTitleContainer;
