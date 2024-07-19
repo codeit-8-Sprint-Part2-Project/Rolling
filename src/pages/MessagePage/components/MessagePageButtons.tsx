@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 type props = {
     recipientId: string,
+    handlePost: () => void,
 }
 
-function MessagePageButtons({ recipientId }: props) {
+function MessagePageButtons({ recipientId, handlePost }: props) {
 
     const navigate = useNavigate();
     
@@ -15,7 +16,10 @@ function MessagePageButtons({ recipientId }: props) {
 
     return(
         <div className="flex gap-4 w-full my-3">
-            <button className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE]">
+            <button
+                className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE]"
+                onClick={handlePost}
+            >
                 생성하기
             </button>
             <button

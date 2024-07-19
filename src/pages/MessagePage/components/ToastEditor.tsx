@@ -8,7 +8,7 @@ interface ToastEditorProps {
 }
 
 const ToastEditor: React.FC<ToastEditorProps> = ({ editorState, onChange }) => {
-
+  
   return (
     <div className="flex flex-col gap-3 w-full">
         <p className="font-bold text-2xl">내용을 입력해 주세요</p>

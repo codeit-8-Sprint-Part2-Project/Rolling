@@ -9,7 +9,7 @@ type Font =
   | "손편지체";
 
 interface FontSelectSectionProps {
-  selectedFont: Font;
+  selectedFont: string;
   onFontChange: (font: Font) => void;
 }
 

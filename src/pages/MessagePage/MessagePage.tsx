@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { EditorState } from 'draft-js';
+import { useNavigate, useParams } from "react-router-dom";
+import { convertToRaw, EditorState } from 'draft-js';
 import InputProfileSection from "./components/InputProfileSection";
 import RelationshipSelectSection from "./components/RelationshipSelectSection";
 import FontSelectSection from "./components/FontSelectSection";
@@ -8,6 +8,7 @@ import InputSenderSection from "./components/InputSenderSection";
 import ToastEditor from "./components/ToastEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
 import { MessageCreate } from "../../DTO/message/MessageCreate";
+import { postMessage } from "../PostPage/api/api";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
@@ -16,7 +17,7 @@ const INITIAL_FORM_VALUES: MessageCreate = {
   team: "8-1",
   recipientId: 0,
   sender: '',
-  profileImageURL: null,
+  profileImageURL: "https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png",
   relationship: "친구",
   content: '',
   font: "Noto Sans",
@@ -27,6 +28,8 @@ const MessagePage: React.FC = () => {
   const { recipientId } = useParams() as { recipientId: string };
   const [formData, setFormData] = useState<MessageCreate>(INITIAL_FORM_VALUES);
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+  const [isPostPending, setIsPostPending] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const changeFormData = (key: string, value: any) => {
     setFormData((prev: MessageCreate) => ({
@@ -36,10 +39,7 @@ const MessagePage: React.FC = () => {
   }
 
   useEffect(() => {
-    setFormData((prev: MessageCreate) => ({
-      ...prev,
-      recipientId: +recipientId,
-    }))
+    changeFormData("recipientId", +recipientId)
   }, [recipientId]);
   
   const handleSenderChange = (newSender: string) => {
@@ -52,6 +52,7 @@ const MessagePage: React.FC = () => {
 
   const handleToastEditorChange = (newContent: string) => {
     changeFormData("content", newContent);
+    console.log("handleToastEditorChange called");
   };
 
   const handleFontChange = (newFont: Font) => {
@@ -60,6 +61,32 @@ const MessagePage: React.FC = () => {
 
   const handleProfileImageChange = (newUrl: string) => {
     changeFormData("profileImageURL", newUrl);
+  }
+
+  const isFormValid = formData.recipientId && formData.sender && formData.content;
+
+  const handlePost = async () => {
+    const textContent = editorState.getCurrentContent();
+    const rawContent = convertToRaw(textContent);
+    const stringified = JSON.stringify(rawContent);
+    console.log(stringified);
+    handleToastEditorChange(stringified);
+
+    if(!isFormValid) {
+      alert("유효성 이슈");
+      return;
+    }
+
+    try {
+      setIsPostPending(true);
+      postMessage(recipientId, formData);
+    } catch(error:any) {
+      alert(`handlePost에서 발생한 오류: ${error.message}`);
+    } finally {
+      setIsPostPending(false);
+    }
+
+    navigate(`/post/${recipientId}`)
   }
 
   return (
@@ -85,7 +112,10 @@ const MessagePage: React.FC = () => {
           selectedFont={formData.font}
           onFontChange={handleFontChange}
         />
-        <MessagePageButtons recipientId={recipientId} />
+        <MessagePageButtons
+          recipientId={recipientId}
+          handlePost={handlePost}
+        />
       </div>
     </div>
   );
