@@ -53,7 +53,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
             className={`w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden`}
             style={cardStyle}
         >
-            {backgroundColor === "purple" && (
+            {backgroundColor === "purple" && backgroundImageURL === null &&(
                 <div 
                     className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
                     style={{
@@ -71,7 +71,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     }}
                 />
             )}
-            {backgroundColor === "blue" && (
+            {backgroundColor === "blue" && backgroundImageURL === null &&(
                 <svg
                     className="absolute"
                     style={{ transform: 'translate(85%, 70%)' }}
@@ -87,7 +87,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     />
                 </svg>
             )}
-            {backgroundColor === "green" && (
+            {backgroundColor === "green" && backgroundImageURL === null &&(
                 <div 
                     className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
                     style={{
