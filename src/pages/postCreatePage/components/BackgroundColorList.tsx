@@ -2,9 +2,9 @@ import * as React from "react";
 import { useState, useEffect, useMemo } from "react";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { getColorClass } from "../utils/getColorClass";
-import { BackgroundColor } from "../constants/enum";
+import { BackgroundColor } from "../constants/initial";
 import { BackgroundColorListProps } from "../constants/propTypes";
-import ThemeCheckIc from "../UI/ThemeCheckIc";
+import ThemeCheckIc from "./UI/ThemeCheckIc";
 
 export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   selectedColor,

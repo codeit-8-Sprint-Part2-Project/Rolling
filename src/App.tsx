@@ -2,9 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import ListPage from "./pages/ListPage/ListPage";
 import PostPage from "./pages/PostPage/PostPage";
-import * as React from "react";
-import ThemeProvider from "./pages/postTheme/api/ThemeProvider";
-import PostTheme from "./pages/postTheme/PostTheme";
+import ThemeProvider from "./pages/postCreatePage/api/ThemeProvider";
+import PostCreate from "./pages/postCreatePage/PostCreate";
 import Header from "./components/Layout/Header";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
             index
             element={
               <ThemeProvider>
-                <PostTheme />
+                <PostCreate />
               </ThemeProvider>
             }
           />

@@ -4,7 +4,7 @@ import { BackgroundColorList } from "./BackgroundColorList";
 import BackgroundImageList from "./BackgroundImageList";
 import { ThemeTypeSelectionProps } from "../constants/propTypes";
 import useUpdateThemeData from "../hooks/useUpdateThemeData";
-import ThemeTypeButton from "../UI/ThemeTypeButton";
+import ThemeTypeButton from "./UI/ThemeTypeButton";
 import ThemePreview from "./ThemePreview";
 
 const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
