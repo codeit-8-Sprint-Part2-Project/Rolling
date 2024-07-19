@@ -113,7 +113,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
             left: "50%",
             right: "auto",
             top: "auto",
-            bottom: "3%",
+            bottom: "6%",
             transform: "translate(-50%, -50%)",
             height: "auto",
             background: "none",
@@ -126,7 +126,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
           },
         }}
       >
-        <div className="w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
+        <div className="w-[320px] md:w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
           <div className="flex gap-[12px]">
             <img
               className="max-w-[24px] max-h-[24px]"
