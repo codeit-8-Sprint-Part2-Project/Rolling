@@ -6,6 +6,7 @@ import InputSenderSection from "./components/InputSenderSection";
 import ToastEditor from "./components/ToastEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
 import { useParams } from "react-router-dom";
+import { EditorState } from 'draft-js';
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
@@ -34,6 +35,7 @@ const MessagePage: React.FC = () => {
 
   const { recipientId } = useParams() as { recipientId: string };
   const [formData, setFormData] = useState<SubmitFormType>(INITIAL_FORM_VALUES);
+  const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 
   const changeFormData = (key: string, value: any) => {
     setFormData((prev: SubmitFormType) => ({
@@ -56,9 +58,7 @@ const MessagePage: React.FC = () => {
   const handleRelationshipChange = (newRelationship: RelationShip) => {
     changeFormData("relationship", newRelationship);
   };
-
-  const [body, setBody] = React.useState('');
-
+  
   const handleToastEditorChange = (newContent: string) => {
     changeFormData("content", newContent);
   };
@@ -87,8 +87,8 @@ const MessagePage: React.FC = () => {
           onRelationshipChange={handleRelationshipChange}
         />
         <ToastEditor
-          body={body}
-          setBody={handleToastEditorChange} 
+          editorState={editorState}
+          onChange={setEditorState}
         />
         <FontSelectSection
           selectedFont={formData.font}
