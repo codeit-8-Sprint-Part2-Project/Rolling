@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { EditorState } from 'draft-js';
 import InputProfileSection from "./components/InputProfileSection";
 import RelationshipSelectSection from "./components/RelationshipSelectSection";
 import FontSelectSection from "./components/FontSelectSection";
 import InputSenderSection from "./components/InputSenderSection";
 import ToastEditor from "./components/ToastEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
-import { useParams } from "react-router-dom";
-import { EditorState } from 'draft-js';
+import { MessageCreate } from "../../DTO/message/MessageCreate";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
 
-type SubmitFormType = {
-  team: string,
-  recipientId: number,
-  sender: string,
-  profileImageURL: string | null,
-  relationship: RelationShip,
-  content: string,
-  font: Font,
-}
-
-const INITIAL_FORM_VALUES: SubmitFormType = {
+const INITIAL_FORM_VALUES: MessageCreate = {
   team: "8-1",
   recipientId: 0,
   sender: '',
@@ -34,18 +25,18 @@ const INITIAL_FORM_VALUES: SubmitFormType = {
 const MessagePage: React.FC = () => {
 
   const { recipientId } = useParams() as { recipientId: string };
-  const [formData, setFormData] = useState<SubmitFormType>(INITIAL_FORM_VALUES);
+  const [formData, setFormData] = useState<MessageCreate>(INITIAL_FORM_VALUES);
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 
   const changeFormData = (key: string, value: any) => {
-    setFormData((prev: SubmitFormType) => ({
+    setFormData((prev: MessageCreate) => ({
       ...prev,
       [key]: value,
     }))
   }
 
   useEffect(() => {
-    setFormData((prev: SubmitFormType) => ({
+    setFormData((prev: MessageCreate) => ({
       ...prev,
       recipientId: +recipientId,
     }))
@@ -58,7 +49,7 @@ const MessagePage: React.FC = () => {
   const handleRelationshipChange = (newRelationship: RelationShip) => {
     changeFormData("relationship", newRelationship);
   };
-  
+
   const handleToastEditorChange = (newContent: string) => {
     changeFormData("content", newContent);
   };
