@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useProfileImages from '../hooks/useProfileImage';
 
 interface InputProfileSectionProps {
-  onImageUpload: (imageUrl: string) => void;
+  profileImageURL: string | null,
+  onProfileImageChange: (newUrl: string) => void,
 }
 
-const InputProfileSection: React.FC<InputProfileSectionProps> = ({ onImageUpload }) => {
-  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
+const InputProfileSection: React.FC<InputProfileSectionProps> = ({ profileImageURL, onProfileImageChange }) => {
   const profileImages = useProfileImages();
 
   const getDisplayImageUrl = (): string => {
-    if (selectedImageUrl) {
-      return selectedImageUrl;
+    if (profileImageURL) {
+      return profileImageURL;
     } else if (profileImages && profileImages.imageUrls.length > 0) {
       return profileImages.imageUrls[0];
     } else {
@@ -33,7 +33,7 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ onImageUpload
                 <button
                   key={index}
                   className="rounded-full"
-                  onClick={() => setSelectedImageUrl(imageUrl)}
+                  onClick={() => onProfileImageChange(imageUrl)}
                 >
                   <img src={imageUrl} alt="URL 프로필 이미지" className="w-14 h-14 rounded-full" />
                 </button>
