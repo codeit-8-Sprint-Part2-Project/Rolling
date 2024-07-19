@@ -6,7 +6,7 @@ import ThemeProvider from "./pages/postCreatePage/api/ThemeProvider";
 import PostCreate from "./pages/postCreatePage/PostCreate";
 import Header from "./components/Layout/Header";
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Header />
@@ -29,6 +29,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
