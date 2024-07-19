@@ -28,9 +28,13 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     }
   };
 
-  const shareToUrl = () => {
-    navigator.clipboard.writeText(url);
-    setIsModalOpen(true);
+  const shareToUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setIsModalOpen(true);
+    } catch (e) {
+      setIsModalOpen(false);
+    }
   };
 
   useEffect(() => {
