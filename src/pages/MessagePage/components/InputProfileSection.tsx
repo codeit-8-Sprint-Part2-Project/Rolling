@@ -34,7 +34,7 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ onImageUpload
                 className="rounded-full px-1 py-1"
                 onClick={() => setSelectedImageUrl(imageUrl)}
               >
-                <img src={imageUrl} alt={`Image ${index}`} className="w-14 h-14 rounded-full" />
+                <img src={imageUrl} alt="URL 프로필 이미지" className="w-14 h-14 rounded-full" />
               </button>
             ))}
           </div>

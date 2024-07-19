@@ -82,8 +82,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         >
           <div className="py-1" role="none">
             {options.map((option, index) => (
-              <a
-                href="#"
+              <div
                 key={index}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
@@ -91,7 +90,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 onClick={() => handleOptionSelect(option)}
               >
                 {option.label}
-              </a>
+              </div>
             ))}
           </div>
         </div>
