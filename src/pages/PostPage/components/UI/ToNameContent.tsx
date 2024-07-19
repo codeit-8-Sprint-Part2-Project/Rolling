@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getByPostId } from "../../api/getByPostId";
 import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
@@ -20,7 +20,9 @@ interface Recipient {
   topReactions?: string;
 }
 
-const ToNameContent: React.FC<ToNameContentProps> = ({ className = "" }) => {
+const ToNameContent = ({
+  className = "",
+}: ToNameContentProps): ReactElement => {
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 export type DropdownOption = {
   label: string;
@@ -29,9 +29,9 @@ const Dropdown: React.FC<DropdownProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
 
@@ -54,7 +54,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
-          {selectedOption?.label || 'Select an option'}
+          {selectedOption?.label || "Select an option"}
           <svg
             className="-mr-1 ml-2 h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"

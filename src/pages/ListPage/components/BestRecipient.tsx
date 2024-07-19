@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BestRecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient';
 import LoadingSpinner from './UI/LoadingSpinner';
+import Title from "./UI/Title";
 
 const BestRecipient: React.FC = () => {
     const [recipientData, setRecipientData] = useState<any>(null);
@@ -31,12 +32,8 @@ const BestRecipient: React.FC = () => {
     }, []);
 
     return (
-        <div className="max-w-[1201px] mx-auto">
-            <div>
-                <div className="flex-grow-3 flex-shrink-0 basis-0">
-                    <h2 className="font-bold text-2xl">인기 롤링 페이퍼 🔥️</h2>
-                </div>
-            </div>
+        <div className="max-w-[1201px] mx-auto" >
+            <div style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}><Title text="인기 롤링 페이퍼 🔥️" ></Title></div>
 
             {isLoading ? (
                 <LoadingSpinner /> // 로딩 중이면 스피너 표시

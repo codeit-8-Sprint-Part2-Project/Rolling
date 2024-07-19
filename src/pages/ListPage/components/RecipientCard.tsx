@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface RecipientCardProps {
     name: string;
@@ -19,6 +19,8 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
     backgroundColor,
     backgroundImageURL,
 }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     let bgColorClass = "";
 
     switch (backgroundColor) {
@@ -44,17 +46,22 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",
-        transition: "background-color 0.3s ease", // 배경색 변화에 대한 transition 추가
     };
 
     const textColorClass = backgroundImageURL ? "text-white" : "text-black";
 
     return (
         <div
-            className={`w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden`}
-            style={cardStyle}
+            className={`w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden transition-all duration-300 ease-in-out`}
+            style={{
+                ...cardStyle,
+                transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                boxShadow: isHovered ? '0 10px 20px rgba(0,0,0,0.2)' : '0 4px 6px rgba(0,0,0,0.1)',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            {backgroundColor === "purple" && (
+            {backgroundColor === "purple" && backgroundImageURL === null &&(
                 <div 
                     className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
                     style={{
@@ -72,7 +79,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     }}
                 />
             )}
-            {backgroundColor === "blue" && (
+            {backgroundColor === "blue" && backgroundImageURL === null &&(
                 <svg
                     className="absolute"
                     style={{ transform: 'translate(85%, 70%)' }}
@@ -88,7 +95,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     />
                 </svg>
             )}
-            {backgroundColor === "green" && (
+            {backgroundColor === "green" && backgroundImageURL === null &&(
                 <div 
                     className="absolute right-0 bottom-0 w-[336px] h-[169px] rounded-tl-[90.5px] overflow-hidden"
                     style={{
@@ -100,7 +107,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
             {backgroundImageURL && (
                 <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             )}
-            <div className={`p-2 rounded-md relative flex flex-col justify-between h-full z-10 ${textColorClass}`}>
+            <div className={`p-2 rounded-md relative flex flex-col justify-between h-full z-10 ${textColorClass} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-90'}`}>
                 <div>
                     <h2 className={`font-pretendard text-[24px] font-bold leading-[36px] tracking-[-0.01em] text-left`}>
                         To. {name}
@@ -140,8 +147,8 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                                             >
                                                 <div
                                                     style={{
-                                                        width: "28px", // 동일한 크기
-                                                        height: "28px", // 동일한 크기
+                                                        width: "33px", 
+                                                        height: "28px", 
                                                         backgroundColor: "white",
                                                         borderRadius: "50%",
                                                         display: "flex",
