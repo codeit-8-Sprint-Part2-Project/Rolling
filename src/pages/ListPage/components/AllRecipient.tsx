@@ -25,8 +25,8 @@ const AllRecipient: React.FC = () => {
     }, []);
 
     return (
-        <div className="max-w-[1201px] mx-auto" style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}>
-            <Title text="최근에 만든 롤링 페이퍼 ⭐️" ></Title>
+        <div className="max-w-[1201px] mx-auto" >
+            <div style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}><Title text="최근에 만든 롤링 페이퍼 ⭐" ></Title></div>
 
             {isLoading ? (
                 <LoadingSpinner /> // 로딩 중이면 스피너 표시
