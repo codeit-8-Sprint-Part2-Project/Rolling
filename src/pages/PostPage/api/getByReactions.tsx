@@ -1,15 +1,15 @@
 interface Params {
-  productid?: string;
+  recipientId?: string;
 }
 
 export async function getByReactions(params: Params | null = null) {
-  const { productid } = params || {};
+  const { recipientId } = params || {};
 
   try {
-    let url = "https://rolling-api.vercel.app/7-5/recipients/";
+    let url = "https://rolling-api.vercel.app/8-1/recipients/";
 
-    if (productid) {
-      url += `${productid}/reactions/`;
+    if (recipientId) {
+      url += `${recipientId}/reactions/`;
     }
 
     const response = await fetch(url);

@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import ListPage from "./pages/ListPage/ListPage";
 import PostPage from "./pages/PostPage/PostPage";
-import * as React from "react";
-import ThemeProvider from "./pages/postTheme/api/ThemeProvider";
-import PostTheme from "./pages/postTheme/PostTheme";
+import ThemeProvider from "./pages/postCreatePage/api/ThemeProvider";
+import PostCreate from "./pages/postCreatePage/PostCreate";
 import Header from "./components/Layout/Header";
+import MessagePage from "./pages/MessagePage/MessagePage";
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Header />
@@ -18,18 +18,19 @@ function App() {
             index
             element={
               <ThemeProvider>
-                <PostTheme />
+                <PostCreate />
               </ThemeProvider>
             }
           />
-          <Route path=":recipientId" element={<PostPage />} />
+          <Route path=":recipientId">
+            <Route index element={<PostPage />} />
+            <Route path="message" element={<MessagePage />} />
+          </Route>
         </Route>
-        <Route path="list">
-          <Route index element={<ListPage />} />
-        </Route>
+        <Route path="list" element={<ListPage />} />
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

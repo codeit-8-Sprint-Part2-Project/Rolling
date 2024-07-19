@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import Modal from "react-modal";
 import IconShare from "../../assets/icons/IconShare.png";
 import IconUrlCompleted from "../../assets/icons/IconUrlCompleted.png";
@@ -10,7 +10,7 @@ interface ShareButtonProps {
   url: string;
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
+const ShareButton = ({ url }: ShareButtonProps): ReactElement => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,9 +28,20 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     }
   };
 
-  const shareToUrl = () => {
-    navigator.clipboard.writeText(url);
-    setIsModalOpen(true);
+  const shareToUrl = async () => {
+    if (!navigator.clipboard) {
+      console.error("이 브라우저는 Clipboard API를 지원하지 않습니다.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      console.log("URL이 클립보드에 성공적으로 복사되었습니다.");
+      setIsModalOpen(true);
+    } catch (e) {
+      console.error("URL 복사에 실패했습니다. 오류 메시지:", e);
+      setIsModalOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -38,10 +49,10 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       try {
         if (!window.Kakao.isInitialized()) {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
-          console.log("Kakao SDK initialized"); // 초기화 로그
+          console.log("Kakao SDK 성공적으로 호출");
         }
       } catch (e) {
-        console.error("Kakao SDK initialization error:", e);
+        console.error("Kakao SDK 호출 오류:", e);
       }
     }
   }, []);
@@ -62,19 +73,23 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] ml-[13px]"
+        className="px-2 md:px-4 py-1.5 border border-solid border-[#cccccc] rounded-md ml-[13px]"
       >
-        <img src={IconShare} alt="공유하기 버튼" />
+        <img
+          src={IconShare}
+          alt="공유하기 버튼"
+          className="w-5 h-5 md:w-6 md:h-6"
+        />
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
+        <div className="flex flex-col px-[1px] py-2.5 bg-white border border-[#cccccc] rounded-lg shadow-custom absolute top-[45px] left-[-85px] md:left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
               setIsDropdownVisible(false);
             }}
-            className="w-[138px] px-[16px] py-[12px] font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
+            className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
             카카오톡 공유
           </button>
@@ -83,7 +98,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
               shareToUrl();
               setIsDropdownVisible(false);
             }}
-            className="w-[138px] px-[16px] py-[12px] font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
+            className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
             URL 공유
           </button>
@@ -92,13 +107,14 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
 
       <Modal
         isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
         style={{
           content: {
             position: "fixed",
             left: "50%",
             right: "auto",
             top: "auto",
-            bottom: "3%",
+            bottom: "6%",
             transform: "translate(-50%, -50%)",
             height: "auto",
             background: "none",
@@ -111,23 +127,19 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
           },
         }}
       >
-        <div className="w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
-          <div className="flex gap-[12px]">
+        <div className="w-[320px] md:w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-lg justify-between items-center">
+          <div className="flex gap-3">
             <img
-              className="max-w-[24px] max-h-[24px]"
+              className="max-w-6 max-h-6"
               src={IconUrlCompleted}
               alt="복사 완료"
             />
-            <p className="font-pretendard font-[400] text-[16px] text-[#ffffff]">
+            <p className="font-pretendard font-[400] text-[16px] text-white">
               URL이 복사 되었습니다.
             </p>
           </div>
           <button onClick={() => setIsModalOpen(false)}>
-            <img
-              className="max-w-[24px] max-h-[24px]"
-              src={IconUrlClose}
-              alt="창 닫기"
-            />
+            <img className="max-w-6 max-h-6" src={IconUrlClose} alt="창 닫기" />
           </button>
         </div>
       </Modal>

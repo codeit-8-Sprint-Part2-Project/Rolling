@@ -1,4 +1,4 @@
-import { BackgroundColor } from "../constants/enum";
+import { BackgroundColor } from "../constants/initial";
 
 // Tailwind CSS 클래스 이름을 value에 따라 동적으로 생성하는 함수
 export const getColorClass = (color: string) => {
