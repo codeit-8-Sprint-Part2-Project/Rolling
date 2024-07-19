@@ -29,10 +29,17 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
   };
 
   const shareToUrl = async () => {
+    if (!navigator.clipboard) {
+      console.error("이 브라우저는 Clipboard API를 지원하지 않습니다.");
+      return;
+    }
+
     try {
       await navigator.clipboard.writeText(url);
+      console.log("URL이 클립보드에 성공적으로 복사되었습니다.");
       setIsModalOpen(true);
     } catch (e) {
+      console.error("URL 복사에 실패했습니다. 오류 메시지:", e);
       setIsModalOpen(false);
     }
   };
