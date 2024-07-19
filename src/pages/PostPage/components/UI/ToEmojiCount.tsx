@@ -6,13 +6,13 @@ import { getByReactions } from "../../api/getByReactions";
 import { ReactionCreate } from "../../../../DTO/reaction/ReactionCreate";
 
 function ToEmojiCount() {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<ReactionCreate | null>(null);
 
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const Counts = await getByReactions(params);
 
         setData(Counts);
@@ -22,7 +22,7 @@ function ToEmojiCount() {
     };
 
     fetchCount();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>총 이모티콘을 불러오지 못했습니다.</p>;
@@ -31,7 +31,7 @@ function ToEmojiCount() {
   const displayedEmojis = data?.results?.slice(0, 3);
 
   const onEmojiadded = async (emoji: string) => {
-    const Counts = await getByReactions({ productid });
+    const Counts = await getByReactions({ recipientId });
     setData(Counts);
   };
 
@@ -40,7 +40,7 @@ function ToEmojiCount() {
       {displayedEmojis?.map((emoji) => (
         <ul
           key={emoji.id}
-          className="flex gap-[8px] md:gap-[2px] rounded-[32px] px-[8px] py-[4px] md:px-[12px] md:py-[8px] bg-black/50 font-pretendard font-[400] text-[14px] md:text-[16px] text-[#ffffff] justify-center items-center"
+          className="flex gap-[8px] md:gap-[2px] min-w-[56px] md:min-w-[66px] rounded-[32px] px-[8px] py-[4px] md:px-[12px] md:py-[8px] bg-black/50 font-pretendard font-[400] text-[14px] md:text-[16px] text-[#ffffff] justify-center items-center"
         >
           <li>{emoji.emoji}</li>
           <li>{emoji.count}</li>
