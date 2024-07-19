@@ -3,6 +3,7 @@ import RecipientCardList from './RecipientCardList';
 import getRecipient from '../api/getRecipient'; // getRecipient 함수 불러오기
 import TitleButton from "./UI/TitleButton";
 import LoadingSpinner from './UI/LoadingSpinner'; // Assuming you have a LoadingSpinner component
+import Title from "./UI/Title";
 
 const AllRecipient: React.FC = () => {
     const [recipientData, setRecipientData] = useState<any>(null); // 수신자 데이터 상태
@@ -24,10 +25,8 @@ const AllRecipient: React.FC = () => {
     }, []);
 
     return (
-        <div className="max-w-[1201px] mx-auto">
-            <div>
-                <h2 className="mt-[20px] mb-[5px] flex-grow-3 flex-shrink-0 basis-0 font-bold text-2xl" style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}>최근에 만든 롤링 페이퍼 ⭐️️</h2>
-            </div>
+        <div className="max-w-[1201px] mx-auto" style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}>
+            <Title text="최근에 만든 롤링 페이퍼 ⭐️" ></Title>
 
             {isLoading ? (
                 <LoadingSpinner /> // 로딩 중이면 스피너 표시
