@@ -22,7 +22,7 @@ function MessageModal({ message, setIsMessageModalOpen }: props) {
                     <SenderInfo message={message} />
                     <div className="text-[#999999] text-sm font-normal ml-1">{formatComparedTime(message.createdAt)}</div>
                 </div>
-                <div className="w-full grow">
+                <div className="w-full grow text-wrap mb-6 overflow-y-scroll">
                     <MessageContent rawString={message.content} />
                 </div>
                 <button className="w-[7.5rem] h-10 bg-[#9935FF] border-none text-white text-base font-normal rounded-lg hover:bg-[#861DEE]" onClick={handleButtonClick}>
