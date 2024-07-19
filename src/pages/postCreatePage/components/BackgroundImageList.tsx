@@ -16,7 +16,7 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   );
   const updateThemeData = useUpdateThemeData(setThemeData);
 
-  // 로드할 때마다 첫 번째 이미지 URL 선택
+  // 로드할 때 첫 번째 이미지 URL 선택
   useEffect(() => {
     if (imageUrls.length > 0 && !selectedImageUrl) {
       setSelectedImageUrl(imageUrls[0]);

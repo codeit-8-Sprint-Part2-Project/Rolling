@@ -6,6 +6,7 @@ interface FetchUrlsResult {
   error: Error | null;
 }
 
+// 주어진 urlType에 따라 apiCall, 데이터 추출 후 URL 배열 반환
 const useGetUrls = (
   urlType: string,
   extractUrls: (data: any) => string[]
