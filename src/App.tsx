@@ -5,6 +5,7 @@ import PostPage from "./pages/PostPage/PostPage";
 import ThemeProvider from "./pages/postCreatePage/api/ThemeProvider";
 import PostCreate from "./pages/postCreatePage/PostCreate";
 import Header from "./components/Layout/Header";
+import MessagePage from "./pages/MessagePage/MessagePage";
 
 const App: React.FC = () => {
   return (
@@ -21,11 +22,12 @@ const App: React.FC = () => {
               </ThemeProvider>
             }
           />
-          <Route path=":recipientId" element={<PostPage />} />
+          <Route path=":recipientId">
+            <Route index element={<PostPage />} />
+            <Route path="message" element={<MessagePage />} />
+          </Route>
         </Route>
-        <Route path="list">
-          <Route index element={<ListPage />} />
-        </Route>
+        <Route path="list" element={<ListPage />} />
       </Routes>
     </BrowserRouter>
   );
