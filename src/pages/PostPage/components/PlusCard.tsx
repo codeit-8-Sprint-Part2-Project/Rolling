@@ -1,13 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import plusIcon from "../../../assets/icons/plus.svg";
 
-type props = {
-    handleWriteModalOpen: (isOpen: boolean) => void;
-}
+function PlusCard({ id }: { id:string }) {
 
-function PlusCard({ handleWriteModalOpen }: props) {
-
+    const navigate = useNavigate();
+    
     const handleCardClick = () => {
-        handleWriteModalOpen(true);
+        navigate(`message`);
     }
 
     return (

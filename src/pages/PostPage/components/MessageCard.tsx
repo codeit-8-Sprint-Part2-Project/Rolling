@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import MessageModal from "./MessageModal";
 import TrashcanButton from "./TrashcanButton";
 import DeletionConfirmModal from "./DeletionConfirmModal";
+import WriteModal from "./WriteModal";
 
 const INITIAL_MESSAGE_VALUE: MessageRetrieve = {
     id : 0,
@@ -28,15 +29,18 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
 
     const [isMessageModalOpen, setIsMessageModalOpen] = useState<boolean>(false);
     const [isDeletionModalOpen, setIsDeletionModalOpen] = useState<boolean>(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
     const id: number = message.id || 0;
     
     const handleCardClick = () => {
-        if(isEditing) return;
-        setIsMessageModalOpen(true);
+        (isEditing)
+            ? setIsEditModalOpen(true)
+            : setIsMessageModalOpen(true)
     }
 
-    const handleTrashcanClick = () => {
+    const handleTrashcanClick = (evt: any) => {
+        evt.stopPropagation();
         if(!isEditing) return;
         setIsDeletionModalOpen(true);
     }
@@ -44,15 +48,10 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
     const handleMessageDeleteWrapper = () => {
         handleMessageDelete(id);
     }
-
-    const hoverCursor = () => {
-        if (isEditing) return " cursor-default";
-        return " cursor-pointer";
-    }
     
     return (
         <>
-            <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col gap-4 max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]" + hoverCursor()} onClick={handleCardClick}>
+            <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col gap-4 cursor-pointer max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]"} onClick={handleCardClick}>
                 <div className="pb-4 border-solid border-b border-[#EEEEEE] flex justify-between">
                     <SenderInfo message={message} />
                     {isEditing && <TrashcanButton onClick={handleTrashcanClick} />}
@@ -61,13 +60,17 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
                 <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
             </div>
             {isMessageModalOpen && createPortal(
-                    <MessageModal message={message} setIsMessageModalOpen={setIsMessageModalOpen} />,
-                    document.body
-                )}
+                <MessageModal message={message} setIsMessageModalOpen={setIsMessageModalOpen} />,
+                document.body
+            )}
             {(isDeletionModalOpen) && createPortal(
-                    <DeletionConfirmModal handleModalOpen={setIsDeletionModalOpen} handleDelete={handleMessageDeleteWrapper} />,
-                    document.body
-                )}
+                <DeletionConfirmModal handleModalOpen={setIsDeletionModalOpen} handleDelete={handleMessageDeleteWrapper} />,
+                document.body
+            )}
+            {(isEditModalOpen) && createPortal(
+                <WriteModal id={id} />,
+                document.body
+            )}
         </>
     )
 }
