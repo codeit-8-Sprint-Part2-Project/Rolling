@@ -6,13 +6,13 @@ import { getByReactions } from "../../api/getByReactions";
 import { ReactionCreate } from "../../../../DTO/reaction/ReactionCreate";
 
 function ToEmojiCount() {
-  const { productid } = useParams();
+  const { recipientId } = useParams();
   const [data, setData] = useState<ReactionCreate | null>(null);
 
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const params = productid ? { productid } : {};
+        const params = recipientId ? { recipientId } : {};
         const Counts = await getByReactions(params);
 
         setData(Counts);
@@ -22,7 +22,7 @@ function ToEmojiCount() {
     };
 
     fetchCount();
-  }, [productid]);
+  }, [recipientId]);
 
   if (!data) {
     return <p>총 이모티콘을 불러오지 못했습니다.</p>;
@@ -31,7 +31,7 @@ function ToEmojiCount() {
   const displayedEmojis = data?.results?.slice(0, 3);
 
   const onEmojiadded = async (emoji: string) => {
-    const Counts = await getByReactions({ productid });
+    const Counts = await getByReactions({ recipientId });
     setData(Counts);
   };
 
