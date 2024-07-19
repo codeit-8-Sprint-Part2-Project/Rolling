@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface PostNavContainerProps {
   children: ReactNode;
@@ -6,11 +6,11 @@ interface PostNavContainerProps {
   justifyName?: string;
 }
 
-const PostNavContainer: React.FC<PostNavContainerProps> = ({
+const PostNavContainer = ({
   children,
   className = "",
   justifyName = "",
-}) => {
+}: PostNavContainerProps): ReactElement => {
   return (
     <div
       className={`border-b border-solid border-[#ededed] h-[52px] md:h-[68px] flex items-center px-6 ${className}`}
