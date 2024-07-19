@@ -12,7 +12,7 @@ const InputSenderSection: React.FC<InputSenderProps> = ({ sender, onSenderChange
     const value = e.target.value;
     onSenderChange(value);
     if (value.trim().length === 0) {
-      setSenderError('받는 사람 이름을 입력해주세요.');
+      setSenderError('이름을 입력해주세요.');
     } else {
 
       setSenderError('');
@@ -25,7 +25,7 @@ const InputSenderSection: React.FC<InputSenderProps> = ({ sender, onSenderChange
       <input
         type="text"
         value={sender}
-        placeholder="받는 사람 이름을 입력해주세요"
+        placeholder="이름을 입력해주세요"
         onChange={handleSenderChange}
         className={`py-3 px-4 rounded-lg outline outline-1 ${
           senderError
