@@ -2,14 +2,14 @@ import React, { ReactNode } from "react";
 
 interface PostNavContainerProps {
   children: ReactNode;
-  className: string;
-  justifyName: string;
+  className?: string;
+  justifyName?: string;
 }
 
 const PostNavContainer: React.FC<PostNavContainerProps> = ({
   children,
-  className,
-  justifyName,
+  className = "",
+  justifyName = "",
 }) => {
   return (
     <div

@@ -46,7 +46,7 @@ function ToMessageCount() {
       : 0;
 
   return (
-    <div className="hidden items-center gap-[11px] pr-[28px] min-1155:flex">
+    <div className="hidden items-center gap-[11px] pr-7 min-1155:flex">
       <div
         className="flex items-center relative"
         style={{ width: `${((displayedProfiles?.length || 0) - 1) * 24}px` }}
@@ -54,7 +54,7 @@ function ToMessageCount() {
         {displayedProfiles?.map((profile, index) => (
           <img
             key={profile.id}
-            className="border border-solid border-[#ffffff] border-[1.4px] absolute"
+            className="border-solid border-white border-[1.4px] absolute"
             src={profile.profileImageURL}
             alt="이모지 보낸 사람들 프로필사진"
             width="24px"
@@ -70,7 +70,7 @@ function ToMessageCount() {
 
       {countsProfiles > 0 && (
         <div
-          className="w-[24px] h-[24px] border border-solid border-[#e3e3e3] rounded-full font-pretendard font-[500] text-[#484848] text-[12px]"
+          className="w-6 h-6 border border-solid border-[#e3e3e3] rounded-full font-pretendard font-[500] text-[#484848] text-[12px]"
           style={{
             left: `${(displayedProfiles?.length || 0) * 15}px`,
             zIndex: `${(displayedProfiles?.length || 0) * 2}}`,
@@ -80,7 +80,7 @@ function ToMessageCount() {
         </div>
       )}
       <p className="font-pretendard font-[400] text-[18px] text-[#181818]">
-        <span className="font-[700]">{data.recentMessages?.length}</span>명이
+        <span className="font-bold">{data.recentMessages?.length}</span>명이
         작성했어요!
       </p>
     </div>

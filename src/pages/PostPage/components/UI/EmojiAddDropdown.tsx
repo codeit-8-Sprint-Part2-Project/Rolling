@@ -105,8 +105,7 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken":
-              "cMrDN6scAovJZnyjsmRlPqlWgHxn6RcG5aPP0i5ECbnDn8s04GQsqPBWDSyvnNsy",
+            "X-CSRFToken": process.env.REACT_APP_CSRF_TOKEN ?? "",
           },
           body: JSON.stringify({
             emoji: emoji,
@@ -125,12 +124,12 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="px-[8px] md:px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] font-pretendard font-[500] text-[16px] text-[#181818] flex gap-[4px]"
+        className="px-2 md:px-4 py-[6px] border border-solid border-[#cccccc] rounded-md font-pretendard font-[500] text-[16px] text-[#181818] flex gap-1"
       >
         <img
           src={IconAdd}
           alt="이모지 추가 버튼"
-          className="min-w-[20px] min-h-[20px] md:w-[24px] md:h-[24px]"
+          className="w-5 h-5 md:w-6 md:h-6"
         />
         <p className="hidden md:block">추가</p>
       </button>

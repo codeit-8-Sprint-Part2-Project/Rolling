@@ -1,10 +1,10 @@
-import React from "react";
+import { ReactElement } from "react";
 import NavLogo from "../UI/NavLogo";
 import NavButton from "../UI/NavButton";
 import NavContainer from "../UI/NavContainer";
 import { useLocation } from "react-router-dom";
 
-const Header: React.FC = () => {
+const Header = (): ReactElement => {
   const location = useLocation();
 
   const isListorHomePage =
