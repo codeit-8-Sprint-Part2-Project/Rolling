@@ -49,6 +49,9 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
     const handleMessageDeleteWrapper = () => {
         handleMessageDelete(id);
     }
+
+    const font: string = message.font.toLowerCase();
+    const fontClass: string = `font-[${font}]`;
     
     return (
         <>
@@ -57,7 +60,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
                     <SenderInfo message={message} />
                     {isEditing && <TrashcanButton onClick={handleTrashcanClick} />}
                 </div>
-                <div className="truncate grow">
+                <div className={fontClass + " truncate grow mb-4"}>
                     <MessageContent rawString={message.content} />
                 </div>
                 <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
