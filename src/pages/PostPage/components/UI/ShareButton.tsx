@@ -83,7 +83,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
       </button>
 
       {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
+        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-85px] md:left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
