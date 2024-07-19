@@ -26,9 +26,7 @@ const AllRecipient: React.FC = () => {
     return (
         <div className="max-w-[1201px] mx-auto">
             <div>
-                <div className="flex-grow-3 flex-shrink-0 basis-0">
-                    <h2 className="font-bold text-2xl">최근에 만든 롤링 페이퍼 ⭐️️</h2>
-                </div>
+                <h2 className="mt-[20px] mb-[5px] flex-grow-3 flex-shrink-0 basis-0 font-bold text-2xl" style={{ marginLeft: window.innerWidth <= 1220 ? '20px' : 'auto' }}>최근에 만든 롤링 페이퍼 ⭐️️</h2>
             </div>
 
             {isLoading ? (

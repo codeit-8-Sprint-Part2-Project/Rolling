@@ -89,11 +89,14 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
         <div className="relative">
             {currentIndex > 0 && (
                 <button
-                    className="rounded-full absolute top-1/2 left-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
-                    onClick={prevSlide}
-                >
-                    {"<"}
-                </button>
+    className="w-[40px] h-[40px] rounded-full absolute top-1/2 left-[-5px] transform -translate-y-1/2 bg-[rgba(255,255,255,0.9)] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.08)] border border-gray-300 flex items-center justify-center cursor-pointer z-10"
+    onClick={prevSlide}
+>
+    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.46154 13L1 7L7.46154 1" stroke="#101010" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+</button>
+
             )}
             <div className="overflow-hidden w-full">
                 <div
@@ -117,10 +120,13 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
             </div>
             {currentIndex < maxIndex && (
                 <button
-                    className="rounded-full absolute top-1/2 right-0 transform -translate-y-1/2 bg-white border border-gray-300 px-3 py-1 cursor-pointer z-10"
+                    className="w-[40px] h-[40px] rounded-full right-[-5px] absolute top-1/2 right-0 transform -translate-y-1/2 bg-[rgba(255,255,255,0.9)] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.08)] border border-gray-300 px-3 py-1 cursor-pointer z-10"
                     onClick={nextSlide}
                 >
-                    {">"}
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.53846 14L12 8L5.53846 2" stroke="#101010" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
                 </button>
             )}
         </div>
