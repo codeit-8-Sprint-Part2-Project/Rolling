@@ -41,7 +41,7 @@ const MessagePage: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-12 mb-20">
       <div className="flex flex-col w-full max-w-[720px] gap-12">
         <InputSenderSection
           sender={sender}
