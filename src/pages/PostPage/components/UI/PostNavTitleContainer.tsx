@@ -1,12 +1,12 @@
-import React, { ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 
 interface PostNavTitleContainerProps {
   children: ReactNode;
 }
 
-const PostNavTitleContainer: React.FC<PostNavTitleContainerProps> = ({
+const PostNavTitleContainer = ({
   children,
-}) => {
+}: PostNavTitleContainerProps): ReactElement => {
   return <div className="flex items-center justify-end">{children}</div>;
 };
 

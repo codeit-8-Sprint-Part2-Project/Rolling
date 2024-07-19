@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface TitleLineProps {
   children: ReactNode;
 }
 
-const TitleLine: React.FC<TitleLineProps> = ({ children }) => {
+const TitleLine = ({ children }: TitleLineProps): ReactElement => {
   return <span className="inline min-1155:block">{children}</span>;
 };
 

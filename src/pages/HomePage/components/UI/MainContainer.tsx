@@ -1,11 +1,14 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface MainContainerProps {
   children: ReactNode;
   reverse?: boolean;
 }
 
-const MainContainer: React.FC<MainContainerProps> = ({ children, reverse }) => {
+const MainContainer = ({
+  children,
+  reverse,
+}: MainContainerProps): ReactElement => {
   return (
     <div
       className={`${

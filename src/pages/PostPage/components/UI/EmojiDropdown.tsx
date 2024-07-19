@@ -30,9 +30,9 @@ function EmojiDropdown({ data }: { data: ReactionCreate | null }) {
       </button>
 
       {isDropdownVisible && (
-        <div className="max-w-[214px] md:max-w-[344px] flex flex-wrap gap-[10px] rounded-[8px] border border-[#b6b6b6] shadow-custom p-[12px] md:p-[24px] bg-[#ffffff] absolute top-[40px] md:left-[-60px]">
+        <div className="max-w-[226px] md:max-w-[344px] flex flex-wrap gap-2.5 rounded-lg border border-[#b6b6b6] shadow-custom p-3 md:p-6 bg-white absolute top-10 md:left-[-60px]">
           {displayedEmojis?.map((emoji) => (
-            <ul className="flex gap-[8px] md:gap-[2px] min-w-[56px] md:min-w-[66px] rounded-[32px] px-[8px] py-[4px] md:px-[12px] md:py-[8px] bg-black/50 font-pretendard font-[400] text-[14px] md:text-[16px] text-[#ffffff] justify-center items-center">
+            <ul className="flex gap-2 md:gap-0.5 min-w-[60px] md:min-w-[66px] rounded-[32px] px-2 py-1 md:px-3 md:py-2 bg-black/50 font-pretendard font-[400] text-[14px] md:text-base text-white justify-center items-center">
               <li>{emoji.emoji}</li>
               <li>{emoji.count}</li>
             </ul>

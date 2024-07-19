@@ -1,11 +1,11 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 interface TitleButtonProps {
   children: ReactNode;
 }
 
-const TitleButton: React.FC<TitleButtonProps> = ({ children }) => {
+const TitleButton = ({ children }: TitleButtonProps): ReactElement => {
   return (
     <div className="container mx-auto max-w-[1200px] text-center mb-[150px]">
       <Link to="/list">

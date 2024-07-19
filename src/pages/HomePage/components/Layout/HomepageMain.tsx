@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import BodyContainer from "../UI/BodyContainer";
 import MainContainer from "../UI/MainContainer";
 import TitleContainer from "../UI/TitleContainer";
@@ -10,7 +10,7 @@ import HomepageNotLogin from "../../assets/images/HomepageNotLogin.png";
 import HomepageAddEmoji from "../../assets/images/HomepageAddEmoji.png";
 import TitleLine from "../UI/TitleLine";
 
-const HomepageMain: React.FC = () => {
+const HomepageMain = (): ReactElement => {
   return (
     <div className="px-6">
       <BodyContainer>

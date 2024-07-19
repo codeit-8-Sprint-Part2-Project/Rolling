@@ -1,10 +1,12 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface TitleHeadContentesProps {
   children: ReactNode;
 }
 
-const TitleHeadContents: React.FC<TitleHeadContentesProps> = ({ children }) => {
+const TitleHeadContents = ({
+  children,
+}: TitleHeadContentesProps): ReactElement => {
   return (
     <h2 className="font-pretendard text-[24px] text-[#181818] font-bold">
       {children}

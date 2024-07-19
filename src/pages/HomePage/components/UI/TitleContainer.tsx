@@ -1,14 +1,14 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface TitleContainerProps {
   children: ReactNode;
   reverse?: boolean;
 }
 
-const TitleContainer: React.FC<TitleContainerProps> = ({
+const TitleContainer = ({
   children,
   reverse,
-}) => {
+}: TitleContainerProps): ReactElement => {
   return (
     <div
       className={`${
