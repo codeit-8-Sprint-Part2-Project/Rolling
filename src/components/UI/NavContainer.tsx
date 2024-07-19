@@ -1,11 +1,14 @@
-import React, { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 interface NavContainerProps {
   children: ReactNode;
   className: string;
 }
 
-const NavContainer: React.FC<NavContainerProps> = ({ children, className }) => {
+const NavContainer = ({
+  children,
+  className,
+}: NavContainerProps): ReactElement => {
   return (
     <div
       className={`flex border-b border-solid border-[#ededed] h-16 items-center px-6 ${className}`}

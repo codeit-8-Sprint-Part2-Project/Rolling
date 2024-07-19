@@ -20,7 +20,7 @@ interface Recipient {
   topReactions?: string;
 }
 
-const ToNameContent: React.FC<ToNameContentProps> = ({ className }) => {
+const ToNameContent: React.FC<ToNameContentProps> = ({ className = "" }) => {
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
 
