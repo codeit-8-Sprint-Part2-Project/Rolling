@@ -64,7 +64,7 @@ const SlideButton: React.FC<{ direction: 'prev' | 'next', onClick: () => void }>
 };
 
 const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1220);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const cardsToShow = 4;
@@ -74,17 +74,28 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 1220);
+            const wasMobile = isMobile;
+            const isNowMobile = window.innerWidth < 1220;
+            if (wasMobile !== isNowMobile) {
+                localStorage.setItem('reloaded', 'true');
+                window.location.reload();
+            }
+            setIsMobile(isNowMobile);
         };
 
-        handleResize();
+        if (localStorage.getItem('reloaded') === 'true') {
+            localStorage.removeItem('reloaded');
+        } else {
+            handleResize();
+        }
+
         window.addEventListener('resize', handleResize);
         
         // 컴포넌트가 마운트된 후 애니메이션 시작
         setIsLoaded(true);
 
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [isMobile]);
 
     const prevSlide = () => {
         setCurrentIndex((prev) => Math.max(prev - cardsToShow, 0));

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Dropdown, { DropdownOption } from "./Dropdown";
+import React, { useState } from 'react';
+import Dropdown, { DropdownOption } from './Dropdown';
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 
@@ -19,10 +19,10 @@ const RelationshipSelectSection: React.FC<RelationshipSelectSectionProps> = ({
   );
 
   const options: DropdownOption[] = [
-    { label: "친구", value: "친구" },
-    { label: "지인", value: "지인" },
-    { label: "동료", value: "동료" },
-    { label: "가족", value: "가족" },
+    { label: '친구', value: '친구' },
+    { label: '지인', value: '지인' },
+    { label: '동료', value: '동료' },
+    { label: '가족', value: '가족' },
   ];
 
   const handleOptionSelect = (option: DropdownOption) => {
