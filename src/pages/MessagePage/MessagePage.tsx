@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputProfileSection from "./components/InputProfileSection";
 import RelationshipSelectSection from "./components/RelationshipSelectSection";
 import FontSelectSection from "./components/FontSelectSection";
@@ -39,6 +39,13 @@ const MessagePage: React.FC = () => {
       [key]: value,
     }))
   }
+
+  useEffect(() => {
+    setFormData((prev: SubmitFormType) => ({
+      ...prev,
+      recipientId: +recipientId,
+    }))
+  }, []);
   
   const [sender, setSender] = useState<string>('');
 
@@ -49,20 +56,24 @@ const MessagePage: React.FC = () => {
   const [relationship, setRelationship] = useState<RelationShip>("지인");
   
   const handleRelationshipChange = (newRelationship: RelationShip) => {
-    setRelationship(newRelationship);
+    changeFormData("relationship", newRelationship);
   };
 
   const [body, setBody] = React.useState('');
 
-  const handleToastEditorChange = (value: string) => {
-    setBody(value);
+  const handleToastEditorChange = (newContent: string) => {
+    changeFormData("content", newContent);
   };
 
   const [font, setFont] = useState<Font>("Noto Sans");
   
   const handleFontChange = (newFont: Font) => {
-    setFont(newFont);
+    changeFormData("font", newFont);
   };
+
+  const handleProfileImageChange = (newUrl: string) => {
+    changeFormData("profileImageURL", newUrl);
+  }
 
   const handleImageUpload = (imageUrl: string) => {
     console.log("Uploaded image URL:", imageUrl);
