@@ -5,6 +5,7 @@ import FontSelectSection from "./components/FontSelectSection";
 import InputSenderSection from "./components/InputSenderSection";
 import ToastEditor from "./components/ToastEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
+import { useParams } from "react-router-dom";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
@@ -12,6 +13,8 @@ type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "
 
 const MessagePage: React.FC = () => {
 
+  const { recipientId } = useParams() as { recipientId: string };
+  
   const [sender, setSender] = useState<string>('');
 
   const handleSenderChange = (newSender: string) => {
@@ -62,7 +65,7 @@ const MessagePage: React.FC = () => {
           selectedFont={font}
           onFontChange={handleFontChange}
         />
-        <MessagePageButtons />
+        <MessagePageButtons recipientId={recipientId} />
       </div>
     </div>
   );
