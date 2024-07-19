@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { ThemePreviewProps } from "../constants/propTypes";
 import { getColorClass } from "../utils/getColorClass";
 import PreviewPlusCard from "./UI/PreviewPlusCard";
+import CloseButton from "./UI/CloseButton";
 
 interface ExtendedThemePreviewProps extends ThemePreviewProps {
   isThemeType: boolean;
@@ -74,12 +75,7 @@ const ThemePreview: React.FC<ExtendedThemePreviewProps> = ({ themeData }) => {
               <PreviewPlusCard />
             </main>
           </div>
-          <button
-            onClick={handleCloseModal}
-            className="w-full mt-4 p-2 bg-violet-500 text-white rounded"
-          >
-            닫기
-          </button>
+          <CloseButton handleCloseModal={handleCloseModal} />
         </div>
       </Modal>
     </>
