@@ -4,6 +4,7 @@ import { ThemePreviewProps } from "../constants/propTypes";
 import { getColorClass } from "../utils/getColorClass";
 import PreviewPlusCard from "./UI/PreviewPlusCard";
 import CloseButton from "./UI/CloseButton";
+import PreviewButton from "./UI/PreviewButton";
 
 interface ExtendedThemePreviewProps extends ThemePreviewProps {
   isThemeType: boolean;
@@ -35,16 +36,10 @@ const ThemePreview: React.FC<ExtendedThemePreviewProps> = ({ themeData }) => {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleOpenModal}
-        className={`absolute right-0 w-[140px] h-full max-md:w-[122px] rounded-sm ${
-          isDisabled ? "bg-gray-200" : "bg-violet-500 text-white"
-        }`}
-        disabled={isDisabled}
-      >
-        미리 보기
-      </button>
+      <PreviewButton
+        handleOpenModal={handleOpenModal}
+        isDisabled={isDisabled}
+      />
       <Modal
         isOpen={isOpen}
         onRequestClose={handleCloseModal}
