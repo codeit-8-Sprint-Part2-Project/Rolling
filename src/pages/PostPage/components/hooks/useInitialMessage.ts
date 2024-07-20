@@ -12,7 +12,7 @@ const INITIAL_FORM_VALUES: MessageCreate = {
     font: "Noto Sans",
 }
 
-function useInitialMessage(message?: MessageRetrieve) {
+function useInitialMessage(message?: MessageRetrieve | undefined) {
     const initialForm: MessageCreate = message
         ? {
             team:"8-1",
@@ -29,7 +29,7 @@ function useInitialMessage(message?: MessageRetrieve) {
         ? convertFromRaw(JSON.parse(message.content))
         : EditorState.createEmpty().getCurrentContent();
 
-    return {initialForm, initialContent};
+    return { initialForm, initialContent };
 }
 
 export default useInitialMessage;

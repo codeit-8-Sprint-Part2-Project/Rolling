@@ -1,5 +1,5 @@
-import React, { SetStateAction, useState } from "react";
-import { EditorState } from "draft-js";
+import React, { SetStateAction, useEffect, useState } from "react";
+import { convertToRaw, EditorState } from "draft-js";
 import WriteModalButtons from "./WriteModalButtons";
 import { MessageCreate } from "../../../DTO/message/MessageCreate";
 import WriteModalSender from "./WriteModalSender";
@@ -9,6 +9,7 @@ import TextEditor from "../../MessagePage/components/TextEditor";
 import FontSelectSection from "../../MessagePage/components/FontSelectSection";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import useInitialMessage from "./hooks/useInitialMessage";
+import useSubmitMethodPicker from "./hooks/useSubmitMethodPicker";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";
@@ -22,6 +23,7 @@ type props = {
 function WriteModal({ recipientId, handleModalOpen, message }: props) {
 
     const { initialForm, initialContent } = useInitialMessage(message);
+    const { isPostPending, handleSubmit } = useSubmitMethodPicker(message);
     
     const [editorState, setEditorState] = useState<EditorState>(() => EditorState.createWithContent(initialContent));
     const [formData, setFormData] = useState<MessageCreate>(initialForm);
@@ -38,10 +40,37 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
     const handleRelationshipChange = (newRelationship: RelationShip) => handleFormChange("relationship", newRelationship);
     const handleFontChange = (newFont: Font) => handleFormChange("font", newFont);
 
+    const submitId = message
+        ? message.id.toString()
+        : recipientId.toString();
+    
     const handleBackButtonClick = (evt: any) => {
         evt.preventDefault();
         handleModalOpen(false);
     }
+
+    const handleSubmitButtonClick = (evt: any) => {
+        evt.preventDefault();
+
+        const isFormValid = formData.recipientId && formData.sender && editorState.getCurrentContent().hasText();
+        if(!isFormValid) {
+            alert("유효성 이슈");
+            return;
+        }
+
+        handleSubmit(submitId, formData);
+        handleModalOpen(false);
+    }
+
+    useEffect(() => {
+        const textContent = editorState.getCurrentContent();
+        const rawContent = convertToRaw(textContent);
+        const stringified = JSON.stringify(rawContent);
+        setFormData((prev) => ({
+        ...prev,
+        content: stringified,
+        }))
+    }, [editorState]);
 
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard">
@@ -51,7 +80,7 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
                 <RelationshipSelectSection selectedRelationship={formData.relationship} onRelationshipChange={handleRelationshipChange} />
                 <TextEditor editorState={editorState} onChange={setEditorState} />
                 <FontSelectSection selectedFont={formData.font} onFontChange={handleFontChange} />
-                <WriteModalButtons handleBackButtonClick={handleBackButtonClick} />
+                <WriteModalButtons handleSubmitButtonClick={handleSubmitButtonClick} handleBackButtonClick={handleBackButtonClick} />
             </form>
         </div>
     )
