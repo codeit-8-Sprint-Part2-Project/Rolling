@@ -4,6 +4,7 @@ import { EditorState } from "draft-js";
 import WriteModalButtons from "./WriteModalButtons";
 import { MessageCreate } from "../../../DTO/message/MessageCreate";
 import WriteModalSender from "./WriteModalSender";
+import InputProfileSection from "../../MessagePage/components/InputProfileSection";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";
@@ -36,6 +37,7 @@ function WriteModal({ recipientId, handleModalOpen }: props) {
     }
 
     const handleSenderChange = (newSender: string) => handleFormChange("sender", newSender);
+    const handleProfileImageChange = (newUrl: string) => handleFormChange("profileImageURL", newUrl);
 
     const handleBackButtonClick = (evt: any) => {
         evt.preventDefault();
@@ -44,8 +46,9 @@ function WriteModal({ recipientId, handleModalOpen }: props) {
 
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard">
-            <form className="w-[48rem] h-[56rem] bg-white rounded-2xl p-8 flex flex-col gap-[3.125rem] relative">
+            <form className="w-[48rem] h-[56rem] bg-white rounded-2xl p-8 flex flex-col gap-[3.125rem]">
                 <WriteModalSender sender={formData.sender} handleSenderChange={handleSenderChange} />
+                <InputProfileSection profileImageURL={formData.profileImageURL} onProfileImageChange={handleProfileImageChange} />
                 <MyEditor editorState={editorState} onChange={setEditorState} />
                 <WriteModalButtons handleBackButtonClick={handleBackButtonClick} />
             </form>

@@ -15,7 +15,7 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ profileImageU
     } else if (profileImages && profileImages.imageUrls.length > 0) {
       return profileImages.imageUrls[0];
     } else {
-      return 'Rolling/src/assets/images/defaultProfileImage.png';
+      return "'Rolling/src/assets/images/defaultProfileImage.png'";
     }
   };
   
@@ -33,7 +33,10 @@ const InputProfileSection: React.FC<InputProfileSectionProps> = ({ profileImageU
                 <button
                   key={index}
                   className="rounded-full"
-                  onClick={() => onProfileImageChange(imageUrl)}
+                  onClick={(evt:any) => {
+                    evt.preventDefault();
+                    onProfileImageChange(imageUrl);
+                  }}
                 >
                   <img src={imageUrl} alt="URL 프로필 이미지" className="w-14 h-14 rounded-full" />
                 </button>
