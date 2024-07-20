@@ -21,9 +21,9 @@ const INITIAL_MESSAGE_VALUE: MessageRetrieve = {
 }
 
 type props = {
-    message: MessageRetrieve;
-    isEditing?: boolean;
-    handleMessageDelete?: (messageId: number) => void;
+    message: MessageRetrieve,
+    isEditing?: boolean,
+    handleMessageDelete?: (messageId: number) => void,
 }
 
 function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handleMessageDelete = () => {return} }: props) {
