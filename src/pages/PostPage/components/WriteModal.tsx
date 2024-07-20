@@ -72,15 +72,38 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
         }))
     }, [editorState]);
 
+    const pendingOpacityClass = isPostPending ? "opacity-50 " : '';
+
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard">
-            <form className="w-[48rem] h-[56rem] bg-white rounded-2xl p-8 flex flex-col gap-[3.125rem] overflow-y-scroll">
-                <WriteModalSender sender={formData.sender} handleSenderChange={handleSenderChange} />
-                <InputProfileSection profileImageURL={formData.profileImageURL} onProfileImageChange={handleProfileImageChange} />
-                <RelationshipSelectSection selectedRelationship={formData.relationship} onRelationshipChange={handleRelationshipChange} />
-                <TextEditor editorState={editorState} onChange={setEditorState} />
-                <FontSelectSection selectedFont={formData.font} onFontChange={handleFontChange} />
-                <WriteModalButtons handleSubmitButtonClick={handleSubmitButtonClick} handleBackButtonClick={handleBackButtonClick} />
+            <form className={pendingOpacityClass + "w-[48rem] h-[56rem] bg-white rounded-2xl p-8 flex flex-col gap-[3.125rem] overflow-y-scroll"}>
+                <fieldset disabled={isPostPending}>
+                    <WriteModalSender
+                        sender={formData.sender}
+                        handleSenderChange={handleSenderChange}
+                    />
+                    <InputProfileSection
+                        profileImageURL={formData.profileImageURL}
+                        onProfileImageChange={handleProfileImageChange}
+                    />
+                    <RelationshipSelectSection
+                        selectedRelationship={formData.relationship}
+                        onRelationshipChange={handleRelationshipChange}
+                    />
+                    <TextEditor
+                        editorState={editorState}
+                        onChange={setEditorState}
+                    />
+                    <FontSelectSection
+                        selectedFont={formData.font}
+                        onFontChange={handleFontChange}
+                    />
+                    <WriteModalButtons
+                        handleSubmitButtonClick={handleSubmitButtonClick}
+                        handleBackButtonClick={handleBackButtonClick}
+                        isPostPending={isPostPending}
+                    />
+                </fieldset>
             </form>
         </div>
     )
