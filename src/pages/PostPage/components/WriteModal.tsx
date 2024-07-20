@@ -76,7 +76,7 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
 
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard">
-            <form className={pendingOpacityClass + "w-[48rem] h-[56rem] bg-white rounded-2xl p-8 overflow-y-scroll"}>
+            <form className={pendingOpacityClass + "w-[52rem] h-[56rem] border-4 border-solid border-[#CCCCCC] bg-white p-8 overflow-y-scroll"}>
                 <fieldset disabled={isPostPending} className="flex flex-col gap-[3.125rem]">
                     <WriteModalSender
                         sender={formData.sender}
