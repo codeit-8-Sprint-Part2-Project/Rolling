@@ -74,7 +74,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
                 document.body
             )}
             {(isEditModalOpen) && createPortal(
-                <WriteModal id={id} />,
+                <WriteModal recipientId={id} handleModalOpen={setIsEditModalOpen} />,
                 document.body
             )}
         </>
