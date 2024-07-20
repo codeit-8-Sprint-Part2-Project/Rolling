@@ -79,7 +79,7 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
 
     return (
         <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard" onClick={handleShadowClick}>
-            <form className={pendingOpacityClass + "w-[52rem] h-[56rem] border-4 border-solid border-[#CCCCCC] bg-white p-8 overflow-y-scroll"} onClick={handleBoxClick}>
+            <form className={pendingOpacityClass + "w-[52rem] h-[56rem] border-4 border-solid border-[#CCCCCC] bg-white p-8 overflow-y-scroll max-md:h-full max-md:w-full max-md:px-4"} onClick={handleBoxClick}>
                 <fieldset disabled={isPostPending} className="flex flex-col gap-[3.125rem]">
                     <WriteModalSender
                         sender={formData.sender}
