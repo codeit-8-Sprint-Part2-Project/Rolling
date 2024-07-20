@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 
 type props = {
     recipientId: string,
-    handlePost: () => void,
+    handleSubmitClick: () => void,
 }
 
-function MessagePageButtons({ recipientId, handlePost }: props) {
+function MessagePageButtons({ recipientId, handleSubmitClick }: props) {
 
     const navigate = useNavigate();
     
-    const handleBackButtonClick = (evt:any) => {
+    const handleBackButtonClick = (evt: any) => {
         evt.preventDefault();
         navigate(`/post/${recipientId}`);
     }
@@ -18,7 +18,7 @@ function MessagePageButtons({ recipientId, handlePost }: props) {
         <div className="flex gap-4 w-full my-3">
             <button
                 className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE]"
-                onClick={handlePost}
+                onClick={handleSubmitClick}
             >
                 생성하기
             </button>

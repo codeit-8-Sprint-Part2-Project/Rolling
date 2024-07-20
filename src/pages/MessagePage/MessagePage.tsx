@@ -9,6 +9,8 @@ import ToastEditor from "./components/ToastEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
 import { MessageCreate } from "../../DTO/message/MessageCreate";
 import { postMessage } from "../PostPage/api/api";
+import { createPortal } from "react-dom";
+import LazyLoading from "../PostPage/components/LazyLoading";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";
@@ -50,10 +52,6 @@ const MessagePage: React.FC = () => {
     changeFormData("relationship", newRelationship);
   };
 
-  const handleToastEditorChange = (newContent: string) => {
-    changeFormData("content", newContent);
-  };
-
   const handleFontChange = (newFont: Font) => {
     changeFormData("font", newFont);
   };
@@ -62,14 +60,9 @@ const MessagePage: React.FC = () => {
     changeFormData("profileImageURL", newUrl);
   }
 
-  const isFormValid = formData.recipientId && formData.sender && formData.content;
-
-  const handlePost = async () => {
-    const textContent = editorState.getCurrentContent();
-    const rawContent = convertToRaw(textContent);
-    const stringified = JSON.stringify(rawContent);
-    handleToastEditorChange(stringified);
-
+  const handleSubmit = async () => {
+    const isFormValid = formData.recipientId && formData.sender && formData.content;
+    
     if(!isFormValid) {
       alert("유효성 이슈");
       return;
@@ -82,40 +75,59 @@ const MessagePage: React.FC = () => {
       alert(`handlePost에서 발생한 오류: ${error.message}`);
     } finally {
       setIsPostPending(false);
+      navigate(`/post/${recipientId}`)
     }
-
-    navigate(`/post/${recipientId}`)
   }
 
+  const handleSubmitClick = () => {
+    handleSubmit();
+  }
+
+  useEffect(() => {
+    const textContent = editorState.getCurrentContent();
+    const rawContent = convertToRaw(textContent);
+    const stringified = JSON.stringify(rawContent);
+    setFormData((prev) => ({
+      ...prev,
+      content: stringified,
+    }))
+  }, [editorState]);
+
   return (
-    <div className="flex justify-center mt-12 mb-20">
-      <div className="flex flex-col w-full max-w-[720px] gap-12">
-        <InputSenderSection
-          sender={formData.sender}
-          onSenderChange={handleSenderChange}
-        />
-        <InputProfileSection 
-          profileImageURL={formData.profileImageURL}
-          onProfileImageChange={handleProfileImageChange}
-        />
-        <RelationshipSelectSection
-          selectedRelationship={formData.relationship}
-          onRelationshipChange={handleRelationshipChange}
-        />
-        <ToastEditor
-          editorState={editorState}
-          onChange={setEditorState}
-        />
-        <FontSelectSection
-          selectedFont={formData.font}
-          onFontChange={handleFontChange}
-        />
-        <MessagePageButtons
-          recipientId={recipientId}
-          handlePost={handlePost}
-        />
+    <>
+      <div className="flex justify-center mt-12 mb-20">
+        <div className="flex flex-col w-full max-w-[720px] gap-12">
+          <InputSenderSection
+            sender={formData.sender}
+            onSenderChange={handleSenderChange}
+          />
+          <InputProfileSection 
+            profileImageURL={formData.profileImageURL}
+            onProfileImageChange={handleProfileImageChange}
+          />
+          <RelationshipSelectSection
+            selectedRelationship={formData.relationship}
+            onRelationshipChange={handleRelationshipChange}
+          />
+          <ToastEditor
+            editorState={editorState}
+            onChange={setEditorState}
+          />
+          <FontSelectSection
+            selectedFont={formData.font}
+            onFontChange={handleFontChange}
+          />
+          <MessagePageButtons
+            recipientId={recipientId}
+            handleSubmitClick={handleSubmitClick}
+          />
+        </div>
       </div>
-    </div>
+      {isPostPending && createPortal(
+        <LazyLoading />,
+        document.body
+      )}
+    </>
   );
 };
 
