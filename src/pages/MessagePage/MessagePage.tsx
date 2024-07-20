@@ -61,7 +61,7 @@ const MessagePage: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    const isFormValid = formData.recipientId && formData.sender && formData.content;
+    const isFormValid = formData.recipientId && formData.sender && editorState.getCurrentContent().hasText();
     
     if(!isFormValid) {
       alert("유효성 이슈");

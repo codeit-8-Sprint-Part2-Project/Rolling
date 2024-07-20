@@ -26,7 +26,6 @@ async function deleteRecipient(id:string) {
 
 async function postMessage(recipientId: string, formData: any) {
     const formString = JSON.stringify(formData);
-    console.log(formString);
     
     const response = await fetch(`${BASE_URL}recipients/${recipientId}/messages/`, {
         method: "POST",
