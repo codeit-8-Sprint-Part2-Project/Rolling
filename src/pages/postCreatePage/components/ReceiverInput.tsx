@@ -7,21 +7,30 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
 }) => {
   const [error, setError] = useState<string>("");
 
-  // 네임 필드 조건을 체크하여 에러메세지
+  // 네임 필드 에러메세지
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
-    const forbiddenCharsPattern = /[!@#$%^&*(),.?":{}|<>]/; // 금지된 문자 패턴
+    const invalidCharsPattern = /[!@#$%^&*(),.?":{}|<>]/;
 
-    if (
-      forbiddenCharsPattern.test(value) ||
-      /\s/.test(value) ||
-      value.length > 12
-    ) {
-      setError(
-        "특수문자, 공백을 포함하거나 12글자를 초과한 이름은 사용할 수 없습니다."
-      );
-    } else if (!value) {
+    const errors: string[] = [];
+
+    if (!value) {
       setError("이름을 입력하지 않았습니다.");
+      return; // 다른 조건 체크 중단
+    }
+
+    if (invalidCharsPattern.test(value)) {
+      errors.push("특수문자 포함");
+    }
+    if (/\s/.test(value)) {
+      errors.push("공백 포함");
+    }
+    if (value.length > 8) {
+      errors.push("8글자 초과");
+    }
+
+    if (errors.length > 0) {
+      setError(`조건에 맞는 이름이 아닙니다. : ${errors.join(", ")}`);
     } else {
       setError("");
     }
