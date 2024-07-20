@@ -12,7 +12,6 @@ const ReceiverInput: React.FC<ReceiverInputProps> = ({
     const value = e.target.value.trim();
     const forbiddenCharsPattern = /[!@#$%^&*(),.?":{}|<>]/; // 금지된 문자 패턴
 
-    // 조건 체크
     if (
       forbiddenCharsPattern.test(value) ||
       /\s/.test(value) ||
