@@ -4,9 +4,8 @@ import Dropdown, { DropdownOption } from "./Dropdown";
 type Font =
   | "Noto Sans"
   | "Pretendard"
-  | "나눔 명조"
-  | "나눔손글씨"
-  | "손편지체";
+  | "나눔명조"
+  | "나눔손글씨 손편지체";
 
 interface FontSelectSectionProps {
   selectedFont: string;
@@ -24,9 +23,8 @@ const FontSelectSection: React.FC<FontSelectSectionProps> = ({
   const options: DropdownOption[] = [
     { label: "Noto Sans", value: "Noto Sans" },
     { label: "Pretendard", value: "Pretendard" },
-    { label: "나눔 명조", value: "나눔 명조" },
-    { label: "나눔손글씨", value: "나눔손글씨" },
-    { label: "손편지체", value: "손편지체" },
+    { label: "나눔명조", value: "나눔명조" },
+    { label: "나눔손글씨 손편지체", value: "나눔손글씨 손편지체" },
   ];
 
   const handleOptionSelect = (option: DropdownOption) => {

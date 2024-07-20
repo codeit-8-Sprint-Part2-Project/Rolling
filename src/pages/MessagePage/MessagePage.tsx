@@ -11,7 +11,7 @@ import { MessageCreate } from "../../DTO/message/MessageCreate";
 import { postMessage } from "../PostPage/api/api";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
-type Font = "Noto Sans" | "Pretendard" | "나눔 명조" | "나눔손글씨" | "손편지체";
+type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";
 
 const INITIAL_FORM_VALUES: MessageCreate = {
   team: "8-1",
