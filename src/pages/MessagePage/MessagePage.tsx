@@ -5,7 +5,7 @@ import InputProfileSection from "./components/InputProfileSection";
 import RelationshipSelectSection from "./components/RelationshipSelectSection";
 import FontSelectSection from "./components/FontSelectSection";
 import InputSenderSection from "./components/InputSenderSection";
-import ToastEditor from "./components/ToastEditor";
+import TextEditor from "./components/TextEditor";
 import MessagePageButtons from "./components/MessagePageButtons";
 import { MessageCreate } from "../../DTO/message/MessageCreate";
 import { postMessage } from "../PostPage/api/api";
@@ -109,7 +109,7 @@ const MessagePage: React.FC = () => {
             selectedRelationship={formData.relationship}
             onRelationshipChange={handleRelationshipChange}
           />
-          <ToastEditor
+          <TextEditor
             editorState={editorState}
             onChange={setEditorState}
           />

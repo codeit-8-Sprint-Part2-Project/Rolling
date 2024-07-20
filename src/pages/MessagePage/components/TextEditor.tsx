@@ -7,7 +7,7 @@ interface ToastEditorProps {
   onChange: React.Dispatch<SetStateAction<EditorState>>,
 }
 
-const ToastEditor: React.FC<ToastEditorProps> = ({ editorState, onChange }) => {
+const TextEditor: React.FC<ToastEditorProps> = ({ editorState, onChange }) => {
   
   return (
     <div className="flex flex-col gap-3 w-full">
@@ -17,4 +17,4 @@ const ToastEditor: React.FC<ToastEditorProps> = ({ editorState, onChange }) => {
   );
 };
 
-export default ToastEditor;
+export default TextEditor;
