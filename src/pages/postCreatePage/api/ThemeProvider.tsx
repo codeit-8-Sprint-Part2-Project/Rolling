@@ -8,11 +8,11 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(
 
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [themeData, setThemeData] = useState<any>({
-    team: "", // 초기값 설정
-    // 다른 초기값들 설정
+    team: "8-1",
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+  // 입력 필드의 값을 상태에 업데이트
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setThemeData((prevData: any) => ({
@@ -21,6 +21,7 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }));
   };
 
+  // 특정 옵션을 선택할 때 상태 업데이트
   const handleOptionClick = (optionType: string, value: string) => {
     setThemeData((prevData: any) => ({
       ...prevData,
@@ -28,9 +29,7 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }));
   };
 
-  const handleButtonClick = () => {
-    console.log("Button clicked with themeData:", themeData);
-  };
+  const handleButtonClick = () => {};
 
   return (
     <ThemeContext.Provider
@@ -42,7 +41,7 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setIsButtonDisabled,
         handleButtonClick,
         setThemeData,
-        fetchThemeData: () => {}, // 빈 함수로 정의
+        fetchThemeData: () => {},
       }}
     >
       {children}
