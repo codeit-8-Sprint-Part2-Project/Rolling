@@ -7,29 +7,24 @@ import InputProfileSection from "../../MessagePage/components/InputProfileSectio
 import RelationshipSelectSection from "../../MessagePage/components/RelationshipSelectSection";
 import TextEditor from "../../MessagePage/components/TextEditor";
 import FontSelectSection from "../../MessagePage/components/FontSelectSection";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
+import useInitialMessage from "./hooks/useInitialMessage";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";
 
-const INITIAL_FORM_VALUES: MessageCreate = {
-    team: "8-1",
-    recipientId: 0,
-    sender: '',
-    profileImageURL: "https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png",
-    relationship: "친구",
-    content: '',
-    font: "Noto Sans",
-}
-
 type props = {
     recipientId: number,
-    handleModalOpen: React.Dispatch<SetStateAction<boolean>>;
+    handleModalOpen: React.Dispatch<SetStateAction<boolean>>,
+    message?: MessageRetrieve,
 }
 
-function WriteModal({ recipientId, handleModalOpen }: props) {
+function WriteModal({ recipientId, handleModalOpen, message }: props) {
 
-    const [editorState, setEditorState] = useState<EditorState>(() => EditorState.createEmpty());
-    const [formData, setFormData] = useState<MessageCreate>(INITIAL_FORM_VALUES);
+    const { initialForm, initialContent } = useInitialMessage(message);
+    
+    const [editorState, setEditorState] = useState<EditorState>(() => EditorState.createWithContent(initialContent));
+    const [formData, setFormData] = useState<MessageCreate>(initialForm);
 
     const handleFormChange = (key: string, value: any) => {
         setFormData(prev => ({

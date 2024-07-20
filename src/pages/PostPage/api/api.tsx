@@ -41,4 +41,21 @@ async function postMessage(recipientId: string, formData: any) {
     return result;
 }
 
-export { getRecipient, deleteMessage, deleteRecipient, postMessage };
+async function putMessage(messageId: string, formData: any) {
+    const formString = JSON.stringify(formData);
+    
+    const response = await fetch(`${BASE_URL}messages/${messageId}/`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: formString,
+    })
+
+    if(!response.ok) throw new Error("메시지 수정에 실패했습니다.");
+    const result = await response.json();
+
+    return result;
+}
+
+export { getRecipient, deleteMessage, deleteRecipient, postMessage, putMessage };
