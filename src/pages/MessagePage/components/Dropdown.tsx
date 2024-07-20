@@ -35,7 +35,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
   }, [dropdownRef]);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e: any) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
@@ -50,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <button
           type="button"
           className="inline-flex w-full justify-between rounded-md bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 border border-gray-300"
-          onClick={toggleDropdown}
+          onMouseDown={toggleDropdown}
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
