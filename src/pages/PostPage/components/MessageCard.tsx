@@ -55,7 +55,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
     
     return (
         <>
-            <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col cursor-pointer max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]"} onClick={handleCardClick}>
+            <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col cursor-pointer shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]"} onClick={handleCardClick}>
                 <div className="pb-4 border-solid border-b border-[#EEEEEE] flex justify-between">
                     <SenderInfo message={message} />
                     {isEditing && <TrashcanButton onClick={handleTrashcanClick} />}
