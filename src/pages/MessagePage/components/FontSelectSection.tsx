@@ -8,7 +8,7 @@ type Font =
   | "나눔손글씨 손편지체";
 
 interface FontSelectSectionProps {
-  selectedFont: string;
+  selectedFont: Font;
   onFontChange: (font: Font) => void;
 }
 

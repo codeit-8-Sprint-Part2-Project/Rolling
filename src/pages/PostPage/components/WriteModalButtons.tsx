@@ -5,7 +5,7 @@ type props = {
 function WriteModalButtons({ handleBackButtonClick }: props) {
 
     return (
-        <div className="w-full flex justify-between gap-4 px-8">
+        <div className="w-full flex justify-between gap-4 my-4">
             <button className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE]">
                 보내기
             </button>
