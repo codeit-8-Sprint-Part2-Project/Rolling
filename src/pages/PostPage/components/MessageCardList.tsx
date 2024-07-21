@@ -2,9 +2,9 @@ import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCard from "./MessageCard";
 
 type prop = {
-    recentMessages: MessageRetrieve[];
-    isEditing?: boolean;
-    handleMessageDelete?: (messageId: number) => void;
+    recentMessages: MessageRetrieve[],
+    isEditing?: boolean,
+    handleMessageDelete?: (messageId: number) => void,
 }
 
 function MessageCardList({ recentMessages, isEditing = false, handleMessageDelete }: prop) {

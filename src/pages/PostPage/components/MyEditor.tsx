@@ -16,8 +16,8 @@ function MyEditor({ editorState, onChange }: props) {
 
     return (
         <Editor
-            wrapperClassName="wrapper-class h-[211px]"
-            editorClassName="editor-class px-2 border border-solid border-[#F1F1F1]"
+            wrapperClassName="wrapper-class h-[211px] mb-12"
+            editorClassName="editor-class px-2 border border-solid border-[#F1F1F1] h-[211px]"
             toolbarClassName="toolbar-class"
             editorState={editorState}
             onEditorStateChange={onChange}
