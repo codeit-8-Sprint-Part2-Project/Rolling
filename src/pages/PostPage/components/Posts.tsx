@@ -54,6 +54,10 @@ function Posts({ id }: { id: string }) {
 
     const handleLoad = useCallback (async () => {
         const recipientResponse = await wrappedRequest(getRecipient, id);
+        if (!recipientResponse) {
+            navigate("/list");
+            return;
+        }
         const messagesResponse = await wrappedRequest(getMessages, id);
         setRecipient(recipientResponse);
         setMessages(messagesResponse.results);
