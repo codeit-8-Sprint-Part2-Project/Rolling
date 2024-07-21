@@ -1,11 +1,20 @@
 import { convertFromRaw, Editor, EditorState } from "draft-js";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function MessageContent({ rawString }: { rawString: string }) {
 
-    const parsedString = JSON.parse(rawString);
-    const content = convertFromRaw(parsedString);
-    const [editorState, setEditorState] = useState<EditorState>(EditorState.createWithContent(content));
+    const getContent = useCallback ((rawString: string) => {
+        const parsedString = JSON.parse(rawString);
+        const content = convertFromRaw(parsedString);
+
+        return content;
+    }, [])
+
+    const [editorState, setEditorState] = useState<EditorState>(EditorState.createWithContent(getContent(rawString)));
+
+    useEffect(() => {
+        setEditorState(EditorState.createWithContent(getContent(rawString)));
+    }, [rawString, getContent])
 
     return <Editor editorState={editorState} onChange={setEditorState} readOnly={true} />
 }

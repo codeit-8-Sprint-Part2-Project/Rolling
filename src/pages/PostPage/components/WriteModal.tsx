@@ -18,9 +18,10 @@ type props = {
     recipientId: number,
     handleModalOpen: React.Dispatch<SetStateAction<boolean>>,
     message?: MessageRetrieve,
+    handleAfterSubmit: (formData: MessageCreate) => void;
 }
 
-function WriteModal({ recipientId, handleModalOpen, message }: props) {
+function WriteModal({ recipientId, handleModalOpen, message, handleAfterSubmit }: props) {
 
     const { initialForm, initialContent } = useInitialMessage(message);
     const { isPostPending, handleSubmit } = useSubmitMethodPicker(message);
@@ -59,7 +60,8 @@ function WriteModal({ recipientId, handleModalOpen, message }: props) {
         }
 
         handleSubmit(submitId, formData);
-        window.location.reload();
+        handleAfterSubmit(formData);
+        handleModalOpen(false);
     }
 
     useEffect(() => {
