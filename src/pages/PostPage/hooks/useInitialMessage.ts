@@ -1,6 +1,6 @@
 import { ContentState, convertFromRaw, EditorState } from "draft-js";
-import { MessageCreate } from "../../../../DTO/message/MessageCreate";
-import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
+import { MessageCreate } from "../../../DTO/message/MessageCreate";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 
 const INITIAL_FORM_VALUES: MessageCreate = {
     team: "8-1",

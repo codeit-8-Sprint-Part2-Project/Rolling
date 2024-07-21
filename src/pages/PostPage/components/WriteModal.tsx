@@ -8,8 +8,8 @@ import RelationshipSelectSection from "../../MessagePage/components/Relationship
 import TextEditor from "../../MessagePage/components/TextEditor";
 import FontSelectSection from "../../MessagePage/components/FontSelectSection";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
-import useInitialMessage from "./hooks/useInitialMessage";
-import useSubmitMethodPicker from "./hooks/useSubmitMethodPicker";
+import useInitialMessage from "../hooks/useInitialMessage";
+import useSubmitMethodPicker from "../hooks/useSubmitMethodPicker";
 
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 type Font = "Noto Sans" | "Pretendard" | "나눔명조" | "나눔손글씨 손편지체";

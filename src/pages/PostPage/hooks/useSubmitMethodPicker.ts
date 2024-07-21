@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
-import { putMessage } from "../../api/api";
-import { MessageCreate } from "../../../../DTO/message/MessageCreate";
+import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
+import { putMessage } from "../api/api";
+import { MessageCreate } from "../../../DTO/message/MessageCreate";
 
 function useSubmitMethodPicker(message: MessageRetrieve | undefined) {
     const [isPostPending, setIsPostPending] = useState<boolean>(false);
