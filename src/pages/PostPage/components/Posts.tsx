@@ -61,7 +61,7 @@ function Posts({ id }: { id: string }) {
         const messagesResponse = await wrappedRequest(getMessages, id);
         setRecipient(recipientResponse);
         setMessages(messagesResponse.results);
-    }, [id, wrappedRequest])
+    }, [id, wrappedRequest, navigate])
 
     // 배경색 클래스 string
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
