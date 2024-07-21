@@ -30,7 +30,7 @@ function formatComparedTime(targetTime) {
 
     else if(comparedTime > HOUR) return `${Math.floor(comparedTime / HOUR)}시간 전`;
 
-    else if(comparedTime > MIN) return `${Math.floor(compareTime / MIN)}분 전`;
+    else if(comparedTime > MIN) return `${Math.floor(comparedTime / MIN)}분 전`;
 
     else return "방금 전";
 }

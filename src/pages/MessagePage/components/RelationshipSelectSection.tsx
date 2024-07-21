@@ -4,7 +4,7 @@ import Dropdown, { DropdownOption } from "./Dropdown";
 type RelationShip = "친구" | "지인" | "동료" | "가족";
 
 interface RelationshipSelectSectionProps {
-  selectedRelationship: RelationShip;
+  selectedRelationship: string;
   onRelationshipChange: (relationship: RelationShip) => void;
 }
 

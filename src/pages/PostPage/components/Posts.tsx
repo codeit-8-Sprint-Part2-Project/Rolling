@@ -8,6 +8,7 @@ import LazyLoading from "./LazyLoading";
 import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
 import MainSectionButtons from "./MainSectionButtons";
+import useRequest from "../hooks/useRequest";
 // import WriteModal from "./WriteModal";
 
 export interface Recipient {
@@ -44,17 +45,20 @@ function Posts({ id }: { id: string }) {
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
-    const [isDeletionPending, setIsDeletionPending] = useState<boolean>(false);
     // const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
+
+    const { isPending, wrappedRequest } = useRequest();
 
     const navigate = useNavigate();
 
     const handleLoad = useCallback (async () => {
-        const result = await getRecipient(id);
+        const result = await wrappedRequest(getRecipient, id);
         setRecipient(result);
-    }, [id])
+    }, [id, wrappedRequest])
 
+    // 배경색 클래스 string
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
+    // 상태에 따른 버튼 내용
     const whatsButtonText = () => {
         return isEditing ? "돌아가기" : "수정하기";
     }
@@ -63,15 +67,8 @@ function Posts({ id }: { id: string }) {
     const recentMessages: MessageRetrieve[] = recipient.recentMessages || [];
 
     // 메시지 삭제 함수
-    const handleMessageDelete = async (messageId: number) => {
-        try {
-            setIsDeletionPending(true);
-            await deleteMessage(messageId);
-        } catch(error: any) {
-            alert(error.message);
-        } finally {
-            setIsDeletionPending(false);
-        }
+    const handleMessageDelete = (messageId: number) => {
+        wrappedRequest(deleteMessage, messageId);
 
         const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
         setRecipient((preValues) => ({
@@ -82,26 +79,13 @@ function Posts({ id }: { id: string }) {
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        try {
-            setIsDeletionPending(true);
-            await deleteRecipient(id);
-        } catch(error: any) {
-            alert(error.message);
-        } finally {
-            setIsDeletionPending(false);
-        }
-
+        wrappedRequest(deleteRecipient, id);
         navigate("/list");
     }
 
     // 수정하기 / 돌아가기 버튼 클릭 제어 함수
-    const handleEditButtonClick = () => {
-        setIsEditing(!isEditing);
-    }
-
-    const handleBackButtonclick = () => {
-        navigate("/list");
-    }
+    const handleEditButtonClick = () => setIsEditing(!isEditing)
+    const handleBackButtonclick = () => navigate("/list")
 
     useEffect(() => {
         handleLoad();
@@ -109,7 +93,7 @@ function Posts({ id }: { id: string }) {
     
     return (
         <>
-            <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover"}>
+            <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover font-pretendard"}>
                 <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7 relative max-[1200px]:grid-cols-2 max-[1200px]:gap-4 max-md:grid-cols-1">
                     {isEditing
                         ? <RecipientDeleteCard
@@ -127,12 +111,12 @@ function Posts({ id }: { id: string }) {
                     <MainSectionButtons
                         handleEditButtonClick={handleEditButtonClick}
                         handleBackButtonClick={handleBackButtonclick}
-                        isDeletionPending={isDeletionPending}
+                        isDeletionPending={isPending}
                         whatsButtonText={whatsButtonText}
                     />
                 </div>
             </main>
-            {isDeletionPending && createPortal(
+            {isPending && createPortal(
                         <LazyLoading />,
                         document.body
                     )}

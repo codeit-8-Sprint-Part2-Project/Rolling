@@ -16,10 +16,13 @@ function DeletionConfirmModal({ handleModalOpen, handleDelete, isRecipientDeleti
     const confirmMessage = (isRecipientDeletion: boolean) => {
         return isRecipientDeletion ? "정말 게시판을 삭제할까요?" : "정말 메시지를 삭제할까요?";
     }
+
+    const handleBoxClick = (e: any) => e.stopPropagation();
+    const handleShadowClick = () => handleModalOpen(false);
     
     return (
-        <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50">
-            <div className="w-[37.5rem] h-[29.75rem] mx-6 bg-white rounded-2xl p-10 flex flex-col items-center">
+        <div className="bg-black/50 flex justify-center items-center fixed inset-0 z-50 font-pretendard" onClick={handleShadowClick}>
+            <div className="w-[37.5rem] h-[29.75rem] mx-6 bg-white rounded-2xl p-10 flex flex-col items-center" onClick={handleBoxClick}>
                 <img src={TrashcanIcon} alt="삭제 확인" className="w-40 mt-14" />
                 <div className="text-[#DC3A3A]">{confirmMessage(isRecipientDeletion)}</div>
                 <div className="flex justify-between gap-4 mt-16">
