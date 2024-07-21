@@ -8,6 +8,14 @@ async function getRecipient(id:string) {
     return result;
 }
 
+async function getMessages(id:string) {
+    const response = await fetch(`${BASE_URL}recipients/${id}/messages/`);
+    if(!response.ok) throw new Error("메세지를 불러오는데 실패했습니다.");
+    const result = await response.json();
+
+    return result;
+}
+
 async function deleteMessage(messageId:number) {
     const response = await fetch(`${BASE_URL}messages/${messageId}/`, {
         method: "DELETE",
@@ -58,4 +66,4 @@ async function putMessage(messageId: string, formData: any) {
     return result;
 }
 
-export { getRecipient, deleteMessage, deleteRecipient, postMessage, putMessage };
+export { getRecipient, getMessages, deleteMessage, deleteRecipient, postMessage, putMessage };

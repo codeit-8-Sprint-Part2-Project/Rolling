@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { deleteMessage, deleteRecipient, getRecipient } from "../api/api";
+import { deleteMessage, deleteRecipient, getMessages, getRecipient } from "../api/api";
 import PlusCard from "./PlusCard";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCardList from "./MessageCardList";
@@ -43,6 +43,7 @@ const INITIAL_RECIPIENT_VALUE: Recipient = {
 function Posts({ id }: { id: string }) {
     
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
+    const [messages, setMessages] = useState<MessageRetrieve[]>([]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
     // const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
@@ -52,8 +53,10 @@ function Posts({ id }: { id: string }) {
     const navigate = useNavigate();
 
     const handleLoad = useCallback (async () => {
-        const result = await wrappedRequest(getRecipient, id);
-        setRecipient(result);
+        const recipientResponse = await wrappedRequest(getRecipient, id);
+        const messagesResponse = await wrappedRequest(getMessages, id);
+        setRecipient(recipientResponse);
+        setMessages(messagesResponse.results);
     }, [id, wrappedRequest])
 
     // 배경색 클래스 string
@@ -64,17 +67,13 @@ function Posts({ id }: { id: string }) {
     }
 
     const backgroundImageURL: string = recipient.backgroundImageURL || '';
-    const recentMessages: MessageRetrieve[] = recipient.recentMessages || [];
 
     // 메시지 삭제 함수
     const handleMessageDelete = (messageId: number) => {
         wrappedRequest(deleteMessage, messageId);
 
-        const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
-        setRecipient((preValues) => ({
-            ...preValues,
-            recentMessages: updatedMessages,
-        }));
+        const updatedMessages: MessageRetrieve[] = messages.filter((message) => message.id !== messageId);
+        setMessages(updatedMessages);
     }
 
     // 게시판 삭제 함수
@@ -104,7 +103,7 @@ function Posts({ id }: { id: string }) {
                         : <PlusCard id={id} />
                     }
                     <MessageCardList
-                        recentMessages={recentMessages}
+                        messages={messages}
                         isEditing={isEditing}
                         handleMessageDelete={handleMessageDelete}
                     />
