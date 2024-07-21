@@ -31,8 +31,7 @@ const useSubmitData = (
         throw new Error(`서버 응답 에러: ${response.status} ${errorText}`);
       }
 
-      const result = await response.json();
-      console.log("폼 데이터 전송 완료:", result);
+      await response.json();
 
       // 데이터 전송 후 입력 필드 초기화
       setThemeData(INIT_THEME_VALUE);
