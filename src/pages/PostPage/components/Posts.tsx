@@ -56,7 +56,9 @@ function Posts({ id }: { id: string }) {
         setRecipient(result);
     }, [id, wrappedRequest])
 
+    // 배경색 클래스 string
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
+    // 상태에 따른 버튼 내용
     const whatsButtonText = () => {
         return isEditing ? "돌아가기" : "수정하기";
     }
