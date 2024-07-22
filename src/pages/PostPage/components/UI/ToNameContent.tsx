@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getByPostId } from "../../api/getByPostId";
 import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
+import RoundedLoadingBar from "./RoundedLoadingBar";
 
 interface ToNameContentProps {
   className?: string;
@@ -25,6 +26,7 @@ const ToNameContent = ({
 }: ToNameContentProps): ReactElement => {
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchName = async () => {
@@ -35,22 +37,26 @@ const ToNameContent = ({
         setData(names);
       } catch (error) {
         console.error("이름을 불러오지 못했습니다.", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchName();
   }, [recipientId]);
 
-  if (!data) {
-    return <p>이름을 불러오지 못했습니다.</p>;
-  }
-
   return (
-    <h1
-      className={`font-pretendard font-bold text-[18px] md:text-[28px] text-[#2b2b2b] ${className}`}
-    >
-      To. {data.name}
-    </h1>
+    <>
+      {isLoading ? (
+        <RoundedLoadingBar />
+      ) : (
+        <h1
+          className={`font-pretendard font-bold text-[18px] md:text-[28px] text-[#2b2b2b] ${className}`}
+        >
+          To. {data?.name}
+        </h1>
+      )}
+    </>
   );
 };
 
