@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import RecipientCard from './RecipientCard';
 
@@ -69,6 +69,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1220);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const scrollRef = useRef<HTMLDivElement>(null);
     const cardsToShow = 4;
 
     const totalCards = data.results.length;
@@ -83,11 +84,27 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
         };
 
         window.addEventListener('resize', handleResize);
-        
+
         // 컴포넌트가 마운트된 후 애니메이션 시작
         setIsLoaded(true);
 
         return () => window.removeEventListener('resize', handleResize);
+    }, [isMobile]);
+
+    useEffect(() => {
+        if (isMobile && scrollRef.current) {
+            const handleScroll = (event: WheelEvent) => {
+                scrollRef.current!.scrollLeft += event.deltaY;
+                event.preventDefault(); // 기본 세로 스크롤 동작 방지
+            };
+
+            const scrollContainer = scrollRef.current;
+            scrollContainer.addEventListener('wheel', handleScroll);
+
+            return () => {
+                scrollContainer.removeEventListener('wheel', handleScroll);
+            };
+        }
     }, [isMobile]);
 
     const prevSlide = () => {
@@ -134,7 +151,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
             <style>{customScrollbarStyles}</style>
             <style>{cardAnimationStyles}</style>
             {isMobile ? (
-                <div className="overflow-x-auto overflow-y-hidden custom-scrollbar">
+                <div className="overflow-x-auto overflow-y-hidden custom-scrollbar" ref={scrollRef}>
                     <div className="flex">
                         {data.results.map((recipient, index) => (
                             <div 
@@ -199,3 +216,4 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
 };
 
 export default RecipientCardList;
+
