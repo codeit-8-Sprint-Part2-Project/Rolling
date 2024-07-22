@@ -18,20 +18,41 @@ const ProfileGroup: React.FC<{
     messageCount: number;
     isLoaded: boolean;
 }> = ({ recentMessages, messageCount, isLoaded }) => {
+    const [hoveredProfile, setHoveredProfile] = useState<number | null>(null);
+
     return (
         <div className={`flex flex-wrap gap-[-30px] h-7 transition-all duration-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}>
             {recentMessages.slice(0, 3).map((message, index) => (
-                <img
+                <div
                     key={message.id}
-                    src={message.profileImageURL}
-                    alt={message.sender}
-                    className="w-7 h-7 object-cover rounded-full border-2 border-white"
+                    className="relative"
+                    onMouseEnter={() => setHoveredProfile(message.id)}
+                    onMouseLeave={() => setHoveredProfile(null)}
                     style={{
                         position: "absolute",
                         left: `${index * 20}px`,
                         zIndex: index,
                     }}
-                />
+                >
+                    <img
+                        src={message.profileImageURL}
+                        alt={message.sender}
+                        className="w-7 h-7 object-cover rounded-full border-2 border-white transition-transform duration-200 hover:scale-110"
+                    />
+                    {hoveredProfile === message.id && (
+                        <div
+                            className="absolute bg-black bg-opacity-75 text-white text-xs py-1 px-2 rounded-md whitespace-nowrap"
+                            style={{
+                                top: "-25px",
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                                zIndex: 10,
+                            }}
+                        >
+                            From.{message.sender}
+                        </div>
+                    )}
+                </div>
             ))}
             {(messageCount - 3) > 0 && (
                 <div
@@ -73,6 +94,8 @@ const ProfileGroup: React.FC<{
         </div>
     );
 };
+
+
 
 const RecipientCard: React.FC<RecipientCardProps> = ({
     name,
@@ -123,7 +146,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
 
     return (
         <div
-            className={`absolute w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden transition-all duration-300 ease-in-out`}
+            className={`absolute w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative transition-all duration-300 ease-in-out`}
             style={{
                 ...cardStyle,
                 transform: isHovered ? 'scale(1.05)' : 'scale(1)',
