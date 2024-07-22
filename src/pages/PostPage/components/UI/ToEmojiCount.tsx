@@ -5,7 +5,17 @@ import EmojiAddDropdown from "./EmojiAddDropdown";
 import { getByReactions } from "../../api/getByReactions";
 import { ReactionCreate } from "../../../../DTO/reaction/ReactionCreate";
 
-function ToEmojiCount() {
+function ToEmojiCount({
+  isEmojiDropdownVisible,
+  handleEmojiDropdownToggle,
+  isEmojiAddDropdownVisible,
+  handleEmojiAddDropdownToggle,
+}: {
+  isEmojiDropdownVisible: boolean;
+  handleEmojiDropdownToggle: () => void;
+  isEmojiAddDropdownVisible: boolean;
+  handleEmojiAddDropdownToggle: () => void;
+}) {
   const { recipientId } = useParams();
   const [data, setData] = useState<ReactionCreate | null>(null);
 
@@ -48,8 +58,16 @@ function ToEmojiCount() {
           <li>{emoji.count}</li>
         </ul>
       ))}
-      <EmojiDropdown data={data} />
-      <EmojiAddDropdown onEmojiAdded={onEmojiadded} />
+      <EmojiDropdown
+        data={data}
+        isDropdownVisible={isEmojiDropdownVisible}
+        toggleDropdown={handleEmojiDropdownToggle}
+      />
+      <EmojiAddDropdown
+        onEmojiAdded={onEmojiadded}
+        isDropdownVisible={isEmojiAddDropdownVisible}
+        toggleDropdown={handleEmojiAddDropdownToggle}
+      />
     </div>
   );
 }

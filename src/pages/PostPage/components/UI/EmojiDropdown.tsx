@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import IconArrowDown from "../../assets/icons/IconArrowDown.png";
 import { ReactionCreate } from "../../../../DTO/reaction/ReactionCreate";
 
-function EmojiDropdown({ data }: { data: ReactionCreate | null }) {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+function EmojiDropdown({
+  data,
+  isDropdownVisible,
+  toggleDropdown,
+}: {
+  data: ReactionCreate | null;
+  isDropdownVisible: boolean;
+  toggleDropdown: () => void;
+}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
 
   useEffect(() => {
     const handleResize = () => {

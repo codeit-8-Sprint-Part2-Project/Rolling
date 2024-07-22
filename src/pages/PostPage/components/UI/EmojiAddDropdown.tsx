@@ -21,16 +21,17 @@ interface Recipient {
 
 interface EmojiAddDropdownProps {
   onEmojiAdded: (emoji: string) => void;
+  isDropdownVisible: boolean;
+  toggleDropdown: () => void;
 }
 
-function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
+function EmojiAddDropdown({
+  onEmojiAdded,
+  isDropdownVisible,
+  toggleDropdown,
+}: EmojiAddDropdownProps) {
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
 
   useEffect(() => {
     const fetchCount = async () => {
