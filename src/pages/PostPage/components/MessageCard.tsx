@@ -8,6 +8,7 @@ import TrashcanButton from "./TrashcanButton";
 import DeletionConfirmModal from "./DeletionConfirmModal";
 import WriteModal from "./WriteModal";
 import MessageContent from "./MessageContent";
+import { MessageCreate } from "../../../DTO/message/MessageCreate";
 
 const INITIAL_MESSAGE_VALUE: MessageRetrieve = {
     id : 0,
@@ -31,8 +32,9 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
     const [isMessageModalOpen, setIsMessageModalOpen] = useState<boolean>(false);
     const [isDeletionModalOpen, setIsDeletionModalOpen] = useState<boolean>(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+    const [messageState, setMessageState] = useState<MessageRetrieve>(message);
 
-    const id: number = message.id || 0;
+    const id: number = messageState.id || 0;
     
     const handleCardClick = () => {
         (isEditing)
@@ -50,23 +52,34 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
         handleMessageDelete(id);
     }
 
-    const font: string = message.font.toLowerCase();
+    const handleAfterEdit = (formData: MessageCreate) => {
+        setMessageState((prev) => ({
+            ...prev,
+            sender: formData.sender,
+            profileImageURL: formData.profileImageURL,
+            relationship: formData.relationship,
+            content: formData.content,
+            font: formData.font,
+        }))
+    }
+
+    const font: string = messageState.font.toLowerCase();
     const fontClass: string = `font-[${font}]`;
     
     return (
         <>
             <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col cursor-pointer shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]"} onClick={handleCardClick}>
                 <div className="pb-4 border-solid border-b border-[#EEEEEE] flex justify-between">
-                    <SenderInfo message={message} />
+                    <SenderInfo message={messageState} />
                     {isEditing && <TrashcanButton onClick={handleTrashcanClick} />}
                 </div>
                 <div className={fontClass + " truncate grow mb-4"}>
-                    <MessageContent rawString={message.content} />
+                    <MessageContent rawString={messageState.content} />
                 </div>
-                <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(message.createdAt)}</div>
+                <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(messageState.createdAt)}</div>
             </div>
             {isMessageModalOpen && createPortal(
-                <MessageModal message={message} setIsMessageModalOpen={setIsMessageModalOpen} />,
+                <MessageModal message={messageState} setIsMessageModalOpen={setIsMessageModalOpen} />,
                 document.body
             )}
             {(isDeletionModalOpen) && createPortal(
@@ -74,7 +87,7 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
                 document.body
             )}
             {(isEditModalOpen) && createPortal(
-                <WriteModal recipientId={id} handleModalOpen={setIsEditModalOpen} message={message} />,
+                <WriteModal recipientId={id} handleModalOpen={setIsEditModalOpen} message={messageState} handleAfterSubmit={handleAfterEdit} />,
                 document.body
             )}
         </>
