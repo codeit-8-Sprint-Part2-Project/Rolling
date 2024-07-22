@@ -31,6 +31,7 @@ https://post-rolling.netlify.app 🔗
 ![tailwindCss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 <br>
+<br>
 
 ## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪"> 개발팀 소개
 
@@ -58,6 +59,7 @@ https://post-rolling.netlify.app 🔗
     </tr>
 </table>
 
+<br>
 <br>
 
 ## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 프로젝트 소개
