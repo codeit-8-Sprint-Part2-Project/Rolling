@@ -13,6 +13,7 @@ module.exports = {
       },
       screens: {
         "min-1155": "1155px",
+        xs: "360px",
       },
       colors: {
         beige: "#FFE2AD",
@@ -27,10 +28,9 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
-    { 
+    {
       tailwindcss: {},
       autoprefixer: {},
     },
   ],
-  
 };

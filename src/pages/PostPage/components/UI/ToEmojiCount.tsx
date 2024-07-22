@@ -37,10 +37,12 @@ function ToEmojiCount() {
 
   return (
     <div className="border-r-[1px] flex items-center gap-2 min-1155:border-x-[1px] md:pl-7 pr-[13px] h-7 relative z-10">
-      {displayedEmojis?.map((emoji) => (
+      {displayedEmojis?.map((emoji, index) => (
         <ul
           key={emoji.id}
-          className="flex gap-2 md:gap-0.5 min-w-[60px] md:min-w-[66px] rounded-[32px] px-2 py-1 md:px-3 md:py-2 bg-black/50 font-pretendard font-[400] text-[14px] md:text-[16px] text-white justify-center items-center"
+          className={`flex gap-2 md:gap-0.5 min-w-[60px] md:min-w-[66px] rounded-[32px] px-2 py-1 md:px-3 md:py-2 bg-black/50 font-pretendard font-[400] text-[14px] md:text-[16px] text-white justify-center items-center ${
+            index === 2 ? "xs:flex hidden" : ""
+          }`}
         >
           <li>{emoji.emoji}</li>
           <li>{emoji.count}</li>

@@ -78,7 +78,7 @@ const ShareButton = ({ url }: ShareButtonProps): ReactElement => {
         <img
           src={IconShare}
           alt="공유하기 버튼"
-          className="w-5 h-5 md:w-6 md:h-6"
+          className="min-w-5 min-h-5 md:w-6 md:h-6"
         />
       </button>
 
