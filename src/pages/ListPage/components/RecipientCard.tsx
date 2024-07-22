@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,ReactNode} from "react";
+import ReactDOM from "react-dom";
 
 interface RecipientCardProps {
     name: string;
@@ -12,88 +13,109 @@ interface RecipientCardProps {
     backgroundColor: string;
     backgroundImageURL?: string | null;
 }
-
-const ProfileGroup: React.FC<{
-    recentMessages: { id: number; sender: string; profileImageURL: string }[];
+interface CustomTooltipProps {
+    content: string;
+    children: ReactNode;
+  }
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ content, children }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+  
+    const updatePosition = (event: React.MouseEvent<HTMLDivElement>) => {
+      const rect = event.currentTarget.getBoundingClientRect();
+      setPosition({
+        top: rect.top - 30, // Adjust this value as needed
+        left: rect.left + rect.width / 2,
+      });
+    };
+  
+    const tooltipContent = isVisible && (
+      <div
+        style={{
+          position: "fixed",
+          top: `${position.top}px`,
+          left: `${position.left}px`,
+          transform: "translateX(-30%)",
+          zIndex: 9999,
+        }}
+        className="px-2 py-1 bg-black bg-opacity-75 text-white text-xs rounded pointer-events-none whitespace-nowrap"
+      >
+        {content}
+      </div>
+    );
+  
+    return (
+      <>
+        <div
+          onMouseEnter={(e) => {
+            setIsVisible(true);
+            updatePosition(e);
+          }}
+          onMouseLeave={() => setIsVisible(false)}
+          onMouseMove={updatePosition}
+        >
+          {children}
+        </div>
+        {isVisible && ReactDOM.createPortal(tooltipContent, document.body)}
+      </>
+    );
+  };
+  
+  interface ProfileGroupProps {
+    recentMessages: Array<{
+      id: number;
+      sender: string;
+      profileImageURL: string;
+    }>;
     messageCount: number;
     isLoaded: boolean;
-}> = ({ recentMessages, messageCount, isLoaded }) => {
-    const [hoveredProfile, setHoveredProfile] = useState<number | null>(null);
-
+  }
+  
+  const ProfileGroup: React.FC<ProfileGroupProps> = ({ recentMessages, messageCount, isLoaded }) => {
     return (
-        <div className={`flex flex-wrap gap-[-30px] h-7 transition-all duration-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}>
-            {recentMessages.slice(0, 3).map((message, index) => (
-                <div
-                    key={message.id}
-                    className="relative"
-                    onMouseEnter={() => setHoveredProfile(message.id)}
-                    onMouseLeave={() => setHoveredProfile(null)}
-                    style={{
-                        position: "absolute",
-                        left: `${index * 20}px`,
-                        zIndex: index,
-                    }}
-                >
-                    <img
-                        src={message.profileImageURL}
-                        alt={message.sender}
-                        className="w-7 h-7 object-cover rounded-full border-2 border-white transition-transform duration-200 hover:scale-110"
-                    />
-                    {hoveredProfile === message.id && (
-                        <div
-                            className="absolute bg-black bg-opacity-75 text-white text-xs py-1 px-2 rounded-md whitespace-nowrap"
-                            style={{
-                                top: "-25px",
-                                left: "50%",
-                                transform: "translateX(-50%)",
-                                zIndex: 10,
-                            }}
-                        >
-                            From.{message.sender}
-                        </div>
-                    )}
-                </div>
-            ))}
-            {(messageCount - 3) > 0 && (
-                <div
-                    style={{
-                        position: "absolute",
-                        left: `${3 * 20}px`,
-                        zIndex: 3,
-                    }}
-                >
-                    <div
-                        style={{
-                            width: "33px",
-                            height: "28px",
-                            backgroundColor: "white",
-                            borderRadius: "50%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <p
-                            style={{
-                                fontFamily: "Pretendard",
-                                fontSize: "12px",
-                                fontWeight: 400,
-                                lineHeight: "18px",
-                                letterSpacing: "-0.005em",
-                                textAlign: "left",
-                                color: "rgba(85, 85, 85, 1)",
-                                margin: 0,
-                            }}
-                        >
-                            <span>+</span>
-                            {messageCount - 3}
-                        </p>
-                    </div>
-                </div>
-            )}
-        </div>
+      <div
+        className={`flex flex-wrap -gap-[30px] h-7 transition-all duration-500 ${
+          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+        }`}
+      >
+        {recentMessages.slice(0, 3).map((message, index) => (
+          <div
+            key={message.id}
+            className="absolute"
+            style={{
+              left: `${index * 20}px`,
+              zIndex: index,
+            }}
+          >
+            <CustomTooltip content={`From. ${message.sender}`}>
+              <img
+                src={message.profileImageURL}
+                alt={message.sender}
+                className="w-7 h-7 object-cover rounded-full border-2 border-white transition-transform duration-200 hover:scale-110"
+              />
+            </CustomTooltip>
+          </div>
+        ))}
+        {messageCount - 3 > 0 && (
+          <div
+            className="absolute"
+            style={{
+              left: `${3 * 20}px`,
+              zIndex: 3,
+            }}
+          >
+            <div className="w-[33px] h-[28px] bg-white rounded-full flex items-center justify-center">
+              <p className="font-pretendard text-xs font-normal leading-[18px] tracking-[-0.005em] text-left text-[#555555] m-0">
+                <span>+</span>
+                {messageCount - 3}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     );
-};
+  };
+
 
 
 
