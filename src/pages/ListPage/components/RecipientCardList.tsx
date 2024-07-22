@@ -4,12 +4,14 @@ import RecipientCard from './RecipientCard';
 
 interface RecentMessage {
     id: number;
+    messageCount: number;
     sender: string;
     profileImageURL: string;
 }
 
 interface Recipient {
     id: string;
+    messageCount: number;
     name: string;
     recentMessages: RecentMessage[];
     topReactions: { emoji: string; count: number }[];
@@ -155,6 +157,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                                     topReactions={recipient.topReactions}
                                     backgroundColor={recipient.backgroundColor}
                                     backgroundImageURL={recipient.backgroundImageURL}
+                                    messageCount={recipient.messageCount}
                                 />
                             </Link>
                         </div>
@@ -191,6 +194,7 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
                                     topReactions={recipient.topReactions}
                                     backgroundColor={recipient.backgroundColor}
                                     backgroundImageURL={recipient.backgroundImageURL}
+                                    messageCount={recipient.messageCount}
                                 />
                             </Link>
                         </div>
