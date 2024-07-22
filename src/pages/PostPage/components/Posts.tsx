@@ -82,7 +82,7 @@ function Posts({ id }: { id: string }) {
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        wrappedRequest(deleteRecipient, id);
+        await wrappedRequest(deleteRecipient, id);
         navigate("/list");
     }
 
