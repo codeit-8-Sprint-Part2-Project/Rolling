@@ -35,7 +35,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ content, children }) => {
           position: "fixed",
           top: `${position.top}px`,
           left: `${position.left}px`,
-          transform: "translateX(-50%)",
+          transform: "translateX(-30%)",
           zIndex: 9999,
         }}
         className="px-2 py-1 bg-black bg-opacity-75 text-white text-xs rounded pointer-events-none whitespace-nowrap"
