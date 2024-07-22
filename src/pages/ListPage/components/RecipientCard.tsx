@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface RecipientCardProps {
     name: string;
@@ -13,6 +13,90 @@ interface RecipientCardProps {
     backgroundImageURL?: string | null;
 }
 
+const ProfileGroup: React.FC<{
+    recentMessages: { id: number; sender: string; profileImageURL: string }[];
+    messageCount: number;
+    isLoaded: boolean;
+}> = ({ recentMessages, messageCount, isLoaded }) => {
+    const [hoveredProfile, setHoveredProfile] = useState<number | null>(null);
+
+    return (
+        <div className={`flex flex-wrap gap-[-30px] h-7 transition-all duration-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[20px]'}`}>
+            {recentMessages.slice(0, 3).map((message, index) => (
+                <div
+                    key={message.id}
+                    className="relative"
+                    onMouseEnter={() => setHoveredProfile(message.id)}
+                    onMouseLeave={() => setHoveredProfile(null)}
+                    style={{
+                        position: "absolute",
+                        left: `${index * 20}px`,
+                        zIndex: index,
+                    }}
+                >
+                    <img
+                        src={message.profileImageURL}
+                        alt={message.sender}
+                        className="w-7 h-7 object-cover rounded-full border-2 border-white transition-transform duration-200 hover:scale-110"
+                    />
+                    {hoveredProfile === message.id && (
+                        <div
+                            className="absolute bg-black bg-opacity-75 text-white text-xs py-1 px-2 rounded-md whitespace-nowrap"
+                            style={{
+                                top: "-25px",
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                                zIndex: 10,
+                            }}
+                        >
+                            From.{message.sender}
+                        </div>
+                    )}
+                </div>
+            ))}
+            {(messageCount - 3) > 0 && (
+                <div
+                    style={{
+                        position: "absolute",
+                        left: `${3 * 20}px`,
+                        zIndex: 3,
+                    }}
+                >
+                    <div
+                        style={{
+                            width: "33px",
+                            height: "28px",
+                            backgroundColor: "white",
+                            borderRadius: "50%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        <p
+                            style={{
+                                fontFamily: "Pretendard",
+                                fontSize: "12px",
+                                fontWeight: 400,
+                                lineHeight: "18px",
+                                letterSpacing: "-0.005em",
+                                textAlign: "left",
+                                color: "rgba(85, 85, 85, 1)",
+                                margin: 0,
+                            }}
+                        >
+                            <span>+</span>
+                            {messageCount - 3}
+                        </p>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+
+
 const RecipientCard: React.FC<RecipientCardProps> = ({
     name,
     messageCount,
@@ -22,6 +106,12 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
     backgroundImageURL,
 }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoaded(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
 
     let bgColorClass = "";
 
@@ -56,7 +146,7 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
 
     return (
         <div
-            className={`absolute w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative overflow-hidden transition-all duration-300 ease-in-out`}
+            className={`absolute w-[275px] h-[260px] p-4 mb-4 border rounded-[16px] border-solid border-[#0000001A] shadow-md ${bgColorClass} relative transition-all duration-300 ease-in-out`}
             style={{
                 ...cardStyle,
                 transform: isHovered ? 'scale(1.05)' : 'scale(1)',
@@ -133,77 +223,23 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     </svg>
                 </div>
             )}
+            
             <div className={`p-2 rounded-md relative flex flex-col justify-between h-full z-10 ${textColorClass} transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-90'}`}>
                 <div>
-                    <h2 className={`font-pretendard text-[24px] font-bold leading-[36px] tracking-[-0.01em] text-left`}>
+                    <h2 className={`font-pretendard text-[24px] font-bold leading-[36px] tracking-[-0.01em] text-left transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
                         To. {name}
                     </h2>
                     {messageCount === 0 && (
-                        <div className="mt-2">
-                            <p className={`font-pretendard text-[16px] font-bold leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                0
-                            </p>
+                        <div className={`mt-2 transition-all duration-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-[-20px] opacity-0'}`}>
                             <span className={`font-pretendard text-[16px] font-normal leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                명이 작성했어요!
+                                아직 작성자가 없어요!
                             </span>
                         </div>
                     )}
                     {messageCount > 0 && (
-                        <div className="mt-2 relative">
-                            <div className="flex flex-wrap gap-[-30px] h-7">
-                                {recentMessages.slice(0, 3).map((message, index) => (
-                                    <React.Fragment key={message.id}>
-                                        <img
-                                            src={message.profileImageURL}
-                                            alt={message.sender}
-                                            className="w-7 h-7 object-cover rounded-full border-2 border-white"
-                                            style={{
-                                                position: "absolute",
-                                                left: `${index * 20}px`,
-                                                zIndex: index,
-                                            }}
-                                        />
-                                    </React.Fragment>
-                                ))}
-                                {(messageCount - 3) > 0 && (
-                                    <div
-                                        style={{
-                                            position: "absolute",
-                                            left: `${3 * 20}px`,
-                                            zIndex: 3,
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                width: "33px",
-                                                height: "28px",
-                                                backgroundColor: "white",
-                                                borderRadius: "50%",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                            }}
-                                        >
-                                            <p
-                                                style={{
-                                                    fontFamily: "Pretendard",
-                                                    fontSize: "12px",
-                                                    fontWeight: 400,
-                                                    lineHeight: "18px",
-                                                    letterSpacing: "-0.005em",
-                                                    textAlign: "left",
-                                                    color: "rgba(85, 85, 85, 1)",
-                                                    margin: 0,
-                                                }}
-                                            >
-                                                <span>+</span>
-                                                {messageCount - 3}
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                            <div className="mt-2">
+                        <div className={`mt-2 relative transition-all duration-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-[-20px] opacity-0'}`}>
+                            <ProfileGroup recentMessages={recentMessages} messageCount={messageCount} isLoaded={isLoaded} />
+                            <div className={`mt-2 transition-all duration-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[20px] opacity-0'}`}>
                                 <p className={`font-pretendard text-[16px] font-bold leading-[26px] tracking-[-0.01em] text-left inline`}>
                                     {messageCount}
                                 </p>
@@ -214,13 +250,18 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                         </div>
                     )}
                 </div>
-                <div className="mt-2">
+                <div className={`mt-2 transition-all duration-500 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[20px] opacity-0'}`}>
                     <ul className={`flex flex-wrap gap-2 border-t border-solid ${backgroundImageURL ? 'border-[#FFFFFF4D]' : 'border-[#0000001F]'} w-227 pt-4`}>
                         {topReactions.map((reaction, index) => (
                             <li
                                 key={index}
-                                className="flex items-center gap-1 bg-[#0000008A] px-2 py-1 rounded-full"
-                                style={{ alignSelf: "flex-end" }}
+                                className={`flex items-center gap-1 bg-[#0000008A] px-2 py-1 rounded-full transition-all duration-500`}
+                                style={{ 
+                                    alignSelf: "flex-end",
+                                    transitionDelay: `${index * 100}ms`,
+                                    opacity: isLoaded ? 1 : 0,
+                                    transform: isLoaded ? 'translateY(0)' : 'translateY(20px)'
+                                }}
                             >
                                 {reaction.emoji}
                                 <span className="font-pretendard text-16 font-normal leading-20 text-white">

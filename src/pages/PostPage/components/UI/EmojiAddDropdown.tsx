@@ -5,6 +5,7 @@ import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
 import { ReactionRetrieve } from "../../../../DTO/reaction/ReactionRetrieve";
 import EmojiPicker, { EmojiClickData, Categories } from "emoji-picker-react";
 import IconAdd from "../../assets/icons/IconEmojiAdd.png";
+import RoundedLoadingBar from "./RoundedLoadingBar";
 
 interface Recipient {
   id?: number;
@@ -21,16 +22,18 @@ interface Recipient {
 
 interface EmojiAddDropdownProps {
   onEmojiAdded: (emoji: string) => void;
+  isDropdownVisible: boolean;
+  toggleDropdown: () => void;
 }
 
-function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
+function EmojiAddDropdown({
+  onEmojiAdded,
+  isDropdownVisible,
+  toggleDropdown,
+}: EmojiAddDropdownProps) {
   const { recipientId } = useParams();
-  const [data, setData] = useState<Recipient | null>(null);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
+  const [, setData] = useState<Recipient | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -41,15 +44,13 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
         setData(Counts);
       } catch (error) {
         console.error("총 이모티콘을 불러오지 못했습니다.", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchCount();
   }, [recipientId]);
-
-  if (!data) {
-    return <p>총 이모티콘을 불러오지 못했습니다.</p>;
-  }
 
   interface CustomNames {
     category: Categories;
@@ -121,29 +122,36 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
   };
 
   return (
-    <div className="relative">
-      <button
-        onClick={toggleDropdown}
-        className="px-2 md:px-4 py-[6px] border border-solid border-[#cccccc] rounded-md font-pretendard font-[500] text-[16px] text-[#181818] flex gap-1"
-      >
-        <img
-          src={IconAdd}
-          alt="이모지 추가 버튼"
-          className="w-5 h-5 md:w-6 md:h-6"
-        />
-        <p className="hidden md:block">추가</p>
-      </button>
+    <>
+      {isLoading ? (
+        <RoundedLoadingBar />
+      ) : (
+        <div className="relative">
+          <button
+            onClick={toggleDropdown}
+            className="px-2 md:px-4 py-[6px] border border-solid border-[#cccccc] rounded-md font-pretendard font-[500] text-[16px] text-[#181818] flex gap-1"
+          >
+            <img
+              src={IconAdd}
+              alt="이모지 추가 버튼"
+              className="min-w-5 min-h-5 md:w-6 md:h-6"
+            />
+            <p className="hidden md:block">추가</p>
+          </button>
 
-      {isDropdownVisible && (
-        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-270px] z-10">
-          <EmojiPicker
-            searchPlaceholder="검색"
-            categories={customNames}
-            onEmojiClick={onEmojiClick}
-          />
+          {isDropdownVisible && (
+            <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-200px] z-10">
+              <EmojiPicker
+                searchPlaceholder="검색"
+                categories={customNames}
+                onEmojiClick={onEmojiClick}
+                width="100%"
+              />
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 }
 
