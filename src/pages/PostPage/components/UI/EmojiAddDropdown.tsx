@@ -21,16 +21,17 @@ interface Recipient {
 
 interface EmojiAddDropdownProps {
   onEmojiAdded: (emoji: string) => void;
+  isDropdownVisible: boolean;
+  toggleDropdown: () => void;
 }
 
-function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
+function EmojiAddDropdown({
+  onEmojiAdded,
+  isDropdownVisible,
+  toggleDropdown,
+}: EmojiAddDropdownProps) {
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
 
   useEffect(() => {
     const fetchCount = async () => {
@@ -129,17 +130,18 @@ function EmojiAddDropdown({ onEmojiAdded }: EmojiAddDropdownProps) {
         <img
           src={IconAdd}
           alt="이모지 추가 버튼"
-          className="w-5 h-5 md:w-6 md:h-6"
+          className="min-w-5 min-h-5 md:w-6 md:h-6"
         />
         <p className="hidden md:block">추가</p>
       </button>
 
       {isDropdownVisible && (
-        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-270px] z-10">
+        <div className="border border-[#cccccc] rounded-[9px] shadow-custom absolute top-[45px] left-[-200px] z-10">
           <EmojiPicker
             searchPlaceholder="검색"
             categories={customNames}
             onEmojiClick={onEmojiClick}
+            width="100%"
           />
         </div>
       )}

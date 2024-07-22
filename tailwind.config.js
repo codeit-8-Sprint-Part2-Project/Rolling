@@ -13,6 +13,7 @@ module.exports = {
       },
       screens: {
         "min-1155": "1155px",
+        xs: "400px",
       },
       colors: {
         beige: "#FFE2AD",
