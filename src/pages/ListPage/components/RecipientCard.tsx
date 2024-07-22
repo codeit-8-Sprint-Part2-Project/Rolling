@@ -140,11 +140,8 @@ const RecipientCard: React.FC<RecipientCardProps> = ({
                     </h2>
                     {messageCount === 0 && (
                         <div className="mt-2">
-                            <p className={`font-pretendard text-[16px] font-bold leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                0
-                            </p>
                             <span className={`font-pretendard text-[16px] font-normal leading-[26px] tracking-[-0.01em] text-left inline`}>
-                                명이 작성했어요!
+                                아직 작성자가 없어요!
                             </span>
                         </div>
                     )}
