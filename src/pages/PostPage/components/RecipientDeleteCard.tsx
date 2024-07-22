@@ -17,7 +17,7 @@ function RecipientDeleteCard( { isRecipientDeleteOpen, setIsRecipientDeleteOpen,
     
     return (
         <>
-            <div className="h-[17.5rem] rounded-2xl bg-white flex flex-col justify-center items-center gap-4 cursor-pointer max-[1200px]:h-[17.75rem] max-md:h-[14.375rem]" onClick={handleCardClick}>
+            <div className="h-[17.5rem] rounded-2xl bg-white flex flex-col justify-center items-center gap-4 cursor-pointer max-[1200px]:h-[17.75rem] max-md:h-[14.375rem] hover:scale-105 transition-all duration-300 ease-in-out" onClick={handleCardClick}>
                 <img src={TrashcanIcon} alt="게시판 삭제" className="w-20" />
                 <div className="text-[#999999]">게시판 삭제하기</div>
             </div>
