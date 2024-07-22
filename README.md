@@ -24,8 +24,38 @@ https://post-rolling.netlify.app 🔗
 
 <br>
 
+## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 기술 스택
+  
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) 
+![ts](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) 
+![tailwindCss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+<br>
+
 ## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪"> 개발팀 소개
 
-## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 기술 스택
+<table align="center">
+    <tr align="center">
+        <td> <img src="https://github.com/user-attachments/assets/d9ade349-5c64-47e4-8321-a09758e46c3e" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/361ebb81-b0d1-4483-918e-82beff58bbad" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/c182ece6-599e-4347-b6d8-e25b3728fbaa" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/7daa9e47-1ca2-4d44-9040-21cf62190b83" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/6248776b-3401-48ee-bdf8-6879c8ab5e83" alt="프로필" width="100" /></td>
+    </tr>
+    <tr align="center">
+        <td><a href="https://github.com/KimDasom521">김다솜</a></td>
+        <td><a href="https://github.com/purplenib">김영주</a></td>
+        <td><a href="https://github.com/SealBros">👑 서지훈</a></td>
+        <td><a href="https://github.com/KJongHwa">김종화</a></td>
+        <td><a href="https://github.com/Jaeheon96">손재헌</a></td>
+    </tr>
+      <tr align="center" >
+        <td>리스트 페이지</td>
+        <td>생성 페이지</td>
+        <td>작성 페이지 </td>
+        <td>랜딩 페이지 <br> GNB </td>
+        <td>포스트 페이지</td>
+    </tr>
+</table>
 
 ## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 프로젝트 소개
