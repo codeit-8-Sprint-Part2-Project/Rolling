@@ -40,12 +40,16 @@ const INITIAL_RECIPIENT_VALUE: Recipient = {
     backgroundImageURL: "",
     };
 
+const LIMIT: number = 6;
+
 function Posts({ id }: { id: string }) {
     
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
     const [messages, setMessages] = useState<MessageRetrieve[]>([]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
+    const [offset, setOffset] = useState<number>(8);
+    const [hasNextMessages, setHasNextMessages] = useState<boolean>(false);
     // const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
 
     const { isPending, wrappedRequest } = useRequest();
@@ -61,7 +65,18 @@ function Posts({ id }: { id: string }) {
         const messagesResponse = await wrappedRequest(getMessages, id);
         setRecipient(recipientResponse);
         setMessages(messagesResponse.results);
+        if(messagesResponse.next) setHasNextMessages(true);
+        else setHasNextMessages(false);
     }, [id, wrappedRequest, navigate])
+
+    const handleLoadMore = useCallback (async () => {
+        if(!hasNextMessages) return;
+        const messagesResponse = await wrappedRequest(getMessages, id, LIMIT, offset);
+        setMessages(prev => [...prev, ...messagesResponse.results]);
+        setOffset(prev => prev + LIMIT);
+        if(messagesResponse.next) setHasNextMessages(true);
+        else setHasNextMessages(false);
+    },[hasNextMessages, id, offset, wrappedRequest])
 
     // 배경색 클래스 string
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
@@ -82,7 +97,7 @@ function Posts({ id }: { id: string }) {
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        wrappedRequest(deleteRecipient, id);
+        await wrappedRequest(deleteRecipient, id);
         navigate("/list");
     }
 
@@ -90,9 +105,22 @@ function Posts({ id }: { id: string }) {
     const handleEditButtonClick = () => setIsEditing(!isEditing)
     const handleBackButtonclick = () => navigate("/list")
 
+    const handleScrollToBottom = useCallback (() => {
+        if(document.documentElement.scrollHeight - document.documentElement.scrollTop === document.documentElement.clientHeight) {
+            handleLoadMore();
+        }
+    },[handleLoadMore])
+
     useEffect(() => {
         handleLoad();
     }, [handleLoad]);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScrollToBottom);
+        return (() => {
+            window.removeEventListener("scroll", handleScrollToBottom);
+        })
+    }, [handleScrollToBottom]);
     
     return (
         <>
