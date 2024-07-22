@@ -76,20 +76,11 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            const wasMobile = isMobile;
             const isNowMobile = window.innerWidth < 1220;
-            if (wasMobile !== isNowMobile) {
-                localStorage.setItem('reloaded', 'true');
-                window.location.reload();
+            if (isMobile !== isNowMobile) {
+                setIsMobile(isNowMobile);
             }
-            setIsMobile(isNowMobile);
         };
-
-        if (localStorage.getItem('reloaded') === 'true') {
-            localStorage.removeItem('reloaded');
-        } else {
-            handleResize();
-        }
 
         window.addEventListener('resize', handleResize);
         
@@ -138,71 +129,70 @@ const RecipientCardList: React.FC<RecipientCardListProps> = ({ data }) => {
         }
     `;
 
-    if (isMobile) {
-        return (
-            <div className="overflow-x-auto overflow-y-hidden custom-scrollbar">
-                <style>{customScrollbarStyles}</style>
-                <style>{cardAnimationStyles}</style>
-                <div className="flex">
-                    {data.results.map((recipient, index) => (
-                        <div 
-                            className={`flex-shrink-0 w-[300px] p-3 card-animation`}
-                            key={recipient.id}
-                            style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                            <Link to={`/post/${recipient.id}`}>
-                                <RecipientCard
-                                    name={recipient.name}
-                                    recentMessages={recipient.recentMessages}
-                                    topReactions={recipient.topReactions}
-                                    backgroundColor={recipient.backgroundColor}
-                                    backgroundImageURL={recipient.backgroundImageURL}
-                                    messageCount={recipient.messageCount}
-                                />
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="relative">
+        <div>
+            <style>{customScrollbarStyles}</style>
             <style>{cardAnimationStyles}</style>
-            {currentIndex > 0 && (
-                <SlideButton direction="prev" onClick={prevSlide} />
-            )}
-            <div className="overflow-hidden w-full">
-                <div
-                    className="flex transition-transform duration-500"
-                    style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
-                >
-                    {data.results.map((recipient, index) => (
-                        <div 
-                            className={`min-w-[25%] box-border p-3 card-animation`}
-                            key={recipient.id}
-                            style={{ 
-                                animationDelay: `${index * 0.1}s`,
-                                visibility: isLoaded ? 'visible' : 'hidden'
-                            }}
-                        >
-                            <Link to={`/post/${recipient.id}`}>
-                                <RecipientCard
-                                    name={recipient.name}
-                                    recentMessages={recipient.recentMessages}
-                                    topReactions={recipient.topReactions}
-                                    backgroundColor={recipient.backgroundColor}
-                                    backgroundImageURL={recipient.backgroundImageURL}
-                                    messageCount={recipient.messageCount}
-                                />
-                            </Link>
-                        </div>
-                    ))}
+            {isMobile ? (
+                <div className="overflow-x-auto overflow-y-hidden custom-scrollbar">
+                    <div className="flex">
+                        {data.results.map((recipient, index) => (
+                            <div 
+                                className={`flex-shrink-0 w-[300px] p-3 card-animation`}
+                                key={recipient.id}
+                                style={{ animationDelay: `${index * 0.1}s` }}
+                            >
+                                <Link to={`/post/${recipient.id}`}>
+                                    <RecipientCard
+                                        name={recipient.name}
+                                        recentMessages={recipient.recentMessages}
+                                        topReactions={recipient.topReactions}
+                                        backgroundColor={recipient.backgroundColor}
+                                        backgroundImageURL={recipient.backgroundImageURL}
+                                        messageCount={recipient.messageCount}
+                                    />
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-            {currentIndex < maxIndex && (
-                <SlideButton direction="next" onClick={nextSlide} />
+            ) : (
+                <div className="relative">
+                    {currentIndex > 0 && (
+                        <SlideButton direction="prev" onClick={prevSlide} />
+                    )}
+                    <div className="overflow-hidden w-full">
+                        <div
+                            className="flex transition-transform duration-500"
+                            style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
+                        >
+                            {data.results.map((recipient, index) => (
+                                <div 
+                                    className={`min-w-[25%] box-border p-3 card-animation`}
+                                    key={recipient.id}
+                                    style={{ 
+                                        animationDelay: `${index * 0.1}s`,
+                                        visibility: isLoaded ? 'visible' : 'hidden'
+                                    }}
+                                >
+                                    <Link to={`/post/${recipient.id}`}>
+                                        <RecipientCard
+                                            name={recipient.name}
+                                            recentMessages={recipient.recentMessages}
+                                            topReactions={recipient.topReactions}
+                                            backgroundColor={recipient.backgroundColor}
+                                            backgroundImageURL={recipient.backgroundImageURL}
+                                            messageCount={recipient.messageCount}
+                                        />
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    {currentIndex < maxIndex && (
+                        <SlideButton direction="next" onClick={nextSlide} />
+                    )}
+                </div>
             )}
         </div>
     );
