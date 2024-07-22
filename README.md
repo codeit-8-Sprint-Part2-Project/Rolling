@@ -55,7 +55,7 @@ https://post-rolling.netlify.app 🔗
         <td>롤링페이퍼 <br> 생성 페이지</td>
         <td>포스트 작성 <br> 및 전송 페이지 </td>
         <td>랜딩 페이지, <br> GNB </td>
-        <td>롤링페이퍼 <br> 페이지</td>
+        <td>롤링페이퍼 <br> 게시판 페이지</td>
     </tr>
 </table>
 
