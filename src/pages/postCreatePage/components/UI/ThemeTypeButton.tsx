@@ -2,7 +2,7 @@ import * as React from "react";
 
 interface ThemeTypeButtonProps {
   isThemeType: boolean;
-  handleClick: () => void;
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label: string;
 }
 

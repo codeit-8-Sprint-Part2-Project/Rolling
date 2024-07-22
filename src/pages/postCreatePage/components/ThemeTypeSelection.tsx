@@ -37,13 +37,15 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   }, [selectedImageUrl, setThemeData, updateThemeData]);
 
   // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값 컬러
-  const handleShowColorOptions = () => {
+  const handleShowColorOptions = (event: React.MouseEvent) => {
+    event.preventDefault();
     setIsThemeType(true);
     setIsButtonDisabled(false);
     setSelectedImageUrl(null);
   };
 
-  const handleShowImageOptions = () => {
+  const handleShowImageOptions = (event: React.MouseEvent) => {
+    event.preventDefault();
     setIsThemeType(false);
     setIsButtonDisabled(themeData.backgroundImageURL === null);
     setSelectedColor("beige");
