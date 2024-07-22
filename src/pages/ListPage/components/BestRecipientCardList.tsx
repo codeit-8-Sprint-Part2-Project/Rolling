@@ -4,12 +4,14 @@ import RecipientCard from './RecipientCard';
 
 interface RecentMessage {
     id: number;
+    messageCount: number;
     sender: string;
     profileImageURL: string;
 }
 
 interface Recipient {
     id: string;
+    messageCount: number;
     name: string;
     recentMessages: RecentMessage[];
     topReactions: { emoji: string; count: number }[];
@@ -65,6 +67,7 @@ const BestRecipientCardList: React.FC<BestRecipientCardListProps> = ({ data }) =
                         <div className="min-w-[25%] box-border p-2" key={recipient.id}>
                             <Link to={`/post/${recipient.id}`}>
                                 <RecipientCard
+                                    messageCount={recipient.messageCount}
                                     name={recipient.name}
                                     recentMessages={recipient.recentMessages}
                                     topReactions={recipient.topReactions}

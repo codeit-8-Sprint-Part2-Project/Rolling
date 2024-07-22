@@ -6,10 +6,12 @@ import ThemeProvider from "./pages/postCreatePage/api/ThemeProvider";
 import PostCreate from "./pages/postCreatePage/PostCreate";
 import Header from "./components/Layout/Header";
 import MessagePage from "./pages/MessagePage/MessagePage";
+import ScrollToTop from "./components/Common/ScrollToTop";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route index element={<HomePage />} />

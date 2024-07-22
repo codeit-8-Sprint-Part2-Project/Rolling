@@ -8,15 +8,16 @@ Modal.setAppElement("#root");
 
 interface ShareButtonProps {
   url: string;
+  isShareDropdownVisible: boolean;
+  handleShareDropdownToggle: () => void;
 }
 
-const ShareButton = ({ url }: ShareButtonProps): ReactElement => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+const ShareButton = ({
+  url,
+  isShareDropdownVisible,
+  handleShareDropdownToggle,
+}: ShareButtonProps): ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
 
   const shareToKakao = () => {
     if (window.Kakao && window.Kakao.Link) {
@@ -72,22 +73,22 @@ const ShareButton = ({ url }: ShareButtonProps): ReactElement => {
   return (
     <div className="relative">
       <button
-        onClick={toggleDropdown}
+        onClick={handleShareDropdownToggle}
         className="px-2 md:px-4 py-1.5 border border-solid border-[#cccccc] rounded-md ml-[13px]"
       >
         <img
           src={IconShare}
           alt="공유하기 버튼"
-          className="w-5 h-5 md:w-6 md:h-6"
+          className="min-w-5 min-h-5 md:w-6 md:h-6"
         />
       </button>
 
-      {isDropdownVisible && (
+      {isShareDropdownVisible && (
         <div className="flex flex-col px-[1px] py-2.5 bg-white border border-[#cccccc] rounded-lg shadow-custom absolute top-[45px] left-[-85px] md:left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
-              setIsDropdownVisible(false);
+              handleShareDropdownToggle();
             }}
             className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
@@ -96,7 +97,7 @@ const ShareButton = ({ url }: ShareButtonProps): ReactElement => {
           <button
             onClick={() => {
               shareToUrl();
-              setIsDropdownVisible(false);
+              handleShareDropdownToggle();
             }}
             className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
