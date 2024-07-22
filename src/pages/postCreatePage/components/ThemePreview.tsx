@@ -44,7 +44,9 @@ const ThemePreview: React.FC<ExtendedThemePreviewProps> = ({ themeData }) => {
         isOpen={isOpen}
         onRequestClose={handleCloseModal}
         contentLabel="미리보기 모달"
-        className="fixed inset-0 flex items-center justify-center"
+        className={`fixed inset-0 flex items-center justify-center ${
+          isOpen ? "animate-fade-in" : "animate-fade-out"
+        }`}
         overlayClassName="fixed inset-0 bg-black bg-opacity-75"
       >
         <div className="font-pretendard flex flex-grow flex-col bg-white rounded-lg w-full max-w-5xl m-6 p-6 max-[1248px]:mx-6">

@@ -13,7 +13,7 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     <button
       type="button"
       onClick={handleOpenModal}
-      className={`absolute right-0 w-[140px] h-full max-md:w-[122px] rounded-sm ${
+      className={`w-[140px] h-[40px] max-md:w-full rounded-sm outline-none ${
         isDisabled ? "bg-gray-200" : "bg-violet-500 text-white"
       }`}
       disabled={isDisabled}

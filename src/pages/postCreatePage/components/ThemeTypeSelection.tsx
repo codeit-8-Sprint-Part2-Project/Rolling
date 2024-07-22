@@ -37,13 +37,15 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   }, [selectedImageUrl, setThemeData, updateThemeData]);
 
   // 테마 타입의 가시성을 관리하는 이벤트 핸들러, 기본 값 컬러
-  const handleShowColorOptions = () => {
+  const handleShowColorOptions = (event: React.MouseEvent) => {
+    event.preventDefault();
     setIsThemeType(true);
     setIsButtonDisabled(false);
     setSelectedImageUrl(null);
   };
 
-  const handleShowImageOptions = () => {
+  const handleShowImageOptions = (event: React.MouseEvent) => {
+    event.preventDefault();
     setIsThemeType(false);
     setIsButtonDisabled(themeData.backgroundImageURL === null);
     setSelectedColor("beige");
@@ -61,7 +63,7 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
   };
 
   return (
-    <section className="flex flex-col gap-16 w-full mt-4 max-[1248px]:gap-10">
+    <section className="flex flex-col gap-12 w-full mt-4 max-[1248px]:gap-10">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-bold text-2xl">배경화면을 선택해 주세요.</p>
@@ -69,18 +71,22 @@ const ThemeTypeSelection: React.FC<ThemeTypeSelectionProps> = ({
             컬러를 선택하거나, 이미지를 선택할 수 있습니다.
           </p>
         </div>
-        <menu className="relative flex gap-2">
-          <ThemeTypeButton
-            isThemeType={isThemeType}
-            handleClick={handleShowColorOptions}
-            label="컬러"
-          />
-          <ThemeTypeButton
-            isThemeType={!isThemeType}
-            handleClick={handleShowImageOptions}
-            label="이미지"
-          />
-          <ThemePreview themeData={themeData} isThemeType={isThemeType} />
+        <menu className="relative flex gap-2 max-md:grid max-md:grid-cols-4 max-md:grid-rows-1 max-md:gap-3">
+          <div className="flex flex-1 gap-2 max-md:gird-rows-1 max-md:col-span-4">
+            <ThemeTypeButton
+              isThemeType={isThemeType}
+              handleClick={handleShowColorOptions}
+              label="컬러"
+            />
+            <ThemeTypeButton
+              isThemeType={!isThemeType}
+              handleClick={handleShowImageOptions}
+              label="이미지"
+            />
+          </div>
+          <div className="max-md:row-start-2 max-md:col-span-4 max-md:col-start-1">
+            <ThemePreview themeData={themeData} isThemeType={isThemeType} />
+          </div>
         </menu>
       </div>
       {isThemeType ? (

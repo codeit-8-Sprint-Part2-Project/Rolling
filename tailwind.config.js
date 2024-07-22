@@ -20,6 +20,20 @@ module.exports = {
       boxShadow: {
         custom: "0 2px 12px rgba(0, 0, 0, 0.08)",
       },
+      animation: {
+        "fade-in": "fadeIn 0.3s ease-in-out",
+        "fade-out": "fadeOut 0.3s ease-in-out",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(-20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(-20px)" },
+        },
+      },
     },
   },
   corePlugins: {
@@ -27,10 +41,9 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
-    { 
+    {
       tailwindcss: {},
       autoprefixer: {},
     },
   ],
-  
 };
