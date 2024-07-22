@@ -50,12 +50,18 @@ https://post-rolling.netlify.app 🔗
         <td><a href="https://github.com/Jaeheon96">손재헌</a></td>
     </tr>
       <tr align="center" >
-        <td>리스트 페이지</td>
-        <td>생성 페이지</td>
-        <td>작성 페이지 </td>
-        <td>랜딩 페이지 <br> GNB </td>
-        <td>포스트 페이지</td>
+        <td>롤링페이퍼 <br> 리스트 페이지</td>
+        <td>롤링페이퍼 <br> 생성 페이지</td>
+        <td>포스트 작성 <br> 및 전송 페이지 </td>
+        <td>랜딩 페이지, <br> GNB </td>
+        <td>롤링페이퍼 <br> 페이지</td>
     </tr>
 </table>
 
+<br>
+
 ## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 프로젝트 소개
+
+<br>
+
+![스크린샷 2024-07-22 223930](https://github.com/user-attachments/assets/2e656695-142a-44c5-ac96-645061187d88)
