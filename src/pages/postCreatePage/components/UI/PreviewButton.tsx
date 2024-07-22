@@ -22,9 +22,12 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
     <button
       type="button"
       onClick={handleButtonClick}
-      className={`w-[140px] h-[40px] max-md:w-full rounded-sm outline-none ${
-        isDisabled ? "bg-gray-200" : "bg-violet-500 text-white"
-      } ${isClicked ? "animate-click" : ""}`}
+      className={`w-[140px] h-[40px] max-md:w-full rounded-sm outline-none
+        ${
+          isDisabled
+            ? "bg-gray-300 opacity-50 cursor-not-allowed"
+            : "bg-violet-500 opacity-100 text-white "
+        } ${isClicked ? "animate-click" : ""}`}
       disabled={isDisabled}
     >
       미리 보기
