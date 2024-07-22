@@ -6,14 +6,13 @@ function useRequest() {
     const wrappedRequest = useCallback (async (method: any, id: number | string, limit?: number, offset?: number) => {
         try {
             setIsPending(true);
-            if (limit && offset) return method(id, limit, offset);
-            return method(id);
+            return (limit && offset) ? method(id, limit, offset) : method(id);
         } catch(e: any) {
             alert(`useRequest에서 출력하는 오류: ${e.message}`);
         } finally {
             setIsPending(false);
         }
-    }, [])
+    }, []);
 
     return { isPending, wrappedRequest };
 }
