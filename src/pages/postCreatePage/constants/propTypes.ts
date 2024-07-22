@@ -63,4 +63,5 @@ export interface BackgroundColorListProps {
 export interface ReceiverInputProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   themeData: ThemeContextProps["themeData"];
+  setInputError: (error: string) => void;
 }

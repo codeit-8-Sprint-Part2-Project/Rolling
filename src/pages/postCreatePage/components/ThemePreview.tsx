@@ -4,6 +4,7 @@ import { ThemePreviewProps } from "../constants/propTypes";
 import { getColorClass } from "../utils/getColorClass";
 import PreviewPlusCard from "./UI/PreviewPlusCard";
 import CloseButton from "./UI/CloseButton";
+import PreviewButton from "./UI/PreviewButton";
 
 interface ExtendedThemePreviewProps extends ThemePreviewProps {
   isThemeType: boolean;
@@ -35,21 +36,17 @@ const ThemePreview: React.FC<ExtendedThemePreviewProps> = ({ themeData }) => {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleOpenModal}
-        className={`absolute right-0 w-[140px] h-full max-md:w-[122px] rounded-sm ${
-          isDisabled ? "bg-gray-200" : "bg-violet-500 text-white"
-        }`}
-        disabled={isDisabled}
-      >
-        미리 보기
-      </button>
+      <PreviewButton
+        handleOpenModal={handleOpenModal}
+        isDisabled={isDisabled}
+      />
       <Modal
         isOpen={isOpen}
         onRequestClose={handleCloseModal}
         contentLabel="미리보기 모달"
-        className="fixed inset-0 flex items-center justify-center"
+        className={`fixed inset-0 flex items-center justify-center ${
+          isOpen ? "animate-fade-in" : "animate-fade-out"
+        }`}
         overlayClassName="fixed inset-0 bg-black bg-opacity-75"
       >
         <div className="font-pretendard flex flex-grow flex-col bg-white rounded-lg w-full max-w-5xl m-6 p-6 max-[1248px]:mx-6">

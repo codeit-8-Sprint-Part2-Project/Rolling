@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 export type DropdownOption = {
   label: string;
@@ -29,13 +29,14 @@ const Dropdown: React.FC<DropdownProps> = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownRef]);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e: any) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
@@ -50,11 +51,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         <button
           type="button"
           className="inline-flex w-full justify-between rounded-md bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 border border-gray-300"
-          onClick={toggleDropdown}
+          onMouseDown={toggleDropdown}
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
-          {selectedOption?.label || 'Select an option'}
+          {selectedOption?.label || "Select an option"}
           <svg
             className="-mr-1 ml-2 h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +75,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-[100] focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
