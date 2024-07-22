@@ -69,11 +69,11 @@ function MessageCard({ message = INITIAL_MESSAGE_VALUE, isEditing = false, handl
     return (
         <>
             <div className={"CARD h-[17.5rem] rounded-2xl bg-white pt-7 px-6 pb-6 flex flex-col cursor-pointer shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] max-[1200px]:h-[17.75rem] max-md:h-[14.375rem] hover:scale-105 transition-all duration-300 ease-in-out"} onClick={handleCardClick}>
-                <div className="pb-4 border-solid border-b border-[#EEEEEE] flex justify-between">
+                <div className="pb-4 border-solid border-b border-[#EEEEEE] flex justify-between truncate">
                     <SenderInfo message={messageState} />
                     {isEditing && <TrashcanButton onClick={handleTrashcanClick} />}
                 </div>
-                <div className={fontClass + " truncate grow mb-4"}>
+                <div className={fontClass + " truncate grow mb-6 line-clamp-4 max-[1200px]:mb-7 max-md:line-clamp-2"}>
                     <MessageContent rawString={messageState.content} />
                 </div>
                 <div className="DATE text-[#999999] text-[0.75rem] font-normal">{formatComparedTime(messageState.createdAt)}</div>
