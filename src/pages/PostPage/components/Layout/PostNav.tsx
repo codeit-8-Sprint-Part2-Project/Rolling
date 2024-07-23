@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ShareButton from "../UI/ShareButton";
 import ToNameContent from "../UI/ToNameContent";
 import ToMessageCount from "../UI/ToMessageCount";
@@ -11,6 +11,32 @@ const PostNav: React.FC = () => {
   const [isEmojiAddDropdownVisible, setIsEmojiAddDropdownVisible] =
     useState(false);
   const [isShareDropdownVisible, setIsShareDropdownVisible] = useState(false);
+
+  const emojiDropdownRef = useRef<HTMLDivElement>(null);
+  const emojiAddDropdownRef = useRef<HTMLDivElement>(null);
+  const shareDropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      emojiDropdownRef.current &&
+      !emojiDropdownRef.current.contains(event.target as Node) &&
+      emojiAddDropdownRef.current &&
+      !emojiAddDropdownRef.current.contains(event.target as Node) &&
+      shareDropdownRef.current &&
+      !shareDropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsEmojiDropdownVisible(false);
+      setIsEmojiAddDropdownVisible(false);
+      setIsShareDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleEmojiDropdownToggle = () => {
     setIsEmojiDropdownVisible(!isEmojiDropdownVisible);
@@ -44,11 +70,14 @@ const PostNav: React.FC = () => {
             handleEmojiDropdownToggle={handleEmojiDropdownToggle}
             isEmojiAddDropdownVisible={isEmojiAddDropdownVisible}
             handleEmojiAddDropdownToggle={handleEmojiAddDropdownToggle}
+            emojiDropdownRef={emojiDropdownRef}
+            emojiAddDropdownRef={emojiAddDropdownRef}
           />
           <ShareButton
             url={window.location.href}
             isShareDropdownVisible={isShareDropdownVisible}
             handleShareDropdownToggle={handleShareDropdownToggle}
+            shareDropdownRef={shareDropdownRef}
           />
         </PostNavTitleContainer>
       </PostNavContainer>

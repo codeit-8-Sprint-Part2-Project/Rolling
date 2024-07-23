@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, RefObject, useEffect, useState } from "react";
 import Modal from "react-modal";
 import IconShare from "../../assets/icons/IconShare.png";
 import IconUrlCompleted from "../../assets/icons/IconUrlCompleted.png";
@@ -10,12 +10,14 @@ interface ShareButtonProps {
   url: string;
   isShareDropdownVisible: boolean;
   handleShareDropdownToggle: () => void;
+  shareDropdownRef: RefObject<HTMLDivElement>;
 }
 
 const ShareButton = ({
   url,
   isShareDropdownVisible,
   handleShareDropdownToggle,
+  shareDropdownRef,
 }: ShareButtonProps): ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -71,7 +73,7 @@ const ShareButton = ({
   }, [isModalOpen]);
 
   return (
-    <div className="relative">
+    <div ref={shareDropdownRef} className="relative">
       <button
         onClick={handleShareDropdownToggle}
         className="px-2 md:px-4 py-1.5 border border-solid border-[#cccccc] rounded-md ml-[13px]"
