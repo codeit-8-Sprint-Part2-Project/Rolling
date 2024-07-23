@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { ReactElement, RefObject, useEffect, useState } from "react";
 import Modal from "react-modal";
 import IconShare from "../../assets/icons/IconShare.png";
 import IconUrlCompleted from "../../assets/icons/IconUrlCompleted.png";
@@ -8,16 +8,21 @@ Modal.setAppElement("#root");
 
 interface ShareButtonProps {
   url: string;
+  isShareDropdownVisible: boolean;
+  handleShareDropdownToggle: () => void;
+  shareDropdownRef: RefObject<HTMLDivElement>;
 }
 
-const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+const ShareButton = ({
+  url,
+  isShareDropdownVisible,
+  handleShareDropdownToggle,
+  shareDropdownRef,
+}: ShareButtonProps): ReactElement => {
+  // 모달창 상태 변수
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
-
+  // 카카오 공유하기 함수
   const shareToKakao = () => {
     if (window.Kakao && window.Kakao.Link) {
       window.Kakao.Link.sendCustom({
@@ -28,24 +33,38 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
     }
   };
 
-  const shareToUrl = () => {
-    navigator.clipboard.writeText(url);
-    setIsModalOpen(true);
+  // URL 공유하기 함수
+  const shareToUrl = async () => {
+    if (!navigator.clipboard) {
+      console.error("이 브라우저는 Clipboard API를 지원하지 않습니다.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      console.log("URL이 클립보드에 성공적으로 복사되었습니다.");
+      setIsModalOpen(true);
+    } catch (e) {
+      console.error("URL 복사에 실패했습니다. 오류 메시지:", e);
+      setIsModalOpen(false);
+    }
   };
 
+  // 카카오 SDK 초기화
   useEffect(() => {
     if (window.Kakao) {
       try {
         if (!window.Kakao.isInitialized()) {
           window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
-          console.log("Kakao SDK initialized");
+          console.log("Kakao SDK 성공적으로 호출");
         }
       } catch (e) {
-        console.error("Kakao SDK initialization error:", e);
+        console.error("Kakao SDK 호출 오류:", e);
       }
     }
   }, []);
 
+  // 5초후 모달 자동 닫기 설정
   useEffect(() => {
     let timerId: number;
     if (isModalOpen) {
@@ -59,35 +78,35 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
   }, [isModalOpen]);
 
   return (
-    <div className="relative">
+    <div ref={shareDropdownRef} className="relative">
       <button
-        onClick={toggleDropdown}
-        className="px-[8px] md:px-[16px] py-[6px] border border-solid border-[#cccccc] rounded-[6px] ml-[13px]"
+        onClick={handleShareDropdownToggle}
+        className="px-2 md:px-4 py-1.5 border border-solid border-[#cccccc] rounded-md ml-[13px]"
       >
         <img
           src={IconShare}
           alt="공유하기 버튼"
-          className="min-w-[20px] min-h-[20px] md:w-[24px] md:h-[24px]"
+          className="max-w-5 max-h-5 md:max-w-6 md:max-h-6"
         />
       </button>
 
-      {isDropdownVisible && (
-        <div className="flex flex-col px-[1px] py-[10px] bg-[#ffffff] border border-[#cccccc] rounded-[8px] shadow-custom absolute top-[45px] left-[-60px] z-10">
+      {isShareDropdownVisible && (
+        <div className="flex flex-col px-[1px] py-2.5 bg-white border border-[#cccccc] rounded-lg shadow-custom absolute top-[45px] left-[-85px] md:left-[-60px] z-10">
           <button
             onClick={() => {
               shareToKakao();
-              setIsDropdownVisible(false);
+              handleShareDropdownToggle();
             }}
-            className="w-[138px] px-[16px] py-[12px] font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
+            className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
             카카오톡 공유
           </button>
           <button
             onClick={() => {
               shareToUrl();
-              setIsDropdownVisible(false);
+              handleShareDropdownToggle();
             }}
-            className="w-[138px] px-[16px] py-[12px] font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
+            className="w-[138px] px-4 py-3 font-pretendard font-[400] text-[16px] text-[#181818] text-left hover:bg-[#f6f6f6]"
           >
             URL 공유
           </button>
@@ -96,13 +115,14 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
 
       <Modal
         isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
         style={{
           content: {
             position: "fixed",
             left: "50%",
             right: "auto",
             top: "auto",
-            bottom: "3%",
+            bottom: "6%",
             transform: "translate(-50%, -50%)",
             height: "auto",
             background: "none",
@@ -115,23 +135,19 @@ const ShareButton: React.FC<ShareButtonProps> = ({ url }) => {
           },
         }}
       >
-        <div className="w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-[8px] justify-between items-center">
-          <div className="flex gap-[12px]">
+        <div className="w-[320px] md:w-[524px] h-[64px] px-[30px] flex bg-black/80 rounded-lg justify-between items-center">
+          <div className="flex gap-3">
             <img
-              className="max-w-[24px] max-h-[24px]"
+              className="max-w-6 max-h-6"
               src={IconUrlCompleted}
               alt="복사 완료"
             />
-            <p className="font-pretendard font-[400] text-[16px] text-[#ffffff]">
+            <p className="font-pretendard font-[400] text-[16px] text-white">
               URL이 복사 되었습니다.
             </p>
           </div>
           <button onClick={() => setIsModalOpen(false)}>
-            <img
-              className="max-w-[24px] max-h-[24px]"
-              src={IconUrlClose}
-              alt="창 닫기"
-            />
+            <img className="max-w-6 max-h-6" src={IconUrlClose} alt="창 닫기" />
           </button>
         </div>
       </Modal>

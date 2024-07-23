@@ -1,7 +1,7 @@
-import React from "react";
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 
-const NavLogo: React.FC = () => {
+const NavLogo = (): ReactElement => {
   return (
     <div className="flex flex-row items-center">
       <Link to="/" className="inline-block">

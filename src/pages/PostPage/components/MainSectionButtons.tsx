@@ -9,7 +9,7 @@ function MainSectionButtons({ handleEditButtonClick, handleBackButtonClick, isDe
 
     return (
         <>
-            <div className="flex justify-between gap-2 absolute right-6 top-[-3.125rem]">
+            <div className="flex justify-between gap-2 absolute right-6 top-[-3.5rem]">
                 <button
                     className="w-[5.75rem] h-10 rounded-md border border-solid border-[#9935FF] bg-[#FFFFFF] text-[#861DEE] text-base font-normal max-[1200px]:hidden hover:border-[#861DEE] hover:bg-[#F8F0FF] hover:text-[#9935FF]"
                     onClick={handleBackButtonClick}
@@ -25,7 +25,7 @@ function MainSectionButtons({ handleEditButtonClick, handleBackButtonClick, isDe
                     {whatsButtonText()}
                 </button>
             </div>
-            <div className="w-full fixed bottom-6 px-6 flex justify-between gap-4 min-[1201px:hidden]">
+            <div className="w-full fixed bottom-6 px-6 flex justify-between gap-4 z-50 min-[1201px:hidden]">
                 <button
                     className="w-full h-14 rounded-md border border-solid border-[#9935FF] bg-[#FFFFFF] text-[#861DEE] text-base font-normal min-[1201px]:hidden hover:border-[#861DEE] hover:bg-[#F8F0FF] hover:text-[#9935FF]"
                     onClick={handleBackButtonClick}

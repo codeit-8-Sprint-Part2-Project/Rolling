@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { deleteMessage, deleteRecipient, getRecipient } from "../api/api";
+import { deleteMessage, deleteRecipient, getMessages, getRecipient } from "../api/api";
 import PlusCard from "./PlusCard";
 import { MessageRetrieve } from "../../../DTO/message/MessageRetrieve";
 import MessageCardList from "./MessageCardList";
@@ -8,7 +8,8 @@ import LazyLoading from "./LazyLoading";
 import RecipientDeleteCard from "./RecipientDeleteCard";
 import { useNavigate } from "react-router-dom";
 import MainSectionButtons from "./MainSectionButtons";
-import WriteModal from "./WriteModal";
+import useRequest from "../hooks/useRequest";
+// import WriteModal from "./WriteModal";
 
 export interface Recipient {
     id?: number;
@@ -39,81 +40,91 @@ const INITIAL_RECIPIENT_VALUE: Recipient = {
     backgroundImageURL: "",
     };
 
+const LIMIT: number = 6;
+
 function Posts({ id }: { id: string }) {
     
     const [recipient, setRecipient] = useState<Recipient>(INITIAL_RECIPIENT_VALUE);
+    const [messages, setMessages] = useState<MessageRetrieve[]>([]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isRecipientDeleteOpen, setIsRecipientDeleteOpen] = useState<boolean>(false);
-    const [isDeletionPending, setIsDeletionPending] = useState<boolean>(false);
-    const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
+    const [offset, setOffset] = useState<number>(8);
+    const [hasNextMessages, setHasNextMessages] = useState<boolean>(false);
+    // const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false);
+
+    const { isPending, wrappedRequest } = useRequest();
 
     const navigate = useNavigate();
 
     const handleLoad = useCallback (async () => {
-        const result = await getRecipient(id);
-        setRecipient(result);
-    }, [id])
+        const recipientResponse = await wrappedRequest(getRecipient, id);
+        if (!recipientResponse) {
+            navigate("/list");
+            return;
+        }
+        const messagesResponse = await wrappedRequest(getMessages, id);
+        setRecipient(recipientResponse);
+        setMessages(messagesResponse.results);
+        if(messagesResponse.next) setHasNextMessages(true);
+        else setHasNextMessages(false);
+    }, [id, wrappedRequest, navigate])
 
+    const handleLoadMore = useCallback (async () => {
+        if(!hasNextMessages) return;
+        const messagesResponse = await wrappedRequest(getMessages, id, LIMIT, offset);
+        setMessages(prev => [...prev, ...messagesResponse.results]);
+        setOffset(prev => prev + LIMIT);
+        if(messagesResponse.next) setHasNextMessages(true);
+        else setHasNextMessages(false);
+    },[hasNextMessages, id, offset, wrappedRequest])
+
+    // 배경색 클래스 string
     const backgroundColor: string = BACKGROUND_COLORS[recipient.backgroundColor] || "bg-[#FFE2AD]";
+    // 상태에 따른 버튼 내용
     const whatsButtonText = () => {
         return isEditing ? "돌아가기" : "수정하기";
     }
 
     const backgroundImageURL: string = recipient.backgroundImageURL || '';
-    const recentMessages: MessageRetrieve[] = recipient.recentMessages || [];
 
     // 메시지 삭제 함수
-    const handleMessageDelete = async (messageId: number) => {
-        try {
-            setIsDeletionPending(true);
-            await deleteMessage(messageId);
-        } catch(error: any) {
-            alert(error.message);
-        } finally {
-            setIsDeletionPending(false);
-        }
+    const handleMessageDelete = (messageId: number) => {
+        wrappedRequest(deleteMessage, messageId);
 
-        const updatedMessages: MessageRetrieve[] = recentMessages.filter((message) => message.id !== messageId);
-        setRecipient((preValues) => ({
-            ...preValues,
-            recentMessages: updatedMessages,
-        }));
+        const updatedMessages: MessageRetrieve[] = messages.filter((message) => message.id !== messageId);
+        setMessages(updatedMessages);
     }
 
     // 게시판 삭제 함수
     const handleRecipientDelete = async () => {
-        try {
-            setIsDeletionPending(true);
-            await deleteRecipient(id);
-        } catch(error: any) {
-            alert(error.message);
-        } finally {
-            setIsDeletionPending(false);
-        }
-
+        await wrappedRequest(deleteRecipient, id);
         navigate("/list");
     }
 
     // 수정하기 / 돌아가기 버튼 클릭 제어 함수
-    const handleEditButtonClick = () => {
-        setIsEditing(!isEditing);
-    }
+    const handleEditButtonClick = () => setIsEditing(!isEditing)
+    const handleBackButtonclick = () => navigate("/list")
 
-    const handleBackButtonclick = () => {
-        navigate("/list");
-    }
-
-    const handleWriteModalOpen = (isOpen: boolean) => {
-        setIsWriteModalOpen(isOpen);
-    }
+    const handleScrollToBottom = useCallback (() => {
+        if(document.documentElement.scrollHeight - document.documentElement.scrollTop === document.documentElement.clientHeight) {
+            handleLoadMore();
+        }
+    },[handleLoadMore])
 
     useEffect(() => {
         handleLoad();
     }, [handleLoad]);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScrollToBottom);
+        return (() => {
+            window.removeEventListener("scroll", handleScrollToBottom);
+        })
+    }, [handleScrollToBottom]);
     
     return (
         <>
-            <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover"}>
+            <main style={{ backgroundImage: `url(${backgroundImageURL})` }} className={backgroundColor + " min-h-screen pt-[7.0625rem] pb-[2.375rem] bg-no-repeat bg-cover font-pretendard max-md:pb-28"}>
                 <div className="CARDS-CONTAINER max-w-[78rem] mx-auto px-6 grid grid-cols-3 gap-x-6 gap-y-7 relative max-[1200px]:grid-cols-2 max-[1200px]:gap-4 max-md:grid-cols-1">
                     {isEditing
                         ? <RecipientDeleteCard
@@ -121,29 +132,29 @@ function Posts({ id }: { id: string }) {
                             setIsRecipientDeleteOpen={setIsRecipientDeleteOpen}
                             handleRecipientDelete={handleRecipientDelete}
                         />
-                        : <PlusCard handleWriteModalOpen={handleWriteModalOpen} />
+                        : <PlusCard id={id} />
                     }
                     <MessageCardList
-                        recentMessages={recentMessages}
+                        messages={messages}
                         isEditing={isEditing}
                         handleMessageDelete={handleMessageDelete}
                     />
                     <MainSectionButtons
                         handleEditButtonClick={handleEditButtonClick}
                         handleBackButtonClick={handleBackButtonclick}
-                        isDeletionPending={isDeletionPending}
+                        isDeletionPending={isPending}
                         whatsButtonText={whatsButtonText}
                     />
                 </div>
             </main>
-            {isDeletionPending && createPortal(
+            {isPending && createPortal(
                         <LazyLoading />,
                         document.body
                     )}
-            {isWriteModalOpen && createPortal(
+            {/* {isWriteModalOpen && createPortal(
                 <WriteModal />,
                 document.body
-            )}
+            )} */}
         </>
     )
 }
