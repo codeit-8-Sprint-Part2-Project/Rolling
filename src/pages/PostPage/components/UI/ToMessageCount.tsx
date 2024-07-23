@@ -82,12 +82,12 @@ function ToMessageCount() {
                   left: `${(displayedProfiles?.length || 0) * 15}px`,
                 }}
               >
-                +{countsProfiles}
+                +{(data?.count || 0) - 3}
               </div>
             )}
           </div>
           <p className="font-pretendard font-[400] text-[18px] text-[#181818]">
-            <span className="font-bold">{data?.results?.length}</span>
+            <span className="font-bold">{data?.count}</span>
             명이 작성했어요!
           </p>
         </div>
