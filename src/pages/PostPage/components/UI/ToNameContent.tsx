@@ -24,10 +24,12 @@ interface Recipient {
 const ToNameContent = ({
   className = "",
 }: ToNameContentProps): ReactElement => {
+  // 상태 변수 정의
   const { recipientId } = useParams();
   const [data, setData] = useState<Recipient | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 이름을 불러오는 함수
   useEffect(() => {
     const fetchName = async () => {
       try {

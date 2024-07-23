@@ -31,10 +31,12 @@ function EmojiAddDropdown({
   isDropdownVisible,
   toggleDropdown,
 }: EmojiAddDropdownProps) {
+  // 상태 변수 정의
   const { recipientId } = useParams();
   const [, setData] = useState<Recipient | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 이모티콘 카운트를 가져오는 함수
   useEffect(() => {
     const fetchCount = async () => {
       try {
@@ -52,11 +54,13 @@ function EmojiAddDropdown({
     fetchCount();
   }, [recipientId]);
 
+  // CustomNames(카테고리 한글화를 위한) 인터페이스 정의
   interface CustomNames {
     category: Categories;
     name: string;
   }
 
+  // 이모티콘 카테고리 한글화
   const customNames: CustomNames[] = [
     {
       category: Categories.SUGGESTED,
@@ -96,6 +100,7 @@ function EmojiAddDropdown({
     },
   ];
 
+  // 이모티콘 클릭시 API에 POST 하는 핸들러
   const onEmojiClick = async (emojiData: EmojiClickData, event: MouseEvent) => {
     const { emoji } = emojiData;
 

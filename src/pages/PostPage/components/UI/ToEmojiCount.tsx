@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, RefObject } from "react";
 import { useParams } from "react-router-dom";
 import EmojiDropdown from "./EmojiDropdown";
 import EmojiAddDropdown from "./EmojiAddDropdown";
@@ -6,21 +6,29 @@ import { getByReactions } from "../../api/getByReactions";
 import { ReactionCreate } from "../../../../DTO/reaction/ReactionCreate";
 import RoundedLoadingBar from "./RoundedLoadingBar";
 
+interface ToEmojiCountProps {
+  isEmojiDropdownVisible: boolean;
+  handleEmojiDropdownToggle: () => void;
+  isEmojiAddDropdownVisible: boolean;
+  handleEmojiAddDropdownToggle: () => void;
+  emojiDropdownRef: RefObject<HTMLDivElement>;
+  emojiAddDropdownRef: RefObject<HTMLDivElement>;
+}
+
 function ToEmojiCount({
   isEmojiDropdownVisible,
   handleEmojiDropdownToggle,
   isEmojiAddDropdownVisible,
   handleEmojiAddDropdownToggle,
-}: {
-  isEmojiDropdownVisible: boolean;
-  handleEmojiDropdownToggle: () => void;
-  isEmojiAddDropdownVisible: boolean;
-  handleEmojiAddDropdownToggle: () => void;
-}) {
+  emojiDropdownRef,
+  emojiAddDropdownRef,
+}: ToEmojiCountProps) {
+  // 상태 변수 정의
   const { recipientId } = useParams();
   const [data, setData] = useState<ReactionCreate | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 이모티콘 카운트를 가져오는 함수
   useEffect(() => {
     const fetchCount = async () => {
       try {
@@ -38,9 +46,11 @@ function ToEmojiCount({
     fetchCount();
   }, [recipientId]);
 
+  // PostNav에 바로 보일 상단 3개의 이모지
   const displayedEmojis = data?.results?.slice(0, 3);
 
-  const onEmojiadded = async (emoji: string) => {
+  // 이모지를 추가하면 리랜더링 하기 위한 함수
+  const onEmojiAdded = async (emoji: string) => {
     const Counts = await getByReactions({ recipientId });
     setData(Counts);
   };
@@ -62,16 +72,20 @@ function ToEmojiCount({
               <li>{emoji.count}</li>
             </ul>
           ))}
-          <EmojiDropdown
-            data={data}
-            isDropdownVisible={isEmojiDropdownVisible}
-            toggleDropdown={handleEmojiDropdownToggle}
-          />
-          <EmojiAddDropdown
-            onEmojiAdded={onEmojiadded}
-            isDropdownVisible={isEmojiAddDropdownVisible}
-            toggleDropdown={handleEmojiAddDropdownToggle}
-          />
+          <div ref={emojiDropdownRef}>
+            <EmojiDropdown
+              data={data}
+              isDropdownVisible={isEmojiDropdownVisible}
+              toggleDropdown={handleEmojiDropdownToggle}
+            />
+          </div>
+          <div ref={emojiAddDropdownRef}>
+            <EmojiAddDropdown
+              onEmojiAdded={onEmojiAdded}
+              isDropdownVisible={isEmojiAddDropdownVisible}
+              toggleDropdown={handleEmojiAddDropdownToggle}
+            />
+          </div>
         </div>
       )}
     </>

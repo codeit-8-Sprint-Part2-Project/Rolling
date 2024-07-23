@@ -1,32 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getByPostId } from "../../api/getByPostId";
 import { MessageRetrieve } from "../../../../DTO/message/MessageRetrieve";
 import RoundedLoadingBar from "./RoundedLoadingBar";
+import { getByMessage } from "../../api/getByMessage";
 
-interface Recipient {
-  id?: number;
-  team: string;
-  name: string;
-  backgroundColor: string;
-  backgroundImageURL?: string;
-  createdAt?: Date;
-  messageCount?: string;
-  recentMessages?: MessageRetrieve[];
-  reactionCount?: number;
-  topReactions?: string;
+interface Message {
+  count: number;
+  next?: string;
+  previous?: string;
+  results: MessageRetrieve[];
 }
 
 function ToMessageCount() {
+  // 상태 변수 정의
   const { recipientId } = useParams();
-  const [data, setData] = useState<Recipient | null>(null);
+  const [data, setData] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 메세지 카운트를 가져오는 함수
   useEffect(() => {
     const fetchCount = async () => {
       try {
         const params = recipientId ? { recipientId } : {};
-        const Counts = await getByPostId(params);
+        const Counts = await getByMessage(params);
 
         setData(Counts);
       } catch (error) {
@@ -39,11 +35,11 @@ function ToMessageCount() {
     fetchCount();
   }, [recipientId]);
 
-  const displayedProfiles = data?.recentMessages?.slice(0, 3);
+  // 프로필 이미지 보여줄 3개를 설정
+  const displayedProfiles = data?.results.slice(0, 3);
+  // 3개가 넘어가면 + 몇 개로 표시할게 있는지 확인하기 위한 설정
   const countsProfiles =
-    data?.recentMessages && data.recentMessages.length > 3
-      ? data.recentMessages.length - 3
-      : 0;
+    data?.results && data.results.length > 3 ? data.results.length - 3 : 0;
 
   return (
     <>
@@ -54,13 +50,21 @@ function ToMessageCount() {
           <div
             className="flex items-center relative"
             style={{
-              width: `${((displayedProfiles?.length || 0) - 1) * 24}px`,
+              width: `${
+                data?.results.length === 1
+                  ? 24
+                  : data?.results.length === 2
+                  ? 39
+                  : data?.results.length === 3
+                  ? 54
+                  : 69
+              }px`,
             }}
           >
             {displayedProfiles?.map((profile, index) => (
               <img
                 key={profile.id}
-                className="border-solid border-white border-[1.4px] absolute"
+                className="border-solid border-white border-[1.4px] absolute rounded-full"
                 src={profile.profileImageURL}
                 alt="이모지 보낸 사람들 프로필사진"
                 width="24px"
@@ -68,25 +72,22 @@ function ToMessageCount() {
                 style={{
                   left: `${index * 15}px`,
                   zIndex: `${index * 2}`,
-                  clipPath: "circle(50%)",
                 }}
               />
             ))}
+            {countsProfiles > 0 && (
+              <div
+                className="flex w-6 h-6 border border-solid border-[#e3e3e3] rounded-full font-pretendard font-[500] text-[#484848] text-[12px] bg-white absolute z-10 items-center justify-center"
+                style={{
+                  left: `${(displayedProfiles?.length || 0) * 15}px`,
+                }}
+              >
+                +{countsProfiles}
+              </div>
+            )}
           </div>
-
-          {countsProfiles > 0 && (
-            <div
-              className="w-6 h-6 border border-solid border-[#e3e3e3] rounded-full font-pretendard font-[500] text-[#484848] text-[12px]"
-              style={{
-                left: `${(displayedProfiles?.length || 0) * 15}px`,
-                zIndex: `${(displayedProfiles?.length || 0) * 2}}`,
-              }}
-            >
-              +{countsProfiles}
-            </div>
-          )}
           <p className="font-pretendard font-[400] text-[18px] text-[#181818]">
-            <span className="font-bold">{data?.recentMessages?.length}</span>
+            <span className="font-bold">{data?.results?.length}</span>
             명이 작성했어요!
           </p>
         </div>
