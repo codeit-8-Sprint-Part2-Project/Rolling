@@ -139,7 +139,7 @@ function EmojiAddDropdown({
             <img
               src={IconAdd}
               alt="이모지 추가 버튼"
-              className="min-w-5 min-h-5 md:w-6 md:h-6"
+              className="max-w-5 max-h-5 md:max-w-6 md:max-h-6"
             />
             <p className="hidden md:block">추가</p>
           </button>
