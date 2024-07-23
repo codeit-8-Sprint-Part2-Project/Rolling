@@ -42,7 +42,7 @@ const BackgroundImageList: React.FC<BackgroundImageListProps> = ({
   return (
     <>
       <ul
-        className="flex grow gap-x-4 h-[168px] max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:h-full max-md:mb-16
+        className="flex grow gap-x-4 h-[168px] max-md:grid max-md:grid-cols-2 max-md:grid-rows-2 max-md:gap-y-4 max-md:h-full max-md:mb-16
       max-[1248px]:mb-60"
       >
         {imageUrls.map((imageUrl, index) => (

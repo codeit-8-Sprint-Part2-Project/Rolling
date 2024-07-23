@@ -33,7 +33,7 @@ export const BackgroundColorList: React.FC<BackgroundColorListProps> = ({
   }
 
   return (
-    <ul className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
+    <ul className="flex gap-x-4 max-md:grid max-md:grid-cols-2 max-md:grid-rows-2 max-md:gap-y-4 max-md:mb-16 max-[1248px]:mb-60">
       {backgroundColors.map((color, index) => (
         <li
           key={`${color}-${index}`}
