@@ -11,8 +11,10 @@ function EmojiDropdown({
   isDropdownVisible: boolean;
   toggleDropdown: () => void;
 }) {
+  // 윈도우 너비 상태 변수
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // 윈도우 크기 변경 이벤트 핸들러
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -24,6 +26,7 @@ function EmojiDropdown({
     };
   }, []);
 
+  // 768px의 windowWidth값을 기준으로 표시할 이모티콘 갯수 조절
   const displayedEmojis = data?.results?.slice(0, windowWidth <= 768 ? 6 : 8);
 
   return (

@@ -19,8 +19,10 @@ const ShareButton = ({
   handleShareDropdownToggle,
   shareDropdownRef,
 }: ShareButtonProps): ReactElement => {
+  // 모달창 상태 변수
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 카카오 공유하기 함수
   const shareToKakao = () => {
     if (window.Kakao && window.Kakao.Link) {
       window.Kakao.Link.sendCustom({
@@ -31,6 +33,7 @@ const ShareButton = ({
     }
   };
 
+  // URL 공유하기 함수
   const shareToUrl = async () => {
     if (!navigator.clipboard) {
       console.error("이 브라우저는 Clipboard API를 지원하지 않습니다.");
@@ -47,6 +50,7 @@ const ShareButton = ({
     }
   };
 
+  // 카카오 SDK 초기화
   useEffect(() => {
     if (window.Kakao) {
       try {
@@ -60,6 +64,7 @@ const ShareButton = ({
     }
   }, []);
 
+  // 5초후 모달 자동 닫기 설정
   useEffect(() => {
     let timerId: number;
     if (isModalOpen) {

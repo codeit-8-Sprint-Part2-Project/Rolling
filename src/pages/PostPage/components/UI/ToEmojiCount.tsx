@@ -23,10 +23,12 @@ function ToEmojiCount({
   emojiDropdownRef,
   emojiAddDropdownRef,
 }: ToEmojiCountProps) {
+  // 상태 변수 정의
   const { recipientId } = useParams();
   const [data, setData] = useState<ReactionCreate | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 이모티콘 카운트를 가져오는 함수
   useEffect(() => {
     const fetchCount = async () => {
       try {
@@ -44,8 +46,10 @@ function ToEmojiCount({
     fetchCount();
   }, [recipientId]);
 
+  // PostNav에 바로 보일 상단 3개의 이모지
   const displayedEmojis = data?.results?.slice(0, 3);
 
+  // 이모지를 추가하면 리랜더링 하기 위한 함수
   const onEmojiAdded = async (emoji: string) => {
     const Counts = await getByReactions({ recipientId });
     setData(Counts);

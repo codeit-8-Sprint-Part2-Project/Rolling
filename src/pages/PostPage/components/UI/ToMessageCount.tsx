@@ -12,10 +12,12 @@ interface Message {
 }
 
 function ToMessageCount() {
+  // 상태 변수 정의
   const { recipientId } = useParams();
   const [data, setData] = useState<Message | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 메세지 카운트를 가져오는 함수
   useEffect(() => {
     const fetchCount = async () => {
       try {
@@ -33,7 +35,9 @@ function ToMessageCount() {
     fetchCount();
   }, [recipientId]);
 
+  // 프로필 이미지 보여줄 3개를 설정
   const displayedProfiles = data?.results.slice(0, 3);
+  // 3개가 넘어가면 + 몇 개로 표시할게 있는지 확인하기 위한 설정
   const countsProfiles =
     data?.results && data.results.length > 3 ? data.results.length - 3 : 0;
 

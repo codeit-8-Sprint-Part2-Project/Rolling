@@ -7,15 +7,18 @@ import ToEmojiCount from "../UI/ToEmojiCount";
 import PostNavTitleContainer from "../UI/PostNavTitleContainer";
 
 const PostNav: React.FC = () => {
+  // 상태 변수 정의
   const [isEmojiDropdownVisible, setIsEmojiDropdownVisible] = useState(false);
   const [isEmojiAddDropdownVisible, setIsEmojiAddDropdownVisible] =
     useState(false);
   const [isShareDropdownVisible, setIsShareDropdownVisible] = useState(false);
 
+  // 참조 변수 정의
   const emojiDropdownRef = useRef<HTMLDivElement>(null);
   const emojiAddDropdownRef = useRef<HTMLDivElement>(null);
   const shareDropdownRef = useRef<HTMLDivElement>(null);
 
+  // 드롭다운 외부를 클릭하면 닫아주는 함수
   const handleClickOutside = (event: MouseEvent) => {
     if (
       emojiDropdownRef.current &&
@@ -31,6 +34,7 @@ const PostNav: React.FC = () => {
     }
   };
 
+  // handleClickOutside 이벤트 리스너 설정
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -38,6 +42,7 @@ const PostNav: React.FC = () => {
     };
   }, []);
 
+  // 각 드롭다운 토글 핸들러
   const handleEmojiDropdownToggle = () => {
     setIsEmojiDropdownVisible(!isEmojiDropdownVisible);
     setIsEmojiAddDropdownVisible(false);
