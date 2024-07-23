@@ -86,7 +86,7 @@ const ShareButton = ({
         <img
           src={IconShare}
           alt="공유하기 버튼"
-          className="min-w-5 min-h-5 md:w-6 md:h-6"
+          className="max-w-5 max-h-5 md:max-w-6 md:max-h-6"
         />
       </button>
 
