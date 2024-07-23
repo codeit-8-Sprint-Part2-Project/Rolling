@@ -28,6 +28,7 @@ function WriteModal({ recipientId, handleModalOpen, message, handleAfterSubmit }
     
     const [editorState, setEditorState] = useState<EditorState>(() => EditorState.createWithContent(initialContent));
     const [formData, setFormData] = useState<MessageCreate>(initialForm);
+    const [isFormValid, setIsFormValid] = useState<boolean>(true);
 
     const handleFormChange = (key: string, value: any) => {
         setFormData(prev => ({
@@ -52,13 +53,6 @@ function WriteModal({ recipientId, handleModalOpen, message, handleAfterSubmit }
 
     const handleSubmitButtonClick = (evt: any) => {
         evt.preventDefault();
-
-        const isFormValid = formData.recipientId && formData.sender && editorState.getCurrentContent().hasText();
-        if(!isFormValid) {
-            alert("유효성 이슈");
-            return;
-        }
-
         handleSubmit(submitId, formData);
         handleAfterSubmit(formData);
         handleModalOpen(false);
@@ -73,6 +67,11 @@ function WriteModal({ recipientId, handleModalOpen, message, handleAfterSubmit }
         content: stringified,
         }))
     }, [editorState]);
+
+    useEffect(() => {
+        if(formData.recipientId && (formData.sender.length > 0 && formData.sender.length < 41) && editorState.getCurrentContent().hasText()) setIsFormValid(true);
+        else setIsFormValid(false);
+    }, [formData, editorState])
 
     const pendingOpacityClass = isPostPending ? "opacity-50 " : '';
 
@@ -104,6 +103,7 @@ function WriteModal({ recipientId, handleModalOpen, message, handleAfterSubmit }
                         handleSubmitButtonClick={handleSubmitButtonClick}
                         handleBackButtonClick={handleBackButtonClick}
                         isPostPending={isPostPending}
+                        isFormValid={isFormValid}
                     />
                 </fieldset>
             </form>

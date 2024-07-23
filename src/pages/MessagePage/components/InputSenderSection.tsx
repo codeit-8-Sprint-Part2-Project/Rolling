@@ -11,6 +11,7 @@ const InputSenderSection: React.FC<InputSenderProps> = ({ sender, onSenderChange
   const handleSenderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     onSenderChange(value);
+    if (sender.length >= 40) onSenderChange(sender.slice(0, 39));
     if (value.trim().length === 0) {
       setSenderError('이름을 입력해주세요.');
     } else {

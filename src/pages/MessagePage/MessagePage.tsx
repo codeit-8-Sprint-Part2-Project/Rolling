@@ -31,6 +31,7 @@ const MessagePage: React.FC = () => {
   const [formData, setFormData] = useState<MessageCreate>(INITIAL_FORM_VALUES);
   const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
   const [isPostPending, setIsPostPending] = useState<boolean>(false);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const changeFormData = (key: string, value: any) => {
@@ -61,13 +62,6 @@ const MessagePage: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    const isFormValid = formData.recipientId && formData.sender && editorState.getCurrentContent().hasText();
-    
-    if(!isFormValid) {
-      alert("유효성 이슈");
-      return;
-    }
-
     try {
       setIsPostPending(true);
       postMessage(recipientId, formData);
@@ -92,6 +86,11 @@ const MessagePage: React.FC = () => {
       content: stringified,
     }))
   }, [editorState]);
+
+  useEffect(() => {
+    if(formData.recipientId && (formData.sender.length > 0 && formData.sender.length < 41) && editorState.getCurrentContent().hasText()) setIsFormValid(true);
+    else setIsFormValid(false);
+  }, [formData, editorState])
 
   return (
     <>
@@ -119,6 +118,7 @@ const MessagePage: React.FC = () => {
           />
           <MessagePageButtons
             recipientId={recipientId}
+            isFormValid={isFormValid}
             handleSubmitClick={handleSubmitClick}
           />
         </div>

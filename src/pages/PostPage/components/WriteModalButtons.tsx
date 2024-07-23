@@ -2,15 +2,16 @@ type props = {
     handleSubmitButtonClick: (evt: any) => void,
     handleBackButtonClick: (evt: any) => void,
     isPostPending: boolean,
+    isFormValid: boolean,
 }
 
-function WriteModalButtons({ handleSubmitButtonClick, handleBackButtonClick, isPostPending }: props) {
+function WriteModalButtons({ handleSubmitButtonClick, handleBackButtonClick, isPostPending, isFormValid }: props) {
 
     return (
         <div className="w-full flex justify-between gap-4 my-4">
             <button
-                className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE]"
-                disabled={isPostPending}
+                className="w-full h-14 rounded-md border-none bg-[#9935FF] text-white text-base font-normal hover:bg-[#861DEE] disabled:bg-[#CCCCCC]"
+                disabled={isPostPending || !isFormValid}
                 onClick={handleSubmitButtonClick}
             >
                 보내기
