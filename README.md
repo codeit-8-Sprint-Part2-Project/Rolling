@@ -56,7 +56,8 @@ https://post-rolling.netlify.app 🔗
 <br>
 <br>
 
-![SHANA 생성 (5)](https://github.com/user-attachments/assets/a47c41e1-a506-49ff-8df9-b37713f7be19)
+![SHANA 생성 (1)](https://github.com/user-attachments/assets/4e5ccba8-0a9f-4f23-9b3f-37e190bf9a43)
+
 <table align="center">
 <tr>
 <td  align="center">'나도 만들어보기' 버튼을 눌러 나만의 롤링페이퍼를 생성합니다. <br> 원하는 컬러와 이미지를 선택하고, 미리보기로 미리 디자인을 확인할 수 있습니다. </td>
@@ -67,7 +68,8 @@ https://post-rolling.netlify.app 🔗
 <br>
 <br>
 
-![SHANA 메세지 전송](https://github.com/user-attachments/assets/b33f0fde-3b8b-499f-a44c-017e86284452)
+![SHANA SHANA 메세지 전송 (1)](https://github.com/user-attachments/assets/c0d235dd-5218-46b5-8b09-b41205911328)
+
 <table align="center">
 <tr>
 <td  align="center">'+' 카드를 눌러 롤링페이퍼에 메세지를 남길 수 있습니다. <br> 보내는 이의 이름, 관계, 프로필 이미지, 폰트를 커스텀할 수 있습니다. </td>
@@ -78,7 +80,7 @@ https://post-rolling.netlify.app 🔗
 <br>
 <br>
 
-![SHANA 포스트 (2)](https://github.com/user-attachments/assets/73171e16-8677-4556-a1d3-76799848feea)
+![SHANA SHANA 포스트](https://github.com/user-attachments/assets/4b317de7-4376-4b66-9b75-733472d2a2da)
 <table align="center">
 <tr>
 <td  align="center">'수정하기'를 눌러 특정 메세지를 자유롭게 수정할 수 있습니다. <br> 원하는 메세지 카드를 선택 삭제하거나 게시판 전체를 제거할 수도 있습니다.</td>
