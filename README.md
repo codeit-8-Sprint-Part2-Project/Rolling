@@ -1,46 +1,135 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+<div align="center">
+  
+![제목 없음-1](https://github.com/user-attachments/assets/8393f2fb-a90b-44af-8a41-1d172587425e)
 
-In the project directory, you can run:
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**추억의 롤링 페이퍼를 즐길 수 있는 웹사이트** <br>
+당신의 추억을 담은 롤링 페이퍼를 웹에서 경험해보세요 !
 
-### `npm test`
+- - -
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+> <p>코드잇 스프린트 프론트엔드 8기 1팀 <br> 2024.07.10 ∼ 2024.07.24</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<div align="right">
+<h3>배포 사이트</h3>
+https://post-rolling.netlify.app 🔗
+</div>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<br>
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 기술 스택
+  
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) 
+![ts](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) 
+![tailwindCss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪" > 프로젝트 소개
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br>
 
-## Learn More
+<div align="center">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![SHANA 랜딩, 리스트](https://github.com/user-attachments/assets/545652c4-be6f-4eea-8d12-76c1184ca560)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<table align="center">
+<tr>
+<td  align="center"> 랜딩페이지의 '구경해보기'를 누르면 인기순, 최신순 롤링페이퍼의 리스트를 확인할 수 있습니다. <br>  글을 남긴 사람의 이름과 롤링페이퍼가 받은 이모티콘이 표시됩니다.</td>
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+![SHANA 생성 (1)](https://github.com/user-attachments/assets/4e5ccba8-0a9f-4f23-9b3f-37e190bf9a43)
+
+<table align="center">
+<tr>
+<td  align="center">'나도 만들어보기' 버튼을 눌러 나만의 롤링페이퍼를 생성합니다. <br> 원하는 컬러와 이미지를 선택하고, 미리보기로 미리 디자인을 확인할 수 있습니다. </td>
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+![SHANA SHANA 메세지 전송 (1)](https://github.com/user-attachments/assets/c0d235dd-5218-46b5-8b09-b41205911328)
+
+<table align="center">
+<tr>
+<td  align="center">'+' 카드를 눌러 롤링페이퍼에 메세지를 남길 수 있습니다. <br> 보내는 이의 이름, 관계, 프로필 이미지, 폰트를 커스텀할 수 있습니다. </td>
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+![SHANA SHANA 포스트](https://github.com/user-attachments/assets/4b317de7-4376-4b66-9b75-733472d2a2da)
+<table align="center">
+<tr>
+<td  align="center">'수정하기'를 눌러 특정 메세지를 자유롭게 수정할 수 있습니다. <br> 원하는 메세지 카드를 선택 삭제하거나 게시판 전체를 제거할 수도 있습니다.</td>
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+![SHANA 헤더 이모지 추가, 몇명 작성,카카오톡 공유](https://github.com/user-attachments/assets/eca14823-ac2b-4fe9-86a6-7533040a7196)
+<table align="center">
+<tr>
+<td  align="center"> 롤링페이퍼 상단 바에서 이모티콘으로 감정을 표현할 수 있습니다. <br> 몇명이 메세지를 작성했는지 표시되고, 카카오톡 또는 URL로 외부에 공유할 수 있습니다.</td>
+</tr>
+</table>
+
+
+</div>
+
+
+<br>
+<br>
+
+## <img src="https://github.com/user-attachments/assets/7b6b0302-f7cd-4480-b604-5daeb709e301" alt="🟪"> 개발팀 소개
+
+<table align="center">
+    <tr align="center">
+        <td> <img src="https://github.com/user-attachments/assets/d9ade349-5c64-47e4-8321-a09758e46c3e" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/361ebb81-b0d1-4483-918e-82beff58bbad" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/c182ece6-599e-4347-b6d8-e25b3728fbaa" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/7daa9e47-1ca2-4d44-9040-21cf62190b83" alt="프로필" width="100" /></td>
+        <td><img src="https://github.com/user-attachments/assets/6248776b-3401-48ee-bdf8-6879c8ab5e83" alt="프로필" width="100" /></td>
+    </tr>
+    <tr align="center">
+        <td><a href="https://github.com/KimDasom521">김다솜</a></td>
+        <td><a href="https://github.com/purplenib">김영주</a></td>
+        <td><a href="https://github.com/SealBros">👑 서지훈</a></td>
+        <td><a href="https://github.com/KJongHwa">김종화</a></td>
+        <td><a href="https://github.com/Jaeheon96">손재헌</a></td>
+    </tr>
+      <tr align="center" >
+        <td>롤링페이퍼 <br> 리스트 페이지</td>
+        <td>롤링페이퍼 <br> 생성 페이지</td>
+        <td>메세지 작성 <br> 및 전송 페이지 </td>
+        <td>랜딩 페이지, GNB, <br>  롤링페이퍼 상단 바 </td>
+        <td>롤링페이퍼 <br> 페이지</td>
+    </tr>
+</table>
+
+<br>
+
